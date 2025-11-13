@@ -1,0 +1,116 @@
+<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Duck with cigarette and smoke on dark background">
+  <title>Duck with Cigarette</title>
+  <style>
+    :root {
+      --bg: #0f1214;
+      --duck-body: #d8d8d8;
+      --duck-shadow: #b9b9b9;
+      --bill: #f0a500;
+      --bill-dark: #c88700;
+      --eye: #1c1c1c;
+      --cig-paper: #f5f5f5;
+      --cig-filter: #c88700;
+      --cig-ash: #9a9a9a;
+      --ember: #ff4b3a;
+      --smoke: rgba(255,255,255,0.35);
+      --line: #1e1e1e;
+    }
+    svg { display: block; width: 100%; height: auto; }
+    .bg { fill: var(--bg); }
+    .duck-body { fill: var(--duck-body); }
+    .duck-shadow { fill: var(--duck-shadow); }
+    .outline { fill: none; stroke: var(--line); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .bill { fill: var(--bill); }
+    .bill-dark { fill: var(--bill-dark); }
+    .eye { fill: var(--eye); }
+    .cig-paper { fill: var(--cig-paper); }
+    .cig-filter { fill: var(--cig-filter); }
+    .cig-ash { fill: var(--cig-ash); }
+    .ember { fill: var(--ember); }
+    .smoke { fill: none; stroke: var(--smoke); stroke-width: 3; stroke-linecap: round; }
+  </style>
+
+  <!-- Dark background -->
+  <rect class="bg" x="0" y="0" width="640" height="480"/>
+
+  <!-- Duck group (right-facing profile) -->
+  <g transform="translate(80,40)">
+    <!-- Neck and head silhouette -->
+    <path class="duck-body" d="
+      M 200 280
+      C 160 260, 140 230, 140 200
+      C 140 170, 160 150, 190 140
+      C 210 132, 240 130, 270 138
+      C 310 148, 340 170, 350 200
+      C 355 216, 356 232, 352 244
+      C 348 256, 340 264, 330 270
+      C 320 276, 310 279, 300 280
+      C 280 282, 260 282, 240 282
+      Z"/>
+    <!-- Head highlight/shadow -->
+    <path class="duck-shadow" opacity="0.55" d="
+      M 180 190
+      C 190 170, 220 158, 252 160
+      C 280 162, 306 176, 320 196
+      C 312 204, 300 210, 284 214
+      C 264 220, 236 222, 214 216
+      C 198 212, 186 202, 180 190 Z"/>
+
+    <!-- Bill (upper) -->
+    <path class="bill" d="
+      M 300 210
+      C 332 206, 360 206, 388 212
+      C 404 216, 416 224, 420 232
+      C 424 240, 418 248, 400 252
+      C 372 258, 330 252, 300 242
+      Z"/>
+    <!-- Bill (lower) -->
+    <path class="bill-dark" d="
+      M 300 230
+      C 326 234, 354 238, 380 238
+      C 392 238, 402 240, 408 244
+      C 412 246, 410 250, 404 252
+      C 382 260, 338 256, 306 246
+      Z" opacity="0.9"/>
+
+    <!-- Eye -->
+    <circle class="eye" cx="260" cy="190" r="8"/>
+    <circle cx="257" cy="187" r="2.2" fill="#ffffff" opacity="0.85"/>
+
+    <!-- Body (suggested shoulder curve) -->
+    <path class="duck-body" d="
+      M 160 300
+      C 180 316, 210 328, 240 332
+      C 270 336, 300 334, 320 328
+      C 336 324, 348 316, 356 308
+      C 360 304, 360 298, 356 294
+      C 348 286, 332 282, 314 282
+      C 288 282, 232 282, 200 280
+      C 184 290, 170 296, 160 300 Z" opacity="0.95"/>
+
+    <!-- Cigarette held at bill tip -->
+    <!-- Filter -->
+    <rect class="cig-filter" x="402" y="238" width="16" height="8" rx="2" ry="2"/>
+    <!-- Paper -->
+    <rect class="cig-paper" x="418" y="238" width="38" height="8" rx="2" ry="2"/>
+    <!-- Ash and ember -->
+    <rect class="cig-ash" x="456" y="238" width="10" height="8" rx="2" ry="2"/>
+    <circle class="ember" cx="462" cy="242" r="3.3"/>
+
+    <!-- Small contact notch to bill -->
+    <path class="outline" d="M 398 242 Q 400 240 404 240"/>
+
+    <!-- Smoke curls -->
+    <path class="smoke" d="
+      M 470 236
+      C 484 224, 500 220, 516 224
+      C 530 228, 538 238, 536 248
+      C 534 260, 522 266, 508 264
+      C 494 262, 488 252, 490 242"/>
+    <path class="smoke" d="
+      M 484 230
+      C 498 214, 520 210, 536 216
+      C 548 220, 556 230, 554 242
+      C 552 254, 542 262, 528 262"/>
+  </g>
+</svg>

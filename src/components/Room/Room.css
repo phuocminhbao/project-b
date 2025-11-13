@@ -1,0 +1,82 @@
+.room {
+    position: relative;
+    width: 90vw;
+    height: 90vh;
+    margin: auto;
+    border: 5px solid black;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fox {
+    width: 120px;
+    height: 120px;
+}
+
+.arrow {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+/* Mũi tên text */
+.arrow-text {
+    font-size: 18px;
+}
+
+/* Cost badge chung */
+.cost-badge {
+    position: absolute;
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 2px 6px;
+}
+
+/* Vị trí badge xung quanh mũi tên */
+.badge-up {
+    bottom: 100%;
+    margin-bottom: 4px;
+} /* trên mũi tên */
+.badge-down {
+    top: 100%;
+    margin-top: 4px;
+} /* dưới mũi tên */
+.badge-left {
+    right: 100%;
+    margin-right: 4px;
+} /* bên trái mũi tên */
+.badge-right {
+    left: 100%;
+    margin-left: 4px;
+} /* bên phải mũi tên */
+
+/* Vị trí 4 hướng mũi tên */
+.arrow-up {
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.arrow-down {
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.arrow-left {
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.arrow-right {
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+}
