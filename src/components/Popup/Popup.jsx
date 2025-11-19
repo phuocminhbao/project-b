@@ -1,7 +1,7 @@
 import "./Popup.css";
 import { useState, useEffect } from "react";
 
-const Popup = ({ image, text, choices, close, children }) => {
+const Popup = ({ image, text, choices, children }) => {
     const [displayText, setDisplayText] = useState("");
 
     // Typing effect

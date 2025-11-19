@@ -24,16 +24,15 @@ const mapData = [
 
 const loadMap = () => {
     for (let row = 0; row < MAX_LENGTH; row++) {
+        mapData[row] = [];
         for (let col = 0; col < MAX_LENGTH; col++) {
-            let ranNpc;
-            if (getRandomInt(1, 4) === 2) {
-                ranNpc = getRandomElement(npcCharacters);
-                added.npc[ranNpc.id] = true;
-            }
             mapData[row][col] = {
                 cost: getRandomInt(0, 9),
-                npc: ranNpc,
-                question: questions[0],
+                npc:
+                    getRandomInt(1, 4) === 2
+                        ? getRandomElement(npcCharacters)
+                        : undefined,
+                question: getRandomElement(questions),
                 event: undefined,
                 items: [],
             };
@@ -46,5 +45,5 @@ const reLoadMap = () => {
     added.questions = {};
     loadMap();
 };
-
+loadMap();
 export { mapData, MAX_LENGTH, reLoadMap };

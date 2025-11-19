@@ -1,7 +1,7 @@
 import "./Room.css";
 import Arrow from "../Arrow/Arrow";
 import Popup from "../Popup/Popup";
-import { use, useState } from "react";
+import { Children, use, useState } from "react";
 import InfoBox from "../InfoBox/InfoBox";
 import { mapData, MAX_LENGTH } from "../../data/map";
 import { FoxContext } from "../../context/fox/foxContext";
@@ -30,7 +30,7 @@ const Room = () => {
         col: 0,
     });
     const [isAnswered, setIsAnswered] = useState(false);
-    const [_, setFox] = use(FoxContext);
+    const [fox, setFox] = use(FoxContext);
     const { cost, event, items, npc, question } =
         mapData[posistion.row][posistion.col];
     const [popupData, setPopupData] = useState();
@@ -42,7 +42,16 @@ const Room = () => {
         });
         if (row >= MAX_LENGTH || col >= MAX_LENGTH || row < 0 || col < 0) {
             setPopupData({
-                text: getRandomElement(hitEndMessage),
+                text: `Ngõ cụt: ${getRandomElement(hitEndMessage)}`,
+                children: (
+                    <button
+                        onClick={() => {
+                            closePopup();
+                        }}
+                    >
+                        {"cái djtconmeeeee cuocdoi"}
+                    </button>
+                ),
             });
             return;
         }
@@ -54,9 +63,9 @@ const Room = () => {
 
     return (
         <div className="room">
-            {/* <img src={foxImg} alt="Cáo" className="fox" /> */}
-            {/* <img src={foxImg} alt="Cáo" className="fox" /> */}
-            {/* <img src={foxImg} alt="Cáo" className="fox" /> */}
+            <img src={fox.Avatar} alt="duck" className="fox" />
+            <img src={fox.Avatar} alt="fox" className="fox" />
+            <img src={fox.Avatar} alt="penquin" className="fox" />
 
             {["up", "down", "left", "right"].map((direction) => {
                 const [row, col] = getNextRoomPosition(direction, posistion);
@@ -80,13 +89,7 @@ const Room = () => {
                     text={popupData.text}
                     choices={popupData.choices}
                 >
-                    <button
-                        onClick={() => {
-                            closePopup();
-                        }}
-                    >
-                        {"cái djtconmeeeee cuocdoi"}
-                    </button>
+                    {popupData.children}
                 </Popup>
             )}
             <button
@@ -115,17 +118,31 @@ const Room = () => {
             >
                 Open popup
             </button>
-            <img
-                src={npc.avatar}
-                alt="npc"
-                className="npc"
-                onClick={() => {
-                    console.log("Npc ");
-                }}
-                onMouseEnter={() => {
-                    console.log("hover");
-                }}
-            />
+            {npc && (
+                <img
+                    src={npc.Avatar}
+                    alt="npc"
+                    className="npc"
+                    onClick={() => {
+                        setPopupData({
+                            image: npc.Avatar,
+                            text: npc.CurrentText,
+                            children: (
+                                <button
+                                    onClick={() => {
+                                        setPopupData((pre) => {
+                                            pre.text = npc.NextText;
+                                            return pre;
+                                        });
+                                    }}
+                                >
+                                    sủa tips dei
+                                </button>
+                            ),
+                        });
+                    }}
+                />
+            )}
         </div>
     );
 };

@@ -1,11 +1,14 @@
+import animalstuck from "../assets/animalsduck.jpg";
 export class Fox {
     /**
      * @type {number}
      */
     #points;
+    #avatar;
 
     constructor() {
         this.#points = 20;
+        this.#avatar = animalstuck;
     }
 
     get Points() {
@@ -22,5 +25,9 @@ export class Fox {
 
     minusPoints(amount) {
         this.addPoints(-amount);
+    }
+
+    get Avatar() {
+        return this.#avatar;
     }
 }
