@@ -1,14 +1,11 @@
-import animalstuck from "../assets/animalsduck.jpg";
-export class Fox {
-    /**
-     * @type {number}
-     */
+import foxAvatar from "../assets/fox.gif";
+import { Character } from "./Character";
+class Fox extends Character {
     #points;
-    #avatar;
 
-    constructor() {
+    constructor(possition) {
+        super("Fox", foxAvatar, possition);
         this.#points = 20;
-        this.#avatar = animalstuck;
     }
 
     get Points() {
@@ -26,8 +23,8 @@ export class Fox {
     minusPoints(amount) {
         this.addPoints(-amount);
     }
-
-    get Avatar() {
-        return this.#avatar;
-    }
 }
+
+const fox = new Fox([0, 0]);
+
+export { fox, Fox };

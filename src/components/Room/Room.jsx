@@ -1,13 +1,15 @@
 import "./Room.css";
 import Arrow from "../Arrow/Arrow";
 import Popup from "../Popup/Popup";
-import { Children, use, useState } from "react";
+import { useState } from "react";
 import InfoBox from "../InfoBox/InfoBox";
 import { mapData, MAX_LENGTH } from "../../data/map";
-import { FoxContext } from "../../context/fox/foxContext";
 import { getRandomInt } from "../../utils/numberUtils";
 import { getRandomElement } from "../../utils/array";
 import { hitEndMessage } from "../../data/texts";
+import { fox } from "../../model/Fox";
+import { penguin } from "../../model/Penguin";
+import { duck } from "../../model/Duck";
 
 const getNextRoomPosition = (direction, { row, col }) => {
     switch (direction) {
@@ -25,21 +27,32 @@ const getNextRoomPosition = (direction, { row, col }) => {
 };
 
 const Room = () => {
-    const [posistion, setPosition] = useState({
-        row: 0,
-        col: 0,
-    });
+    const [popupData, setPopupData] = useState();
     const [isAnswered, setIsAnswered] = useState(false);
-    const [fox, setFox] = use(FoxContext);
+    const [posistion, setPosition] = useState({
+        row: fox.Row,
+        col: fox.Col,
+    });
+    const found = {
+        duck: fox.Row === duck.Row && fox.Col === duck.Col,
+        penguin: fox.Row === penguin.Row && fox.Col === penguin.Col,
+    };
+    const moveToNextRoom = (row, col) => {
+        fox.setPossition(row, col);
+        if (found.duck) {
+            duck.setPossition(row, col);
+        }
+        if (found.penguin) {
+            penguin.setPossition(row, col);
+        }
+        setPosition({ row, col });
+    };
     const { cost, event, items, npc, question } =
         mapData[posistion.row][posistion.col];
-    const [popupData, setPopupData] = useState();
 
     const tryToGoNextRoom = ([row, col], cost) => {
-        setFox((fox) => {
-            fox.minusPoints(cost);
-            return fox;
-        });
+        fox.minusPoints(cost);
+
         if (row >= MAX_LENGTH || col >= MAX_LENGTH || row < 0 || col < 0) {
             setPopupData({
                 text: `Ngõ cụt: ${getRandomElement(hitEndMessage)}`,
@@ -55,7 +68,8 @@ const Room = () => {
             });
             return;
         }
-        setPosition({ row, col });
+        moveToNextRoom(row, col);
+        setIsAnswered(false);
     };
     const closePopup = () => {
         setPopupData(undefined);
@@ -63,9 +77,11 @@ const Room = () => {
 
     return (
         <div className="room">
-            <img src={fox.Avatar} alt="duck" className="fox" />
+            {found.duck && <img src={duck.Avatar} alt="duck" className="fox" />}
             <img src={fox.Avatar} alt="fox" className="fox" />
-            <img src={fox.Avatar} alt="penquin" className="fox" />
+            {found.penguin && (
+                <img src={penguin.Avatar} alt="penquin" className="fox" />
+            )}
 
             {["up", "down", "left", "right"].map((direction) => {
                 const [row, col] = getNextRoomPosition(direction, posistion);
@@ -103,12 +119,9 @@ const Room = () => {
                                     closePopup();
                                     return;
                                 }
-                                setFox((fox) => {
-                                    answer.isCorrect
-                                        ? fox.addPoints(question.point)
-                                        : fox.minusPoints(question.point);
-                                    return fox;
-                                });
+                                answer.isCorrect
+                                    ? fox.addPoints(question.point)
+                                    : fox.minusPoints(question.point);
                                 setIsAnswered(true);
                                 setPopupData(undefined);
                             },
@@ -130,10 +143,14 @@ const Room = () => {
                             children: (
                                 <button
                                     onClick={() => {
-                                        setPopupData((pre) => {
-                                            pre.text = npc.NextText;
-                                            return pre;
-                                        });
+                                        if (npc.IsLastText) {
+                                            closePopup();
+                                            return;
+                                        }
+                                        setPopupData((pre) => ({
+                                            ...pre,
+                                            text: npc.NextText,
+                                        }));
                                     }}
                                 >
                                     sủa tips dei

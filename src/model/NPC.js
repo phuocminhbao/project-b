@@ -21,11 +21,13 @@ export class NPC {
     }
 
     get CurrentText() {
-        return this.#texts[this.#currentText];
+        return `${this.#name}: ${
+            this.#texts[this.#currentText] ?? "Chim cook dei"
+        }`;
     }
 
     get IsLastText() {
-        return this.#currentText === this.#texts.length - 1;
+        return this.#currentText >= this.#texts.length - 1;
     }
 
     get NextText() {
