@@ -21,6 +21,7 @@ const mapData = [
             question: questions[0],
             event: undefined,
             items: [],
+            isExit: false,
         },
     ],
 ];

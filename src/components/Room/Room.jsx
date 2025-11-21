@@ -1,7 +1,7 @@
 import "./Room.css";
 import Arrow from "../Arrow/Arrow";
 import Popup from "../Popup/Popup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InfoBox from "../InfoBox/InfoBox";
 import { mapData, MAX_LENGTH } from "../../data/map";
 import { getRandomInt } from "../../utils/numberUtils";
@@ -26,6 +26,25 @@ const getNextRoomPosition = (direction, { row, col }) => {
     }
 };
 
+const getKeyFromKeyCode = (keyCode) => {
+    switch (keyCode) {
+        case 87: // W
+        case 38: // ↑
+            return "up";
+        case 65: // A
+        case 37: // ←
+            return "left";
+        case 83: // S
+        case 40: // ↓
+            return "down";
+        case 68: // D
+        case 39: // →
+            return "right";
+        default:
+            return null;
+    }
+};
+
 const Room = () => {
     const [popupData, setPopupData] = useState();
     const [isAnswered, setIsAnswered] = useState(false);
@@ -47,10 +66,11 @@ const Room = () => {
         }
         setPosition({ row, col });
     };
-    const { cost, event, items, npc, question } =
-        mapData[posistion.row][posistion.col];
+    const { npc, question, isExit } = mapData[posistion.row][posistion.col];
+    const isEndGame = isExit && found.duck && found.penguin;
 
     const tryToGoNextRoom = ([row, col], cost) => {
+        if (popupData) return;
         fox.minusPoints(cost);
 
         if (row >= MAX_LENGTH || col >= MAX_LENGTH || row < 0 || col < 0) {
@@ -62,7 +82,7 @@ const Room = () => {
                             closePopup();
                         }}
                     >
-                        {"cái djtconmeeeee cuocdoi"}
+                        cái djtconmeeeee cuocdoi
                     </button>
                 ),
             });
@@ -74,6 +94,24 @@ const Room = () => {
     const closePopup = () => {
         setPopupData(undefined);
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const handleKeyDown = (e) => {
+        const { keyCode } = e;
+        const direction = getKeyFromKeyCode(keyCode);
+        if (!direction) return;
+        tryToGoNextRoom(
+            getNextRoomPosition(direction, posistion),
+            mapData[posistion.row]?.[posistion.col]?.cost ?? getRandomInt(1, 5)
+        );
+    };
+
+    useEffect(() => {
+        document.addEventListener("keydown", handleKeyDown);
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [handleKeyDown]);
 
     return (
         <div className="room">
@@ -106,6 +144,11 @@ const Room = () => {
                     choices={popupData.choices}
                 >
                     {popupData.children}
+                </Popup>
+            )}
+            {isEndGame && (
+                <Popup text="The end">
+                    <p>Mún chơi lại thì f5 chớ t lừi làm feature reload</p>
                 </Popup>
             )}
             <button
