@@ -48,7 +48,7 @@ const getKeyFromKeyCode = (keyCode) => {
 const Room = () => {
     const [popupData, setPopupData] = useState();
     const [isAnswered, setIsAnswered] = useState(false);
-    const [posistion, setPosition] = useState({
+    const [position, setPosition] = useState({
         row: fox.Row,
         col: fox.Col,
     });
@@ -57,16 +57,16 @@ const Room = () => {
         penguin: fox.Row === penguin.Row && fox.Col === penguin.Col,
     };
     const moveToNextRoom = (row, col) => {
-        fox.setPossition(row, col);
+        fox.setPosition(row, col);
         if (found.duck) {
-            duck.setPossition(row, col);
+            duck.setPosition(row, col);
         }
         if (found.penguin) {
-            penguin.setPossition(row, col);
+            penguin.setPosition(row, col);
         }
         setPosition({ row, col });
     };
-    const { npc, question, isExit } = mapData[posistion.row][posistion.col];
+    const { npc, question, isExit } = mapData[position.row][position.col];
     const isEndGame = isExit && found.duck && found.penguin;
 
     const tryToGoNextRoom = ([row, col], cost) => {
@@ -101,8 +101,8 @@ const Room = () => {
         const direction = getKeyFromKeyCode(keyCode);
         if (!direction) return;
         tryToGoNextRoom(
-            getNextRoomPosition(direction, posistion),
-            mapData[posistion.row]?.[posistion.col]?.cost ?? getRandomInt(1, 5)
+            getNextRoomPosition(direction, position),
+            mapData[position.row]?.[position.col]?.cost ?? getRandomInt(1, 5)
         );
     };
 
@@ -122,7 +122,7 @@ const Room = () => {
             )}
 
             {["up", "down", "left", "right"].map((direction) => {
-                const [row, col] = getNextRoomPosition(direction, posistion);
+                const [row, col] = getNextRoomPosition(direction, position);
                 const cost = mapData[row]?.[col]?.cost ?? getRandomInt(1, 5);
                 return (
                     <Arrow

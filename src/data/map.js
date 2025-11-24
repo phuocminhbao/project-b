@@ -45,7 +45,7 @@ const assignExit = () => {
 
 const assignFox = () => {
     const [row, col] = getRandomPosition();
-    fox.setPossition(row, col);
+    fox.setPosition(row, col);
 };
 
 const assignDuck = () => {
@@ -53,7 +53,7 @@ const assignDuck = () => {
     while (row === fox.Row && col === fox.Col) {
         [row, col] = getRandomPosition();
     }
-    duck.setPossition(row, col);
+    duck.setPosition(row, col);
 };
 
 const assignPenguin = () => {
@@ -64,7 +64,7 @@ const assignPenguin = () => {
     ) {
         [row, col] = getRandomPosition();
     }
-    penguin.setPossition(row, col);
+    penguin.setPosition(row, col);
 };
 
 const loadMap = () => {
