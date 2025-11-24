@@ -24,3 +24,40 @@
     object-fit: contain;
     z-index: 3;
 }
+
+.quiz-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px; /* Moved to left to avoid InfoBox overlap */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(30, 30, 30, 0.85);
+    backdrop-filter: blur(8px);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 20; /* Higher than arrows (10) but lower than popup (100) */
+}
+
+.quiz-btn:hover {
+    background: rgba(50, 50, 50, 0.95);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.quiz-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.quiz-btn svg {
+    width: 20px;
+    height: 20px;
+}

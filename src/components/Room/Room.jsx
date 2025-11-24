@@ -67,7 +67,7 @@ const Room = () => {
         setPosition({ row, col });
     };
     const { npc, question, isExit } = mapData[position.row][position.col];
-    const isEndGame = isExit && found.duck && found.penguin;
+    const isEndGame = (isExit && found.duck && found.penguin) || fox.Points <= 0;
 
     const tryToGoNextRoom = ([row, col], cost) => {
         if (popupData) return;
@@ -152,6 +152,7 @@ const Room = () => {
                 </Popup>
             )}
             <button
+                className="quiz-btn"
                 onClick={() => {
                     setPopupData({
                         text: question.title,
@@ -172,7 +173,21 @@ const Room = () => {
                     });
                 }}
             >
-                Open popup
+                <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                >
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg>
+                <span>Question</span>
             </button>
             {npc && (
                 <img

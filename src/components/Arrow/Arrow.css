@@ -3,44 +3,82 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px 12px;
-    background: rgba(0, 0, 0, 0.7);
+    padding: 12px;
+    background: rgba(30, 30, 30, 0.85);
+    backdrop-filter: blur(8px);
     color: white;
-    font-weight: bold;
-    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%; /* Circular button for arrows looks good */
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    width: 48px;
+    height: 48px;
 }
 
-.arrow-text {
-    font-size: 18px;
+.arrow:hover {
+    background: rgba(50, 50, 50, 0.95);
+    transform: scale(1.1);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
 }
+
+.arrow:active {
+    transform: scale(0.95);
+}
+
+/* Specific hover transforms need to handle the centering translation + scale */
+.arrow-up:hover { transform: translateX(-50%) scale(1.1); }
+.arrow-down:hover { transform: translateX(-50%) scale(1.1); }
+.arrow-left:hover { transform: translateY(-50%) scale(1.1); }
+.arrow-right:hover { transform: translateY(-50%) scale(1.1); }
+
+.arrow-up:active { transform: translateX(-50%) scale(0.95); }
+.arrow-down:active { transform: translateX(-50%) scale(0.95); }
+.arrow-left:active { transform: translateY(-50%) scale(0.95); }
+.arrow-right:active { transform: translateY(-50%) scale(0.95); }
+
 
 /* Cost badge */
 .cost-badge {
     position: absolute;
+    background: rgba(255, 255, 255, 0.9);
     color: #000;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: bold;
     padding: 2px 6px;
-    border-radius: 6px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    pointer-events: none;
+    white-space: nowrap;
 }
 
 /* Vị trí badge */
 .badge-up {
     top: 100%;
-    margin-top: 4px;
-} /* dưới ↑ */
+    margin-top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+} 
 .badge-down {
     bottom: 100%;
-    margin-bottom: 4px;
-} /* trên ↓ */
+    margin-bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+} 
 .badge-left {
     left: 100%;
-    margin-left: 4px;
-} /* bên phải ← */
+    margin-left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+} 
 .badge-right {
     right: 100%;
-    margin-right: 4px;
-} /* bên trái → */
+    margin-right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+} 
 
 /* Vị trí arrow */
 .arrow-up {
