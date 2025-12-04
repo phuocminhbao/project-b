@@ -3,9 +3,9 @@ import Arrow from "../Arrow/Arrow";
 import Popup from "../Popup/Popup";
 import { useEffect, useState } from "react";
 import InfoBox from "../InfoBox/InfoBox";
-import { mapData, MAX_LENGTH } from "../../data/map";
+import { mapData, MAX_LENGTH, assignRandomQuestion } from "../../data/map";
 import { getRandomInt } from "../../utils/numberUtils";
-import { getRandomElement } from "../../utils/array";
+import { getRandomElement, shuffle } from "../../utils/array";
 import { hitEndMessage } from "../../data/texts";
 import { fox } from "../../model/Fox";
 import { penguin } from "../../model/Penguin";
@@ -67,7 +67,8 @@ const Room = () => {
         setPosition({ row, col });
     };
     const { npc, question, isExit } = mapData[position.row][position.col];
-    const isEndGame = (isExit && found.duck && found.penguin) || fox.Points <= 0;
+    const isEndGame =
+        (isExit && found.duck && found.penguin) || fox.Points <= 0;
 
     const tryToGoNextRoom = ([row, col], cost) => {
         if (popupData) return;
@@ -88,6 +89,7 @@ const Room = () => {
             });
             return;
         }
+        assignRandomQuestion(position.row, position.col);
         moveToNextRoom(row, col);
         setIsAnswered(false);
     };
@@ -156,7 +158,7 @@ const Room = () => {
                 onClick={() => {
                     setPopupData({
                         text: question.title,
-                        choices: question.answers.map((answer) => ({
+                        choices: shuffle(question.answers).map((answer) => ({
                             label: answer.title,
                             onClick: () => {
                                 if (isAnswered) {

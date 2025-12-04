@@ -1,4 +1,4 @@
-import { getRandomElement } from "../utils/array";
+import { getRandomElement, generateUniqueRandomArray } from "../utils/array";
 import { getRandomInt } from "../utils/numberUtils";
 import { npcCharacters } from "./npcCharacters";
 import { questions } from "./questions";
@@ -7,11 +7,6 @@ import { duck } from "../model/Duck";
 import { penguin } from "../model/Penguin";
 
 const MAX_LENGTH = 5;
-
-const added = {
-    npc: {},
-    questions: {},
-};
 
 const mapData = [
     [
@@ -67,17 +62,28 @@ const assignPenguin = () => {
     penguin.setPosition(row, col);
 };
 
+const getNPC = (NPCs) => {
+    if (getRandomInt(1, 4) !== 2) return undefined;
+
+    return npcCharacters[NPCs.pop()];
+};
+
 const loadMap = () => {
+    const randomNPCs = generateUniqueRandomArray(
+        npcCharacters.length,
+        MAX_LENGTH * MAX_LENGTH
+    );
+    const randomQuestions = generateUniqueRandomArray(
+        questions.length,
+        MAX_LENGTH * MAX_LENGTH
+    );
     for (let row = 0; row < MAX_LENGTH; row++) {
         mapData[row] = [];
         for (let col = 0; col < MAX_LENGTH; col++) {
             mapData[row][col] = {
                 cost: getRandomInt(0, 9),
-                npc:
-                    getRandomInt(1, 4) === 2
-                        ? getRandomElement(npcCharacters)
-                        : undefined,
-                question: getRandomElement(questions),
+                npc: getNPC(randomNPCs),
+                question: questions[randomQuestions.pop()],
                 event: undefined,
                 items: [],
             };
@@ -90,9 +96,10 @@ const loadMap = () => {
 };
 
 const reLoadMap = () => {
-    added.npc = {};
-    added.questions = {};
     loadMap();
 };
+const assignRandomQuestion = (row, col) => {
+    mapData[row][col].question = getRandomElement(questions);
+};
 loadMap();
-export { mapData, MAX_LENGTH, reLoadMap };
+export { mapData, MAX_LENGTH, reLoadMap, assignRandomQuestion };
