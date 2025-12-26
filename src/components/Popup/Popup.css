@@ -54,26 +54,11 @@
     line-height: 1.4;
 }
 
-/* nút */
 .popup-buttons {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
     justify-content: center;
-}
-
-.popup-buttons button {
-    padding: 10px 16px;
-    background: #f2f2f2;
-    border: 2px solid black;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.1s ease;
-}
-
-.popup-buttons button:hover {
-    transform: translateY(-2px);
 }
 
 /* animation */

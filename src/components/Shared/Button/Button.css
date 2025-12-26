@@ -1,0 +1,13 @@
+.button button {
+    padding: 10px 16px;
+    background: #f2f2f2;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.1s ease;
+}
+
+.button button:hover {
+    transform: translateY(-2px);
+}

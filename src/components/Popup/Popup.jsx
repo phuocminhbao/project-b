@@ -1,3 +1,4 @@
+import { Button } from "../Shared/Button/Button";
 import "./Popup.css";
 import { useState, useEffect } from "react";
 
@@ -40,9 +41,9 @@ const Popup = ({ image, text, choices, children }) => {
                 {choices ? (
                     <div className="popup-buttons">
                         {choices.map((c, i) => (
-                            <button key={i} onClick={c.onClick}>
+                            <Button key={i} onClick={c.onClick}>
                                 {c.label}
-                            </button>
+                            </Button>
                         ))}
                     </div>
                 ) : (

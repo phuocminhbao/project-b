@@ -40,7 +40,8 @@ const assignExit = () => {
 
 const assignFox = () => {
     const [row, col] = getRandomPosition();
-    fox.setPosition(row, col);
+    // fox.setPosition(row, col);
+    fox.setPosition(0, 0);
 };
 
 const assignDuck = () => {
@@ -63,9 +64,9 @@ const assignPenguin = () => {
 };
 
 const getNPC = (NPCs) => {
-    if (getRandomInt(1, 4) !== 2) return undefined;
+    // if (getRandomInt(1, 4) !== 2) return undefined;
 
-    return npcCharacters[NPCs.pop()];
+    return npcCharacters[NPCs.shift()];
 };
 
 const loadMap = () => {

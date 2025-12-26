@@ -10,6 +10,7 @@ import { hitEndMessage } from "../../data/texts";
 import { fox } from "../../model/Fox";
 import { penguin } from "../../model/Penguin";
 import { duck } from "../../model/Duck";
+import { Button } from "../Shared/Button/Button";
 
 const getNextRoomPosition = (direction, { row, col }) => {
     switch (direction) {
@@ -67,8 +68,8 @@ const Room = () => {
         setPosition({ row, col });
     };
     const { npc, question, isExit } = mapData[position.row][position.col];
-    const isEndGame =
-        (isExit && found.duck && found.penguin) || fox.Points <= 0;
+    const isEndGame = false;
+    //(isExit && found.duck && found.penguin) || fox.Points <= 0;
 
     const tryToGoNextRoom = ([row, col], cost) => {
         if (popupData) return;
@@ -78,13 +79,13 @@ const Room = () => {
             setPopupData({
                 text: `Ngõ cụt: ${getRandomElement(hitEndMessage)}`,
                 children: (
-                    <button
+                    <Button
                         onClick={() => {
                             closePopup();
                         }}
                     >
                         cái djtconmeeeee cuocdoi
-                    </button>
+                    </Button>
                 ),
             });
             return;
@@ -201,20 +202,21 @@ const Room = () => {
                             image: npc.Avatar,
                             text: npc.CurrentText,
                             children: (
-                                <button
+                                <Button
                                     onClick={() => {
                                         if (npc.IsLastText) {
                                             closePopup();
                                             return;
                                         }
+                                        const nextText = npc.NextText;
                                         setPopupData((pre) => ({
                                             ...pre,
-                                            text: npc.NextText,
+                                            text: nextText,
                                         }));
                                     }}
                                 >
-                                    sủa tips dei
-                                </button>
+                                    Okiiiii
+                                </Button>
                             ),
                         });
                     }}
