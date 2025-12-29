@@ -18,6 +18,17 @@ import tmlan from "../assets/lan.jpg";
 import mrBeast from "../assets/mr-beast.jpg";
 import hongTy from "../assets/hong-ty.jpg";
 import anhDaDen from "../assets/anhdaden.jpg";
+import gustave from "../assets/gustave.jpg";
+import MTP from "../assets/son-tung-mtp.jpg";
+import tommyXiaomi from "../assets/tommy-xiaomi.png";
+import taeyeon from "../assets/taeyeon.jpg";
+import naruto from "../assets/naruto.webp";
+import pico from "../assets/pico.jpg";
+import gd from "../assets/gd.jpg";
+import andrew from "../assets/andrew.jpg";
+import theGirls from "../assets/the-girls.png";
+import ironFist from "../assets/iron-fist.png";
+
 import { NPC } from "../model/NPC";
 
 export const npcCharacters = [
@@ -109,5 +120,57 @@ export const npcCharacters = [
         "fill in blank",
         "_i_ger",
         "yeah singer",
+    ]),
+    new NPC(21, "Gustave", gustave, [
+        "Nous avançons vers la mort, non par volonté, mais parce que reculer viderait nos vies de leur sens.",
+        "Demain, le monde nous effacera peut-être ; mais ce soir, nous sommes encore là.",
+        "Sophie, ... pourquoi tu m'as laissé seul ici ?",
+    ]),
+    new NPC(22, "Sơn Tùng M-TP", MTP, [
+        "Flop quớ thì ghi tên anh vào",
+        "Anh tìm nỗi nhớ",
+        "Anh tìm quá khứ",
+        "Nhớ lắm kí ức anh và em",
+        "Trả lại anh yêu thương ấy",
+        "Xin người hãy về nơi đây",
+        "Bàn tay yếu ớt cố níu em ở lại",
+        "... ",
+    ]),
+    new NPC(23, "Tommy Xiaomi", tommyXiaomi, [
+        "Dậy dei ông cháu ơi",
+        "Everyone is a whore, Grace. We just sell different parts of ourselves",
+    ]),
+    new NPC(24, "Taeyeon", taeyeon, [
+        "Cía lùn mía",
+        "chị m nhìn Asian vầy",
+        "con Serious Duck vs thằng Kayron cứ bảo chị là Taylor (Blue) Switch",
+    ]),
+    new NPC(25, "Naruto", naruto, [
+        "Ich bin der Hokage!",
+        "Dattebayo!",
+        "ei, bro thấy con vợ Sakuke toi âu k?",
+        "djtme tìm mãi cứ trốn hoi",
+    ]),
+    new NPC(26, "Pico", pico, [
+        "Hiii anh Kayron",
+        "「このアイス最高だよ！お兄ちゃん、一緒に食べてみよう！」",
+    ]),
+    new NPC(27, "G Dragon", gd, [
+        "Bang bang bangggg",
+        "날 그냥 혼자 두게 해, 어차피 난 원래 혼자였으니까.내겐 아무도 없어, 모든 게 다 무의미해.",
+        "Ei mà có 5 củ k anh mượn làm nhạc cái",
+    ]),
+    new NPC(28, "The Amazing Spider Man", andrew, [
+        "Seems everyone will be back in Avenver Serect War",
+        "BUT not uncle Ben and Gwen Stacy :(",
+        "With great power, there must also come great responsibility.",
+    ]),
+    new NPC(29, "The Group", theGirls, [
+        "Aaaaa tặng bạn Kiên tim nè",
+        "chúc bn sớm tìm dc con quỷ cái bên phải",
+    ]),
+    new NPC(30, "Iron Fist", ironFist, [
+        "Dude, I'm looking for Iron Man and some healers",
+        "Qí guàn cháng hóng (CHEAPER TOWN HALL)",
     ]),
 ];
