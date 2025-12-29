@@ -64,7 +64,7 @@ const assignPenguin = () => {
 };
 
 const getNPC = (NPCs) => {
-    if (inChanceOf(50)) {
+    if (inChanceOf(65)) {
         return undefined;
     }
 
