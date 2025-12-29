@@ -1,0 +1,27 @@
+Admin:
+- Rate of : Giving hints, trully hint, hint details
+
+NPC:
+- 50% will give hint
+- 50 % will give true hint
+--------
+- hint are: 
+    extract position (1,69%),
+    range of rooms (any of 1,1 13, 4,6) (40%)
+    relative direction: up/down/left/right (30%)
+    relative direction: upper-left, upper-right, lower-left, lower-right (30%)
+    distance (30%),
+    row/column alignment comparing to fox: same col, same row or not same both (30%),
+    row/column alignment comparing to duck and penguin: same col, same row or not same both (70%),
+    row/column diff in extract number (e.g: Duck is 3 tiles above you, Duck is 2 tiles to your right) (10%),
+    hiding at conner (60%),
+--------
+Achievement:
+- All NPCs are found
+
+Items:
+- Knowing current position
+- Graping Penguin/Duck to current room (5%)
+
+Events:
+- earthwake: Duck and Penguin are lost again

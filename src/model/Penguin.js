@@ -2,7 +2,7 @@ import { Hider } from "./Hider";
 import penguinAvatar from "../assets/penguin.jpg";
 class Penguin extends Hider {
     constructor(possition) {
-        super("Penguin", penguinAvatar, possition);
+        super("Trinh Me", penguinAvatar, possition);
     }
 }
 

@@ -5,7 +5,11 @@ export const getRandomElement = (array) => {
     return array[randomIndex];
 };
 
-export const generateUniqueRandomArray = (n, arrLength) => {
+export const generateUniqueRandomArray = (
+    n,
+    arrLength,
+    isWithoutUndefined = false
+) => {
     const numbers = Array.from({ length: n + 1 }, (_, i) => i);
     const result = [];
 
@@ -14,7 +18,11 @@ export const generateUniqueRandomArray = (n, arrLength) => {
         result.push(numbers.splice(randomIndex, 1)[0]);
     }
 
-    return result;
+    if (!isWithoutUndefined) {
+        return result;
+    }
+
+    return result.filter((item) => item !== undefined);
 };
 
 export const shuffle = (array) => {

@@ -4,7 +4,7 @@ class Fox extends Character {
     #points;
 
     constructor(possition) {
-        super("Fox", foxAvatar, possition);
+        super("Kayron", foxAvatar, possition);
         this.#points = 20;
     }
 

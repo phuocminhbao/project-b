@@ -11,6 +11,7 @@ import { fox } from "../../model/Fox";
 import { penguin } from "../../model/Penguin";
 import { duck } from "../../model/Duck";
 import { Button } from "../Shared/Button/Button";
+import NPCAvatar from "./NPCAvatar";
 
 const getNextRoomPosition = (direction, { row, col }) => {
     switch (direction) {
@@ -57,6 +58,7 @@ const Room = () => {
         duck: fox.Row === duck.Row && fox.Col === duck.Col,
         penguin: fox.Row === penguin.Row && fox.Col === penguin.Col,
     };
+
     const moveToNextRoom = (row, col) => {
         fox.setPosition(row, col);
         if (found.duck) {
@@ -116,12 +118,25 @@ const Room = () => {
         };
     }, [handleKeyDown]);
 
+    useEffect(() => {
+        if (found.duck) {
+            duck.found();
+        }
+        if (found.penguin) {
+            penguin.found();
+        }
+        console.log({
+            duck: found.duck,
+            penguin: found.penguin,
+        });
+    }, [found.duck, found.penguin]);
+
     return (
         <div className="room">
             {found.duck && <img src={duck.Avatar} alt="duck" className="fox" />}
             <img src={fox.Avatar} alt="fox" className="fox" />
             {found.penguin && (
-                <img src={penguin.Avatar} alt="penquin" className="fox" />
+                <img src={penguin.Avatar} alt="penguin" className="fox" />
             )}
 
             {["up", "down", "left", "right"].map((direction) => {
@@ -192,36 +207,11 @@ const Room = () => {
                 </svg>
                 <span>Question</span>
             </button>
-            {npc && (
-                <img
-                    src={npc.Avatar}
-                    alt="npc"
-                    className="npc"
-                    onClick={() => {
-                        setPopupData({
-                            image: npc.Avatar,
-                            text: npc.CurrentText,
-                            children: (
-                                <Button
-                                    onClick={() => {
-                                        if (npc.IsLastText) {
-                                            closePopup();
-                                            return;
-                                        }
-                                        const nextText = npc.NextText;
-                                        setPopupData((pre) => ({
-                                            ...pre,
-                                            text: nextText,
-                                        }));
-                                    }}
-                                >
-                                    Okiiiii
-                                </Button>
-                            ),
-                        });
-                    }}
-                />
-            )}
+            <NPCAvatar
+                npc={npc}
+                setPopupData={setPopupData}
+                closePopup={closePopup}
+            />
         </div>
     );
 };

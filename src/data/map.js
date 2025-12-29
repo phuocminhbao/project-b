@@ -1,5 +1,5 @@
 import { getRandomElement, generateUniqueRandomArray } from "../utils/array";
-import { getRandomInt } from "../utils/numberUtils";
+import { getRandomInt, inChanceOf } from "../utils/numberUtils";
 import { npcCharacters } from "./npcCharacters";
 import { questions } from "./questions";
 import { fox } from "../model/Fox";
@@ -64,19 +64,23 @@ const assignPenguin = () => {
 };
 
 const getNPC = (NPCs) => {
-    // if (getRandomInt(1, 4) !== 2) return undefined;
+    if (inChanceOf(50)) {
+        return undefined;
+    }
 
-    return npcCharacters[NPCs.shift()];
+    return npcCharacters[NPCs.pop()];
 };
 
 const loadMap = () => {
     const randomNPCs = generateUniqueRandomArray(
         npcCharacters.length,
-        MAX_LENGTH * MAX_LENGTH
+        MAX_LENGTH * MAX_LENGTH,
+        true
     );
     const randomQuestions = generateUniqueRandomArray(
         questions.length,
-        MAX_LENGTH * MAX_LENGTH
+        MAX_LENGTH * MAX_LENGTH,
+        true
     );
     for (let row = 0; row < MAX_LENGTH; row++) {
         mapData[row] = [];
