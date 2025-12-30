@@ -28,6 +28,7 @@ import gd from "../assets/gd.jpg";
 import andrew from "../assets/andrew.jpg";
 import theGirls from "../assets/the-girls.png";
 import ironFist from "../assets/iron-fist.png";
+import omen from "../assets/omen.jpg";
 
 import { NPC } from "../model/NPC";
 
@@ -173,4 +174,13 @@ export const npcCharacters = [
         "Dude, I'm looking for Iron Man and some healers",
         "Qí guàn cháng hóng (CHEAPER TOWN HALL)",
     ]),
+    new NPC(31, "A gold Omen", omen, [
+        "People play me in games",
+        "But when it come to bro Ph, that mean Omen playing Serious Duck#2305 and not vice versa",
+    ]),
+    // Omen
+    // Donal Trump
+    // Elon Musk
+    // Gumbal
+    // Wukong
 ];

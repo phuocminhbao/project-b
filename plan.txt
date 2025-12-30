@@ -1,10 +1,14 @@
 Admin:
 - Rate of : Giving hints, trully hint, hint details
 
+Game:
+- 30s of thinking answer for questions, lose 1 point each second after 30s
+- Hint notebook, push hint whenever npc giving hint
+- Audio ?
+/
 NPC:
 - 50% will give hint
 - 50 % will give true hint
---------
 - hint are: 
     extract position (1,69%),
     range of rooms (any of 1,1 13, 4,6) (40%)
@@ -15,13 +19,59 @@ NPC:
     row/column alignment comparing to duck and penguin: same col, same row or not same both (70%),
     row/column diff in extract number (e.g: Duck is 3 tiles above you, Duck is 2 tiles to your right) (10%),
     hiding at conner (60%),
---------
+/
 Achievement:
 - All NPCs are found
 
-Items:
+Shop:
 - Knowing current position
 - Graping Penguin/Duck to current room (5%)
+- Giving 0 - 10 points imediately 
+- Jump to a selected conner
+- Gacha: 1/5 graping both duck and penguin to current room, 4/5 fox dead
+- Knowing if NPC is telling truth
+- Move to next room without losing points
+- Next question return items instead of points
+- Get a random item
+- Become Saitama, 1 hit break through the next wall => Your next move will be 2 rooms
 
 Events:
-- earthwake: Duck and Penguin are lost again
+// Common
+- Fox overthinking so he run into a random room
+- Depress and can not gain more points for 2 next moves
+- Happy birthday: get every items
+- Jump to 0-0 (only fox)
+- Lose every items
+- Lose all hints in note
+- Thanos: Lose 50% of items and hints in note
+- More roll in shop
+
+// Only fox
+- Able to trigger Credit power, fow is very wealthy for next 2 moves
+- Fox feeling lazy so he quit the game
+- Fox overthinking, he not need the gang, fox can only escap with only himself
+- Fox is marked as a cool guy, if next moves he see Kiên Ngân or PS4 npc then those NPC will definitely telling truth
+
+// (Duck & Penguin found)
+- Earthwake: Duck and Penguin are scared and lost again
+- Duck and Penguin are fighting then Duck always lose and run to other room
+- Duck want got top, Penguin want go down (1 got reward, 1 got punishment)
+- Duck and Penguin become childish, fox need to pay for expensive food or else they run away
+
+// Penguin found
+- Penguin feeling heavy and can't move for 3 next moves (Penguin found)
+- Penguin hurt you with bad words, fox lose 3 - 5 points (Penguin found)
+- Penguin forgot her chùy gai at her origin spawn (Penguin found), can't win if you not going back to that room
+- Penguin hearing Duck's whispers so she left fox and run to duck room (Penguin found)
+- Big boss, Peuguin make presure on fox to go down (even end of road)
+
+// Duck found
+- Silent treatment, Duck make presure on 2 next NPCs will sure not giving hints
+- Serious Duck become Mysterious Duck, Mysterious = take some of fox's items and hide them
+- Duck being generous then give fox 3 rolls in this room
+- K chính kiến, duck think go top is a better choice here but fox is the one to decide (if follow duck will gain double points)
+- Duck being Duck, next move he will go differently with fox
+- Easter egg: Other ducks always telling truth if duck is found
+
+Special questions of duck and penguin (20)
+- Reward as item

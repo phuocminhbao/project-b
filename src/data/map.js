@@ -40,8 +40,7 @@ const assignExit = () => {
 
 const assignFox = () => {
     const [row, col] = getRandomPosition();
-    // fox.setPosition(row, col);
-    fox.setPosition(0, 0);
+    fox.setPosition(row, col);
 };
 
 const assignDuck = () => {
@@ -64,7 +63,7 @@ const assignPenguin = () => {
 };
 
 const getNPC = (NPCs) => {
-    if (inChanceOf(65)) {
+    if (inChanceOf(60)) {
         return undefined;
     }
 
