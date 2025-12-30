@@ -23,8 +23,9 @@ const hints = [
     { name: HINT.HIDING_AT_CONNER, chance: 60 },
 ];
 
+const totalChances = hints.reduce((total, hint) => total + hint.chance, 0);
+
 export const getHints = () => {
-    const totalChances = hints.reduce((total, hint) => total + hint.chance, 0);
     const randomChance = Math.random() * totalChances;
     let currentChance = 0;
     for (let i = 0; i < hints.length; i++) {

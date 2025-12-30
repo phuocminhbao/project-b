@@ -14,6 +14,7 @@ import NPCAvatar from "./NPCAvatar";
 import { getNextRoomPosition, getKeyFromKeyCode } from "../../utils/room";
 import DirectionArrows from "./DirectionArrows";
 import QuestionButton from "./QuestionButton";
+import { getItem } from "../../data/items";
 
 const Room = () => {
     const [popupData, setPopupData] = useState();
@@ -87,11 +88,14 @@ const Room = () => {
 
     const handleSpecialQuestionAnswer = (answer) => {
         if (answer.isCorrect) {
-            // Todo: random item
-            fox.addItem();
+            fox.addItem(getItem());
+            alert(
+                `${question.hider.Name} is really proud and give you a gift!`
+            );
+
             return;
         }
-        alert(`${question.hider.Name} rất thất vọng về bạn!`);
+        alert(`${question.hider.Name} is really really disapointing!`);
     };
 
     const handleQuestionClick = () => {
@@ -158,23 +162,6 @@ const Room = () => {
                 </Popup>
             )}
             <QuestionButton onClick={handleQuestionClick} />
-            {/* <button className="quiz-btn" onClick={handleQuestionClick}>
-                <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                >
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                    <line x1="12" y1="17" x2="12.01" y2="17" />
-                </svg>
-                <span>Question</span>
-            </button> */}
             <NPCAvatar
                 npc={npc}
                 setPopupData={setPopupData}

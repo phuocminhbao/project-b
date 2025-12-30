@@ -71,8 +71,7 @@ const getNPC = (NPCs) => {
 };
 
 const getQuestion = (questionIndexs, specialQuestionsIndexs) => {
-    // Special questions from duck and penguin
-    if (inChanceOf(20) && specialQuestionsIndexs.length > 0) {
+    if (inChanceOf(100) && specialQuestionsIndexs.length > 0) {
         return specialQuestions[specialQuestionsIndexs.pop()];
     }
     return questions[questionIndexs.pop()];

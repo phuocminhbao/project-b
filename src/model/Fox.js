@@ -39,5 +39,6 @@ class Fox extends Character {
 }
 
 const fox = new Fox([0, 0]);
+window.fox = fox;
 
 export { fox, Fox };

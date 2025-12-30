@@ -53,7 +53,7 @@ export const specialQuestions = [
         id: 1005,
         isSpecial: true,
         hider: duck,
-        title: `${duck.Name} ám ảnh nhạy cảm cảu Duck`,
+        title: `Ngày ám ảnh nhạy cảm của${duck.Name}`,
         answers: [
             { title: "2207", isCorrect: true },
             { title: "2702" },
