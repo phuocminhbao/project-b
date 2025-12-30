@@ -12,40 +12,8 @@ import { penguin } from "../../model/Penguin";
 import { duck } from "../../model/Duck";
 import { Button } from "../Shared/Button/Button";
 import NPCAvatar from "./NPCAvatar";
-
-const getNextRoomPosition = (direction, { row, col }) => {
-    switch (direction) {
-        case "up":
-            return [row - 1, col];
-        case "down":
-            return [row + 1, col];
-        case "left":
-            return [row, col - 1];
-        case "right":
-            return [row, col + 1];
-        default:
-            throw new Error("No direction found");
-    }
-};
-
-const getKeyFromKeyCode = (keyCode) => {
-    switch (keyCode) {
-        case 87: // W
-        case 38: // ↑
-            return "up";
-        case 65: // A
-        case 37: // ←
-            return "left";
-        case 83: // S
-        case 40: // ↓
-            return "down";
-        case 68: // D
-        case 39: // →
-            return "right";
-        default:
-            return null;
-    }
-};
+import { getNextRoomPosition, getKeyFromKeyCode } from "../../utils/room";
+import DirectionArrows from "./DirectionArrows/DirectionArrows";
 
 const Room = () => {
     const [popupData, setPopupData] = useState();
@@ -125,10 +93,6 @@ const Room = () => {
         if (found.penguin) {
             penguin.found();
         }
-        console.log({
-            duck: found.duck,
-            penguin: found.penguin,
-        });
     }, [found.duck, found.penguin]);
 
     return (
@@ -138,21 +102,10 @@ const Room = () => {
             {found.penguin && (
                 <img src={penguin.Avatar} alt="penguin" className="fox" />
             )}
-
-            {["up", "down", "left", "right"].map((direction) => {
-                const [row, col] = getNextRoomPosition(direction, position);
-                const cost = mapData[row]?.[col]?.cost ?? getRandomInt(1, 5);
-                return (
-                    <Arrow
-                        key={direction}
-                        direction={direction}
-                        cost={cost}
-                        onClick={() => {
-                            tryToGoNextRoom([row, col], cost);
-                        }}
-                    />
-                );
-            })}
+            <DirectionArrows
+                currentPosition={position}
+                goNextRoom={tryToGoNextRoom}
+            />
             <InfoBox />
             {!!popupData && (
                 <Popup

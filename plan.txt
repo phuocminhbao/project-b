@@ -1,5 +1,6 @@
 Admin:
 - Rate of : Giving hints, trully hint, hint details
+- Local storage
 
 Game:
 - 30s of thinking answer for questions, lose 1 point each second after 30s

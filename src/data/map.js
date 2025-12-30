@@ -70,6 +70,11 @@ const getNPC = (NPCs) => {
     return npcCharacters[NPCs.pop()];
 };
 
+const getQuestion = (questionIndexs) => {
+    // Special questions from duck and penguin
+    return questions[questionIndexs.pop()];
+};
+
 const loadMap = () => {
     const randomNPCs = generateUniqueRandomArray(
         npcCharacters.length,
@@ -87,7 +92,7 @@ const loadMap = () => {
             mapData[row][col] = {
                 cost: getRandomInt(0, 9),
                 npc: getNPC(randomNPCs),
-                question: questions[randomQuestions.pop()],
+                question: getQuestion(randomQuestions),
                 event: undefined,
                 items: [],
             };
