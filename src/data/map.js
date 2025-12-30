@@ -1,7 +1,7 @@
 import { getRandomElement, generateUniqueRandomArray } from "../utils/array";
 import { getRandomInt, inChanceOf } from "../utils/numberUtils";
 import { npcCharacters } from "./npcCharacters";
-import { questions } from "./questions";
+import { questions, specialQuestions } from "./questions";
 import { fox } from "../model/Fox";
 import { duck } from "../model/Duck";
 import { penguin } from "../model/Penguin";
@@ -70,8 +70,11 @@ const getNPC = (NPCs) => {
     return npcCharacters[NPCs.pop()];
 };
 
-const getQuestion = (questionIndexs) => {
+const getQuestion = (questionIndexs, specialQuestionsIndexs) => {
     // Special questions from duck and penguin
+    if (inChanceOf(20) && specialQuestionsIndexs.length > 0) {
+        return specialQuestions[specialQuestionsIndexs.pop()];
+    }
     return questions[questionIndexs.pop()];
 };
 
@@ -86,13 +89,18 @@ const loadMap = () => {
         MAX_LENGTH * MAX_LENGTH,
         true
     );
+    const randomSpecialQuestions = generateUniqueRandomArray(
+        specialQuestions.length,
+        MAX_LENGTH * MAX_LENGTH,
+        true
+    );
     for (let row = 0; row < MAX_LENGTH; row++) {
         mapData[row] = [];
         for (let col = 0; col < MAX_LENGTH; col++) {
             mapData[row][col] = {
                 cost: getRandomInt(0, 9),
                 npc: getNPC(randomNPCs),
-                question: getQuestion(randomQuestions),
+                question: getQuestion(randomQuestions, randomSpecialQuestions),
                 event: undefined,
                 items: [],
             };

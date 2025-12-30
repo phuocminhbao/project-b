@@ -1,3 +1,140 @@
+import { duck } from "../model/Duck";
+
+export const specialQuestions = [
+    {
+        id: 1001,
+        isSpecial: true,
+        hider: duck,
+        title: `${duck.Name} thích ăn nhất món j?`,
+        answers: [
+            { title: "Cơm tấm", isCorrect: true },
+            { title: "Bún đậu" },
+            { title: "Beefsteak" },
+            { title: "Pizaa" },
+        ],
+    },
+    {
+        id: 1002,
+        isSpecial: true,
+        hider: duck,
+        title: `Hiện tại ${duck.Name} hứng thú với thể loại game nào nhất?`,
+        answers: [
+            { title: "Roguelike ", isCorrect: true },
+            { title: "Moba" },
+            { title: "FPS" },
+            { title: "Soulslike" },
+        ],
+    },
+    {
+        id: 1003,
+        isSpecial: true,
+        hider: duck,
+        title: `${duck.Name} gắn bó với game nào lâu nhất?`,
+        answers: [
+            { title: "Liên Minh Huyền Thoại", isCorrect: true },
+            { title: "Valorant" },
+            { title: "Gunny" },
+            { title: "Black Myth Wukong" },
+        ],
+    },
+    {
+        id: 1004,
+        isSpecial: true,
+        hider: duck,
+        title: `Đâu là game mà quá khứ ${duck.Name} hồi nhỏ k chơi?`,
+        answers: [
+            { title: "Võ lâm truyền kì", isCorrect: true },
+            { title: "Khu Vườn trên mây" },
+            { title: "My Fish" },
+            { title: "Happy city" },
+        ],
+    },
+    {
+        id: 1005,
+        isSpecial: true,
+        hider: duck,
+        title: `${duck.Name} ám ảnh nhạy cảm cảu Duck`,
+        answers: [
+            { title: "2207", isCorrect: true },
+            { title: "2702" },
+            { title: "36" },
+            { title: "2106" },
+        ],
+    },
+    {
+        id: 1006,
+        isSpecial: true,
+        hider: duck,
+        title: `Tựa game đầu tiên mà ${duck.Name} chơi vs Trinh me là gì?`,
+        answers: [
+            { title: "PUBG", isCorrect: true },
+            { title: "Mobile Legends Bang Bang" },
+            { title: "Liên Minh Huyền Thoại" },
+            { title: "PUBG mobile" },
+        ],
+    },
+    {
+        id: 1007,
+        isSpecial: true,
+        hider: duck,
+        title: `Ngày sinh của ${duck.Name} là ngày nào?`,
+        answers: [
+            { title: "03/01/2000", isCorrect: true },
+            { title: "01/03/2000" },
+            { title: "31/01/2000" },
+            { title: "13/03/2000" },
+        ],
+    },
+    {
+        id: 1008,
+        isSpecial: true,
+        hider: duck,
+        title: `Best food at nhà 2 của ${duck.Name} là gì?`,
+        answers: [
+            { title: "Bánh tráng", isCorrect: true },
+            { title: "Kem" },
+            { title: "Snack" },
+            { title: "1 chị gái 98 xinh đẹp" },
+        ],
+    },
+    {
+        id: 1009,
+        isSpecial: true,
+        hider: duck,
+        title: `Mảng CNTT ${duck.Name} đang làm?`,
+        answers: [
+            { title: "Web application", isCorrect: true },
+            { title: "Mobile application" },
+            { title: "AI" },
+            { title: "Desktop application" },
+        ],
+    },
+    {
+        id: 1010,
+        isSpecial: true,
+        hider: duck,
+        title: `Tên thật của ${duck.Name} là gì?`,
+        answers: [
+            { title: "Ngô Hữu Phước", isCorrect: true },
+            { title: "Nguyễn Hữu Phước" },
+            { title: "Trần Thị Phước" },
+            { title: `${duck.Name}` },
+        ],
+    },
+    {
+        id: 1011,
+        isSpecial: true,
+        hider: duck,
+        title: "Dự án tối thứ 6 hằng tuần dc khởi động lại lúc nào?",
+        answers: [
+            { title: "24/05/2024", isCorrect: true },
+            { title: "25/04/2024" },
+            { title: "22/07/2024" },
+            { title: "23/05/2024" },
+        ],
+    },
+];
+
 export const questions = [
     {
         id: 0,

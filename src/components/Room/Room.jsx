@@ -1,5 +1,4 @@
 import "./Room.css";
-import Arrow from "../Arrow/Arrow";
 import Popup from "../Popup/Popup";
 import { useEffect, useState } from "react";
 import InfoBox from "../InfoBox/InfoBox";
@@ -13,7 +12,8 @@ import { duck } from "../../model/Duck";
 import { Button } from "../Shared/Button/Button";
 import NPCAvatar from "./NPCAvatar";
 import { getNextRoomPosition, getKeyFromKeyCode } from "../../utils/room";
-import DirectionArrows from "./DirectionArrows/DirectionArrows";
+import DirectionArrows from "./DirectionArrows";
+import QuestionButton from "./QuestionButton";
 
 const Room = () => {
     const [popupData, setPopupData] = useState();
@@ -79,6 +79,41 @@ const Room = () => {
         );
     };
 
+    const handleAnswerQuestion = (answer) => {
+        answer.isCorrect
+            ? fox.addPoints(question.point)
+            : fox.minusPoints(question.point);
+    };
+
+    const handleSpecialQuestionAnswer = (answer) => {
+        if (answer.isCorrect) {
+            // Todo: random item
+            fox.addItem();
+            return;
+        }
+        alert(`${question.hider.Name} rất thất vọng về bạn!`);
+    };
+
+    const handleQuestionClick = () => {
+        setPopupData({
+            text: question.title,
+            choices: shuffle(question.answers).map((answer) => ({
+                label: answer.title,
+                onClick: () => {
+                    if (isAnswered) {
+                        closePopup();
+                        return;
+                    }
+                    question.isSpecial
+                        ? handleSpecialQuestionAnswer(answer)
+                        : handleAnswerQuestion(answer);
+                    setIsAnswered(true);
+                    setPopupData(undefined);
+                },
+            })),
+        });
+    };
+
     useEffect(() => {
         document.addEventListener("keydown", handleKeyDown);
         return () => {
@@ -122,28 +157,8 @@ const Room = () => {
                     <p>Mún chơi lại thì f5 chớ t lừi làm feature reload</p>
                 </Popup>
             )}
-            <button
-                className="quiz-btn"
-                onClick={() => {
-                    setPopupData({
-                        text: question.title,
-                        choices: shuffle(question.answers).map((answer) => ({
-                            label: answer.title,
-                            onClick: () => {
-                                if (isAnswered) {
-                                    closePopup();
-                                    return;
-                                }
-                                answer.isCorrect
-                                    ? fox.addPoints(question.point)
-                                    : fox.minusPoints(question.point);
-                                setIsAnswered(true);
-                                setPopupData(undefined);
-                            },
-                        })),
-                    });
-                }}
-            >
+            <QuestionButton onClick={handleQuestionClick} />
+            {/* <button className="quiz-btn" onClick={handleQuestionClick}>
                 <svg
                     width="24"
                     height="24"
@@ -159,7 +174,7 @@ const Room = () => {
                     <line x1="12" y1="17" x2="12.01" y2="17" />
                 </svg>
                 <span>Question</span>
-            </button>
+            </button> */}
             <NPCAvatar
                 npc={npc}
                 setPopupData={setPopupData}

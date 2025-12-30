@@ -1,7 +1,7 @@
-import { mapData } from "../../../data/map";
-import { getRandomInt } from "../../../utils/numberUtils";
-import { getNextRoomPosition } from "../../../utils/room";
-import Arrow from "../../Arrow/Arrow";
+import { mapData } from "../../data/map";
+import { getRandomInt } from "../../utils/numberUtils";
+import { getNextRoomPosition } from "../../utils/room";
+import Arrow from "../Arrow/Arrow";
 
 const DirectionArrows = ({ currentPosition, goNextRoom }) => {
     return ["up", "down", "left", "right"].map((direction) => {
