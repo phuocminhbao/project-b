@@ -133,6 +133,17 @@ export const specialQuestions = [
             { title: "23/05/2024" },
         ],
     },
+    {
+        id: 1012,
+        isSpecial: true,
+        hider: duck,
+        title: `Nguyên do đưa ${duck.Name} tới LMHT`,
+        answers: [
+            { title: "Đú tại thấy nhìu ng chơi", isCorrect: true },
+            { title: "Cinemetic game lúc nhìn ngầu" },
+            { title: "Chán Đột Kích" },
+        ],
+    },
 ];
 
 export const questions = [

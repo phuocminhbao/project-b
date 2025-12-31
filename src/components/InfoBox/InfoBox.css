@@ -42,3 +42,80 @@
 .info-box__items svg {
     pointer-events: none;
 }
+
+/* Base */
+.info-box__points {
+    font-weight: 600;
+}
+
+/* Increase */
+.points-inc {
+    animation: pointsInc 450ms ease-out;
+}
+
+/* Decrease */
+.points-dec {
+    animation: pointsDec 450ms ease-out;
+}
+
+@keyframes pointsInc {
+    0% {
+        transform: scale(1);
+        text-shadow: none;
+    }
+    40% {
+        transform: scale(1.1);
+        text-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+    100% {
+        transform: scale(1);
+        text-shadow: none;
+    }
+}
+
+@keyframes pointsDec {
+    0% {
+        transform: scale(1);
+        text-shadow: none;
+    }
+    40% {
+        transform: scale(0.95);
+        text-shadow: 0 0 10px rgba(239, 68, 68, 0.9);
+    }
+    100% {
+        transform: scale(1);
+        text-shadow: none;
+    }
+}
+
+.points-float {
+    position: absolute;
+    right: 0;
+    top: -6px;
+    font-size: 20px;
+    font-weight: bold;
+    animation: floatUp 800ms ease-out forwards;
+    pointer-events: none;
+}
+
+.points-float--inc {
+    color: #22c55e;
+}
+
+.points-float--dec {
+    color: #ef4444;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-14px);
+    }
+}
