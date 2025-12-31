@@ -95,7 +95,7 @@ export const ITEM_REGISTRY = [
         id: ITEM_ID.SAITAMA,
         name: "Saitama",
         description:
-            "One punch break through all ahead walls, the next move will take you to the last room in the same direction",
+            "One punch break through all ahead walls, the next move will take you to the last room in the same direction without any cost",
         chance: 10,
     }),
 ];

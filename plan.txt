@@ -40,8 +40,12 @@ Item:
 - Gacha: 1/5 graping both duck and penguin to current room, 4/5 fox dead /
 - Graping Penguin/Duck to current room (5%) /
 - Tele Duck/Penguin to exit and wait (1% of tele both) /
-- Next question return items instead of points
-- Become Saitama, 1 hit break through the next wall => Your next move will be 2 rooms
+- Next question return items instead of points /
+- Become Saitama, 1 hit break through the next wall => Your next move will be end of road /
+- Mor items later
+
+Shop:
+- Imediately spawn an NPC that will give truth hint
 
 Events:
 // Common

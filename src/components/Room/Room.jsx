@@ -1,6 +1,6 @@
 import "./Room.css";
 import Popup from "../Popup/Popup";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import InfoBox from "../InfoBox/InfoBox";
 import {
     mapData,
@@ -16,7 +16,12 @@ import { penguin } from "../../model/Penguin";
 import { duck } from "../../model/Duck";
 import { Button } from "../Shared/Button/Button";
 import NPCAvatar from "./NPCAvatar";
-import { getNextRoomPosition, getKeyFromKeyCode } from "../../utils/room";
+import {
+    getNextRoomPosition,
+    getKeyFromKeyCode,
+    DIRECTION,
+    getLastRoomInDirectionPosition,
+} from "../../utils/room";
 import DirectionArrows from "./DirectionArrows";
 import QuestionButton from "./QuestionButton";
 import { getItem, ITEM_ID } from "../../data/items";
@@ -27,6 +32,7 @@ const Room = () => {
     const [isAnswered, setIsAnswered] = useState(false);
     const [, updateScreen] = useState({});
     const questionsReturnItem = useRef(0);
+    const isGoToLastRoom = useRef(false);
 
     const refreshScreen = () => {
         updateScreen({});
@@ -46,9 +52,24 @@ const Room = () => {
         }
         refreshScreen();
     };
+
     const { npc, question, isExit } = mapData[fox.Row][fox.Col];
     const isEndGame = false;
     // (isExit && found.duck && found.penguin) || fox.Points <= 0;
+
+    const resetCurrentRoom = () => {
+        assignRandomQuestion(fox.Row, fox.Col);
+        setIsAnswered(false);
+    };
+    const goToLastRoomInDirection = (direction) => {
+        const [row, col] = getLastRoomInDirectionPosition(
+            direction,
+            fox.Position
+        );
+        resetCurrentRoom();
+        isGoToLastRoom.current = false;
+        moveToNextRoom(row, col);
+    };
 
     const tryToGoNextRoom = ([row, col], cost) => {
         if (popupData) return;
@@ -69,10 +90,29 @@ const Room = () => {
             });
             return;
         }
-        assignRandomQuestion(fox.Row, fox.Col);
+        resetCurrentRoom();
         moveToNextRoom(row, col);
-        setIsAnswered(false);
     };
+
+    const nextRoomsInfos = [
+        DIRECTION.UP,
+        DIRECTION.DOWN,
+        DIRECTION.LEFT,
+        DIRECTION.RIGHT,
+    ].map((direction) => {
+        const position = getNextRoomPosition(direction, fox.Position);
+        const cost =
+            mapData[position.row]?.[position.col]?.cost ?? getRandomInt(1, 5);
+        const go = () => {
+            if (isGoToLastRoom.current) {
+                goToLastRoomInDirection(direction);
+            } else {
+                tryToGoNextRoom(position, cost);
+            }
+        };
+        return { direction, position, cost, go };
+    });
+
     const closePopup = () => {
         setPopupData(undefined);
     };
@@ -82,10 +122,9 @@ const Room = () => {
         const { keyCode } = e;
         const direction = getKeyFromKeyCode(keyCode);
         if (!direction) return;
-        tryToGoNextRoom(
-            getNextRoomPosition(direction, fox.Position),
-            mapData[fox.Row]?.[fox.Col]?.cost ?? getRandomInt(1, 5)
-        );
+        return nextRoomsInfos
+            .find((info) => info.direction === direction)
+            ?.go();
     };
 
     const handleAnswerQuestion = (answer) => {
@@ -266,6 +305,11 @@ const Room = () => {
                 questionsReturnItem.current++;
                 refreshScreen();
                 break;
+            case ITEM_ID.SAITAMA:
+                isGoToLastRoom.current = true;
+                break;
+            default:
+                break;
         }
     };
 
@@ -298,6 +342,7 @@ const Room = () => {
             <DirectionArrows
                 currentPosition={fox.Position}
                 goNextRoom={tryToGoNextRoom}
+                nextRoomsInfos={nextRoomsInfos}
             />
             <InfoBox onItemSelect={handleItemSelect} />
             {popupData && (
