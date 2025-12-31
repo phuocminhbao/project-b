@@ -32,10 +32,6 @@ const BackpackPopup = ({ onClose, onItemSelect }) => {
                         </div>
                     ) : (
                         fox.Items.map((item, i) => {
-                            const quantity = fox.getItemQuantity(item);
-                            if (quantity <= 0) {
-                                return <></>;
-                            }
                             return (
                                 <div
                                     key={i}
@@ -45,7 +41,7 @@ const BackpackPopup = ({ onClose, onItemSelect }) => {
                                     }}
                                 >
                                     <div className="backpack-item__qty">
-                                        x{quantity}
+                                        x{fox.getItemQuantity(item)}
                                     </div>
                                     <div className="backpack-item__name">
                                         {item.Name}

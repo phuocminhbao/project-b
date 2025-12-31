@@ -27,14 +27,14 @@ const getRandomPosition = () => {
     return [row, col];
 };
 
+export const CORNERS = [
+    [0, 0],
+    [0, MAX_LENGTH - 1],
+    [MAX_LENGTH - 1, 0],
+    [MAX_LENGTH - 1, MAX_LENGTH - 1],
+];
 const assignExit = () => {
-    const corners = [
-        [0, 0],
-        [0, MAX_LENGTH - 1],
-        [MAX_LENGTH - 1, 0],
-        [MAX_LENGTH - 1, MAX_LENGTH - 1],
-    ];
-    const [randomRow, randomCol] = getRandomElement(corners);
+    const [randomRow, randomCol] = getRandomElement(CORNERS);
     mapData[randomRow][randomCol].isExit = true;
 };
 

@@ -52,6 +52,10 @@ export class NPC {
         return this.#hintGenerator.getHint(hint);
     }
 
+    get IsTellingTruth() {
+        return this.#isTrueHint;
+    }
+
     get IsLastText() {
         return this.#currentText >= this.#texts.length - 1;
     }

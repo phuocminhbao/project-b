@@ -14,8 +14,8 @@
     background: white;
     border: 3px solid black;
     width: 100%;
-    max-width: 100vh;
-    max-height: 100vh;
+    max-width: 80vh;
+    max-height: 80vh;
     display: flex;
     flex-direction: column;
 }
@@ -72,11 +72,12 @@
 
 .backpack-item__name {
     font-weight: bold;
+    font-size: 17px;
     margin-bottom: 4px;
 }
 
 .backpack-item__description {
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.3;
 }
 

@@ -7,6 +7,7 @@ import { MAX_LENGTH } from "./map";
 export const ITEM_ID = {
     CURRENT_POSITION: "current_position",
     TELEPORT_HIDER: "teleport_hider",
+    TELEPORT_HIDER_TO_EXIT: "teleport_hider_to_exit",
     FREE_POINTS: "free_points",
     JUMP_CONNER: "jump_conner",
     GACHA_TELEPORT_OR_DEAD: "gacha_teleport_or_dead",
@@ -30,6 +31,13 @@ export const ITEM_REGISTRY = [
         name: "Kuchiyose no Jutsu",
         description: `Teleport ${duck.Name} or ${penguin.Name} to the current room`,
         chance: 4,
+    }),
+
+    new GameItem({
+        id: ITEM_ID.TELEPORT_HIDER_TO_EXIT,
+        name: "Room: Shambles",
+        description: `Teleport ${duck.Name} or ${penguin.Name} to the exit, there is 5% both of them will go together`,
+        chance: 10,
     }),
 
     new GameItem({
@@ -111,3 +119,9 @@ export const getItem = () => {
 export const getItemById = (id) => ITEM_REGISTRY.find((item) => item.ID === id);
 
 window.getItem = getItem;
+window.getItemById = getItemById;
+window.triggerFoxCheat = () => {
+    ITEM_REGISTRY.forEach((item) => {
+        fox.addItem(item);
+    });
+};

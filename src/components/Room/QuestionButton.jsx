@@ -1,6 +1,18 @@
-const QuestionButton = ({ onClick }) => {
+const QuestionButton = ({
+    onClick,
+    isRewardQuestion = false,
+    isAnswered = false,
+}) => {
+    const className = [
+        "quiz-btn",
+        !isAnswered && isRewardQuestion && "quiz-btn--reward",
+        !isAnswered && !isRewardQuestion && "quiz-btn--unanswered",
+    ]
+        .filter(Boolean)
+        .join(" ");
+
     return (
-        <button className="quiz-btn" onClick={onClick}>
+        <button className={className} onClick={onClick}>
             <svg
                 width="24"
                 height="24"

@@ -1,4 +1,6 @@
+import { CORNERS, mapData } from "../data/map";
 import { Character } from "./Character";
+import { fox } from "./Fox";
 
 export class Hider extends Character {
     #isFound = false;
@@ -9,6 +11,19 @@ export class Hider extends Character {
     get IsFound() {
         return this.#isFound;
     }
+
+    jumpToFoxRoom() {
+        this.setPosition(fox.Row, fox.Col);
+        this.found();
+    }
+
+    jumpToExit() {
+        const exit = CORNERS.find(
+            (corner) => mapData[corner[0]][corner[1]].isExit
+        );
+        this.setPosition(exit[0], exit[1]);
+    }
+
     found() {
         this.#isFound = true;
     }

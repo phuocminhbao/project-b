@@ -11,8 +11,28 @@
 }
 
 .fox {
+    position: relative;
     width: 120px;
     height: 120px;
+}
+.fox-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.fox-shield {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+
+    width: 50px;
+    height: 50px;
+
+    transform: translateX(-50%);
+    pointer-events: none;
+
+    z-index: 2; /* ensure above fox */
 }
 
 .npc {
@@ -28,7 +48,7 @@
 .quiz-btn {
     position: absolute;
     top: 20px;
-    left: 20px; /* Moved to left to avoid InfoBox overlap */
+    left: 20px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -43,7 +63,9 @@
     font-size: 14px;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    z-index: 20; /* Higher than arrows (10) but lower than popup (100) */
+    z-index: 20;
+
+    overflow: visible;
 }
 
 .quiz-btn:hover {
@@ -60,4 +82,75 @@
 .quiz-btn svg {
     width: 20px;
     height: 20px;
+}
+.quiz-btn--reward::before,
+.quiz-btn--reward::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 16px;
+    pointer-events: none;
+}
+
+.quiz-btn--reward::before {
+    background: linear-gradient(
+        120deg,
+        rgba(19, 124, 138, 0.6),
+        rgba(117, 31, 197, 0.9),
+        rgba(11, 142, 182, 0.6)
+    );
+    filter: blur(5px);
+    animation: rewardGlow 2.2s ease-in-out infinite;
+    z-index: -1;
+}
+
+.quiz-btn--reward::after {
+    border: 1.5px solid rgba(255, 215, 0, 0.9);
+    animation: rewardTwinkle 2.2s ease-in-out infinite;
+}
+
+.quiz-btn--unanswered {
+    animation: unansweredPulse 1.8s ease-in-out infinite;
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.quiz-btn--unanswered::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 14px;
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    opacity: 0;
+    animation: unansweredRing 1.8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes unansweredPulse {
+    0% {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 6px 12px rgba(255, 255, 255, 0.15);
+        transform: scale(1.03);
+    }
+    100% {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transform: scale(1);
+    }
+}
+
+@keyframes unansweredRing {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
 }
