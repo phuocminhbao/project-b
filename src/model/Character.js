@@ -27,6 +27,10 @@ export class Character {
         return this.#col;
     }
 
+    get Position() {
+        return [this.Row, this.Col];
+    }
+
     setPosition(row, col) {
         this.#row = row;
         this.#col = col;

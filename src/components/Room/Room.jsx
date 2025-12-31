@@ -14,15 +14,16 @@ import NPCAvatar from "./NPCAvatar";
 import { getNextRoomPosition, getKeyFromKeyCode } from "../../utils/room";
 import DirectionArrows from "./DirectionArrows";
 import QuestionButton from "./QuestionButton";
-import { getItem } from "../../data/items";
+import { getItem, ITEM_ID } from "../../data/items";
 
 const Room = () => {
     const [popupData, setPopupData] = useState();
     const [isAnswered, setIsAnswered] = useState(false);
-    const [position, setPosition] = useState({
-        row: fox.Row,
-        col: fox.Col,
-    });
+    const [, updateScreen] = useState({});
+
+    const refreshScreen = () => {
+        updateScreen({});
+    };
     const found = {
         duck: fox.Row === duck.Row && fox.Col === duck.Col,
         penguin: fox.Row === penguin.Row && fox.Col === penguin.Col,
@@ -36,9 +37,9 @@ const Room = () => {
         if (found.penguin) {
             penguin.setPosition(row, col);
         }
-        setPosition({ row, col });
+        refreshScreen();
     };
-    const { npc, question, isExit } = mapData[position.row][position.col];
+    const { npc, question, isExit } = mapData[fox.Row][fox.Col];
     const isEndGame = false;
     //(isExit && found.duck && found.penguin) || fox.Points <= 0;
 
@@ -61,7 +62,7 @@ const Room = () => {
             });
             return;
         }
-        assignRandomQuestion(position.row, position.col);
+        assignRandomQuestion(fox.Row, fox.Col);
         moveToNextRoom(row, col);
         setIsAnswered(false);
     };
@@ -75,8 +76,8 @@ const Room = () => {
         const direction = getKeyFromKeyCode(keyCode);
         if (!direction) return;
         tryToGoNextRoom(
-            getNextRoomPosition(direction, position),
-            mapData[position.row]?.[position.col]?.cost ?? getRandomInt(1, 5)
+            getNextRoomPosition(direction, fox.Position),
+            mapData[fox.Row]?.[fox.Col]?.cost ?? getRandomInt(1, 5)
         );
     };
 
@@ -117,6 +118,28 @@ const Room = () => {
             })),
         });
     };
+    const handleItemSelect = (item) => {
+        console.log(item.ID);
+
+        const closeButton = (
+            <Button
+                onClick={() => {
+                    closePopup();
+                }}
+            >
+                Alright!
+            </Button>
+        );
+        switch (item.ID) {
+            case ITEM_ID.CURRENT_POSITION:
+                setPopupData({
+                    image: fox.Avatar,
+                    text: `Oh, mình đang ở phòng: ${fox.Row} - ${fox.Col}`,
+                    children: closeButton,
+                });
+                break;
+        }
+    };
 
     useEffect(() => {
         document.addEventListener("keydown", handleKeyDown);
@@ -142,11 +165,11 @@ const Room = () => {
                 <img src={penguin.Avatar} alt="penguin" className="fox" />
             )}
             <DirectionArrows
-                currentPosition={position}
+                currentPosition={fox.Position}
                 goNextRoom={tryToGoNextRoom}
             />
-            <InfoBox />
-            {!!popupData && (
+            <InfoBox onItemSelect={handleItemSelect} />
+            {popupData && (
                 <Popup
                     key={popupData.image}
                     image={popupData.image}
@@ -161,7 +184,7 @@ const Room = () => {
                     <p>Mún chơi lại thì f5 chớ t lừi làm feature reload</p>
                 </Popup>
             )}
-            <QuestionButton onClick={handleQuestionClick} />
+            {question && <QuestionButton onClick={handleQuestionClick} />}
             <NPCAvatar
                 npc={npc}
                 setPopupData={setPopupData}

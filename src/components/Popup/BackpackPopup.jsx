@@ -1,9 +1,12 @@
 import "./BackpackPopup.css";
 import { fox } from "../../model/Fox";
 import BackpackIcon from "../Shared/Icon/Backpack";
-import { ITEM_RARITY } from "../../data/items";
 
-const BackpackPopup = ({ onClose }) => {
+const BackpackPopup = ({ onClose, onItemSelect }) => {
+    const handleItemSelect = (item) => {
+        onClose();
+        onItemSelect(item);
+    };
     return (
         <div className="backpack-overlay" onClick={onClose}>
             <div
@@ -29,24 +32,26 @@ const BackpackPopup = ({ onClose }) => {
                         </div>
                     ) : (
                         fox.Items.map((item, i) => {
-                            const { name, description, rarity, quantity } =
-                                item;
+                            const quantity = fox.getItemQuantity(item);
                             if (quantity <= 0) {
                                 return <></>;
                             }
                             return (
                                 <div
                                     key={i}
-                                    className={`backpack-item backpack-item--${rarity}`}
+                                    className={`backpack-item backpack-item--${item.Rarity}`}
+                                    onClick={() => {
+                                        handleItemSelect(item);
+                                    }}
                                 >
                                     <div className="backpack-item__qty">
                                         x{quantity}
                                     </div>
                                     <div className="backpack-item__name">
-                                        {name}
+                                        {item.Name}
                                     </div>
                                     <div className="backpack-item__description">
-                                        {description}
+                                        {item.Description}
                                     </div>
                                 </div>
                             );

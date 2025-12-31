@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import BackpackPopup from "../Popup/BackpackPopup";
 import BackpackIcon from "../Shared/Icon/Backpack";
 
-const InfoBox = () => {
+const InfoBox = ({ onItemSelect }) => {
     const [isBackpackOpen, setIsBackpackOpen] = useState(false);
     const [floatingText, setFloatingText] = useState(null);
 
@@ -85,7 +85,10 @@ const InfoBox = () => {
             </div>
 
             {isBackpackOpen && (
-                <BackpackPopup onClose={() => setIsBackpackOpen(false)} />
+                <BackpackPopup
+                    onClose={() => setIsBackpackOpen(false)}
+                    onItemSelect={onItemSelect}
+                />
             )}
         </>
     );

@@ -1,4 +1,4 @@
-export const getNextRoomPosition = (direction, { row, col }) => {
+export const getNextRoomPosition = (direction, [row, col]) => {
     switch (direction) {
         case "up":
             return [row - 1, col];

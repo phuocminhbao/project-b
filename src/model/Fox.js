@@ -1,8 +1,14 @@
 import foxAvatar from "../assets/fox.gif";
 import { Character } from "./Character";
+import { GameItem } from "./GameItem";
 class Fox extends Character {
     #points;
+
+    /**
+     * @type {GameItem[]}
+     */
     #items = [];
+    #itemQuantity = {};
 
     constructor(possition) {
         super("Kayron", foxAvatar, possition);
@@ -13,18 +19,23 @@ class Fox extends Character {
         return this.#items;
     }
 
+    getItemQuantity(item) {
+        return this.#itemQuantity[item.ID];
+    }
+
     addItem(newItem) {
-        const item = this.#items.find((item) => item.id === newItem.id);
-        if (item) {
-            item.quantity++;
+        const isItemExist = this.#itemQuantity[newItem.ID] ?? 0 > 0;
+        if (isItemExist) {
+            this.#itemQuantity[newItem.ID]++;
         } else {
-            this.#items.push({ ...newItem, quantity: 1 });
+            this.#items.push(newItem);
+            this.#itemQuantity[newItem.ID] = 1;
         }
         this.#sortItems();
     }
 
     #sortItems() {
-        this.#items.sort((a, b) => b.order - a.order);
+        this.#items.sort((a, b) => a.Chance - b.Chance);
     }
 
     resetItems() {
