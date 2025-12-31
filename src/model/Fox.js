@@ -13,8 +13,18 @@ class Fox extends Character {
         return this.#items;
     }
 
-    addItem(item) {
-        this.#items.push(item);
+    addItem(newItem) {
+        const item = this.#items.find((item) => item.id === newItem.id);
+        if (item) {
+            item.quantity++;
+        } else {
+            this.#items.push({ ...newItem, quantity: 1 });
+        }
+        this.#sortItems();
+    }
+
+    #sortItems() {
+        this.#items.sort((a, b) => b.order - a.order);
     }
 
     resetItems() {

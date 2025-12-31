@@ -64,7 +64,7 @@ const items = [
     },
     {
         name: ITEM.GACHA_TELEPORT_OR_DEAD,
-        chance: 60,
+        chance: 49,
     },
     {
         name: ITEM.SEE_THE_TRUTH,
@@ -104,6 +104,14 @@ const RARITY_THRESHOLDS = {
     COMMON_MAX: 100,
 };
 
+const RARITY_ORDER = {
+    [ITEM_RARITY.COMMON]: 1,
+    [ITEM_RARITY.UNCOMMON]: 2,
+    [ITEM_RARITY.RARE]: 3,
+    [ITEM_RARITY.EPIC]: 4,
+    [ITEM_RARITY.LEGENDARY]: 5,
+};
+
 const getItemRarity = (chance) => {
     if (chance < 0 || chance > RARITY_THRESHOLDS.COMMON_MAX) {
         throw new Error("Chance must be between 0 and 100");
@@ -131,10 +139,13 @@ const getItemRarity = (chance) => {
 const totalChances = items.reduce((total, item) => total + item.chance, 0);
 
 const getItemInfo = (item) => {
+    const rarity = getItemRarity(item.chance);
     return {
+        id: item.name,
         name: ITEM_NAME[item.name] ?? "Unknown Item",
         description: ITEM_DESCRIPTIONS[item.name] ?? "Unknown Item",
-        rarity: getItemRarity(item.chance),
+        rarity,
+        order: RARITY_ORDER[rarity],
     };
 };
 
@@ -149,3 +160,5 @@ export const getItem = () => {
     }
     return getItemInfo(ITEM.FREE_POINTS);
 };
+
+window.getItem = getItem;

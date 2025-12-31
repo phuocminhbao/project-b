@@ -57,9 +57,14 @@
 /* Item row */
 
 .backpack-item {
+    position: relative; /* anchor for absolute children */
+
     border: 2px solid black;
     padding: 8px;
     margin-bottom: 8px;
+
+    background: white; /* important for overlay illusion */
+    border-radius: 6px;
 }
 
 .backpack-item:last-child {
@@ -78,13 +83,6 @@
 
 .backpack-popup__title {
     margin: 0%;
-}
-
-/* Base item */
-.backpack-item {
-    border: 2px solid black;
-    padding: 8px;
-    margin-bottom: 8px;
 }
 
 .backpack-item--common {
@@ -107,4 +105,21 @@
 .backpack-item--legendary {
     border-color: #f39c12;
     box-shadow: 0 0 8px rgba(243, 156, 18, 0.8);
+}
+
+.backpack-item__qty {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+
+    background: black;
+    color: white;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    padding: 2px 6px;
+    border-radius: 999px;
+
+    line-height: 1;
 }

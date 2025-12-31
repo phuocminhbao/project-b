@@ -29,12 +29,19 @@ const BackpackPopup = ({ onClose }) => {
                         </div>
                     ) : (
                         fox.Items.map((item, i) => {
-                            const { name, description } = item;
+                            const { name, description, rarity, quantity } =
+                                item;
+                            if (quantity <= 0) {
+                                return <></>;
+                            }
                             return (
                                 <div
                                     key={i}
-                                    className={`backpack-item backpack-item--${item.rarity}`}
+                                    className={`backpack-item backpack-item--${rarity}`}
                                 >
+                                    <div className="backpack-item__qty">
+                                        x{quantity}
+                                    </div>
                                     <div className="backpack-item__name">
                                         {name}
                                     </div>
