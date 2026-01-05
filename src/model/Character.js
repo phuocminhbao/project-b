@@ -31,7 +31,7 @@ export class Character {
         return [this.Row, this.Col];
     }
 
-    setPosition(row, col) {
+    moveTo(row, col) {
         this.#row = row;
         this.#col = col;
     }

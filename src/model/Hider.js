@@ -13,7 +13,7 @@ export class Hider extends Character {
     }
 
     jumpToFoxRoom() {
-        this.setPosition(fox.Row, fox.Col);
+        this.moveTo(fox.Row, fox.Col);
         this.found();
     }
 
@@ -21,7 +21,7 @@ export class Hider extends Character {
         const exit = CORNERS.find(
             (corner) => mapData[corner[0]][corner[1]].isExit
         );
-        this.setPosition(exit[0], exit[1]);
+        this.moveTo(exit[0], exit[1]);
     }
 
     found() {

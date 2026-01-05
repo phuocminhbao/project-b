@@ -40,7 +40,7 @@ const assignExit = () => {
 
 const assignFox = () => {
     const [row, col] = getRandomPosition();
-    fox.setPosition(row, col);
+    fox.moveTo(row, col);
 };
 
 const assignDuck = () => {
@@ -48,7 +48,7 @@ const assignDuck = () => {
     while (row === fox.Row && col === fox.Col) {
         [row, col] = getRandomPosition();
     }
-    duck.setPosition(row, col);
+    duck.moveTo(row, col);
 };
 
 const assignPenguin = () => {
@@ -59,7 +59,7 @@ const assignPenguin = () => {
     ) {
         [row, col] = getRandomPosition();
     }
-    penguin.setPosition(row, col);
+    penguin.moveTo(row, col);
 };
 
 const getNPC = (NPCs) => {
