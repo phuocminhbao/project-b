@@ -2,6 +2,7 @@ import { assignRandomQuestion, MAX_LENGTH } from "../../../data/map";
 import { CharacterPositionSynchronizer } from "../../../helper/CharacterPositionSynchronizer";
 import { fox } from "../../../model/Fox";
 import { getLastRoomInDirectionPosition } from "../../../utils/room";
+
 export function createRoomEffectHandler({
     roomSpecialEffectRef,
     refreshScreen,

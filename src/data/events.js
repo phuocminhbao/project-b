@@ -1,6 +1,212 @@
-export const events = [
-    {
-        name: "Dịt và chim lòn gây sự và bỏ đi",
-        action: function () {},
-    },
+import { duck } from "../model/Duck";
+import { fox } from "../model/Fox";
+import { penguin } from "../model/Penguin";
+import { EVENT_TYPE, RoomEvent } from "../model/RoomEvent";
+const foxName = fox.Name;
+const penguinName = penguin.Name;
+const duckName = duck.Name;
+
+export const EVENT_ID = {
+    // COMMON
+    FOX_OVERTHINKING: "fox_overthinking",
+    FOX_DEPRESSION: "fox_depression",
+    HAPPY_BIRTHDAY: "happy_birthday",
+    FOX_GOING_HOME: "fox_going_home",
+    FOX_LOSE_ALL_ITEMS: "fox_lose_all_items",
+    THANOS_SNAP: "thanos_snap",
+    MORE_ROLLS: "more_rolls",
+    DOUBLE_COST: "double_cost",
+    FOX_COOL_GUY: "fox_cool_guy",
+
+    // ONLY FOX
+    F_CREDIT_CARD: "f_credit_card",
+    F_LAZY: "f_lazy",
+    F_LONELY: "f_lonely",
+
+    // DUCK & PENGUIN
+    D_P_EARTHQUAKE: "d_p_earthquake",
+    D_P_FIGHTING: "d_p_fighting",
+    D_P_DIFFERENT_OPINIONS: "d_p_different_opinions",
+    D_P_CHILDISH: "d_p_childish",
+    D_P_CURIOUS: "d_p_curious",
+
+    // PENGUIN
+    P_HEAVY: "p_heavy",
+    P_HURT_WORDS: "p_hurt_words",
+    P_LOST_WEAPON: "p_lost_weapon",
+    P_JOIN_DUCK: "p_join_duck",
+    P_BIG_BOSS: "p_big_boss",
+
+    // DUCK
+    D_SILENT_TREATMENT: "d_silent_treatment",
+    D_MYSTERIOUS: "d_mysterious",
+    D_GENEROUS: "d_generous",
+    D_NO_COMMENT: "d_no_comment",
+    D_DUCKING: "d_ducking",
+};
+
+export const EVENT_REGISTRY = [
+    new RoomEvent({
+        id: EVENT_ID.FOX_OVERTHINKING,
+        name: `${foxName} Overthinking`,
+        description: `${foxName} is overthinking about life, panic then run into a random room.`,
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.FOX_DEPRESSION,
+        name: `${foxName} Depression`,
+        description: `${foxName} is depressed, can't gain any points for next 2 moves`,
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.HAPPY_BIRTHDAY,
+        name: `Happy Birthday ${foxName}!`,
+        description: `It's ${foxName}'s birthday! A gift of every items is given to you.`,
+        type: EVENT_TYPE.GOOD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.FOX_GOING_HOME,
+        name: "Going Home",
+        description: `${foxName} is going home, the current room is now 0-0.`,
+        type: EVENT_TYPE.GOOD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.FOX_LOSE_ALL_ITEMS,
+        name: "Có cho có trả",
+        description: `${foxName} is so clumsy that all items are lost.`,
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.THANOS_SNAP,
+        name: "Thanos Snap",
+        description:
+            "Thanos snapped his fingers, and half of all living beings disappeared INCLUDING your items and hints.",
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.MORE_ROLLS,
+        name: "Rock and rolls",
+        description: "You get an extra rolls in shop.",
+        type: EVENT_TYPE.GOOD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.DOUBLE_COST,
+        name: "Double Cost",
+        description: "Everything cost double",
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.FOX_COOL_GUY,
+        name: "Cool Guy",
+        description: `${foxName} is feeling cool, wherever he see Ngân Kiên or PS4, those NPC will give truth hints`,
+        type: EVENT_TYPE.GOOD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.F_CREDIT_CARD,
+        name: "Credit Card",
+        description: `${foxName} use hit powerful credit card, can't lose points for next 3 moves`,
+        type: EVENT_TYPE.GOOD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.F_LAZY,
+        name: "Lazy Day",
+        description: `${foxName} is too lazy to continue the finding, quit the game`,
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.F_LONELY,
+        name: "The lonely woft",
+        description: `${foxName} don't need anyfriends, he now can ONLY win if find the exit by himself ALONE`,
+        type: EVENT_TYPE.GOOD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.D_P_EARTHQUAKE,
+        name: "Earthquake",
+        description: `An earthquake happened because of ${penguinName}'s weigth, ${duckName} and ${penguinName} are lost in random rooms`,
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.D_P_FIGHTING,
+        name: "Internal fighting",
+        description: `${duckName} and ${penguinName} are fighting, ${duckName} lose so he ran away`,
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.D_P_DIFFERENT_OPINIONS,
+        name: "Different opinions",
+        description: `${duckName} and ${penguinName} have different opinions, ${penguinName} want go bot while ${duckName} want go top. Choose the right one to get reward or else punishment`,
+        type: EVENT_TYPE.GOOD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.D_P_CHILDISH,
+        name: "Childish behavior",
+        description: `${duckName} and ${penguinName} are acting childish, lose 5 points to buy ice-cream for both of them`,
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.D_P_CURIOUS,
+        name: "Anoying curious",
+        description: `${duckName} and ${penguinName} are curious about ${foxName}'s points, next move points will cost triplely as ${duckName} and ${penguinName} also consume it`,
+        type: EVENT_TYPE.GOOD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.P_HEAVY,
+        name: `${penguinName}'s weigth`,
+        description: `${penguinName} is too heavy, can't move for next 2 moves`,
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.P_HURT_WORDS,
+        name: "Hurt Words",
+        description: `${penguinName} said bịp words that hurting ${foxName}, lose 5 points`,
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.P_LOST_WEAPON,
+        name: "Chuỳ gai toi âu?",
+        description: `${penguinName} lost her chuỳ gai her original spawn room, can't not win if not go back there and pick it up`,
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.P_JOIN_DUCK,
+        name: "Join the duck side",
+        description: `${penguinName} hearing ${duckName}'s whispers so she left ${foxName} and run to ${duckName}'s room`,
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.P_BIG_BOSS,
+        name: "The big boss",
+        description: `${penguinName} is a big boss, she force ${foxName} to go down`,
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.D_SILENT_TREATMENT,
+        name: "Silent treatment",
+        description: `${duckName} is silent treatment, he make presure on 2 next NPCs will sure not giving hints`,
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.D_MYSTERIOUS,
+        name: "Mysterious Duck",
+        description: `${duckName} is become a mysterious duck, some of your items being hidden by him`,
+        type: EVENT_TYPE.BAD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.D_GENEROUS,
+        name: "Genious Duck",
+        description: `${duckName} is generous, he give ${foxName} 3 rolls in this room`,
+        type: EVENT_TYPE.GOOD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.D_NO_COMMENT,
+        name: "Không chính kiến",
+        description: `${duckName} think should go top, but the choice is up to ${foxName}`,
+        type: EVENT_TYPE.GOOD,
+    }),
+    new RoomEvent({
+        id: EVENT_ID.D_DUCKING,
+        name: "Quack quack",
+        description: `${duckName} become a actual duck, next move he will go differently with ${foxName}`,
+        type: EVENT_TYPE.BAD,
+    }),
 ];

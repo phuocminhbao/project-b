@@ -146,15 +146,24 @@ const Room = () => {
 
     // Todo: Open popup instead of alert
     const handleSpecialQuestionAnswer = (answer) => {
+        const openHiderPopup = (message) => {
+            const { hider } = question;
+            openPopup({
+                image: hider.Avatar,
+                text: message,
+                closeText: "Bye!",
+            });
+        };
         if (answer.isCorrect) {
             fox.addItem(getItem());
-            alert(
-                `${question.hider.Name} is really proud and give you a gift!`
+            openHiderPopup(
+                `${question.hider.Name}: Check kho đồ dei, ms cho m con hàng á`
             );
-
             return;
         }
-        alert(`${question.hider.Name} is really really disapointing!`);
+        openHiderPopup(
+            `${question.hider.Name}: Bn bè coin card j deos bít j về nhau à?`
+        );
     };
 
     const handleAnswerClick = (answer) => {

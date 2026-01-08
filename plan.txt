@@ -57,18 +57,20 @@ Events:
 - Lose all hints in note
 - Thanos: Lose 50% of items and hints in note
 - More roll in shop
+- Next move will cost double
+- Fox is marked as a cool guy, if next moves he see Kiên Ngân or PS4 npc then those NPC will definitely telling truth
 
 // Only fox
-- Able to trigger Credit power, fow is very wealthy for next 2 moves
+- Able to trigger Credit power, fox is very wealthy for next 2 moves
 - Fox feeling lazy so he quit the game
 - Fox overthinking, he not need the gang, fox can only escap with only himself
-- Fox is marked as a cool guy, if next moves he see Kiên Ngân or PS4 npc then those NPC will definitely telling truth
 
 // (Duck & Penguin found)
 - Earthwake: Duck and Penguin are scared and lost again
 - Duck and Penguin are fighting then Duck always lose and run to other room
 - Duck want got top, Penguin want go down (1 got reward, 1 got punishment)
 - Duck and Penguin become childish, fox need to pay for expensive food or else they run away
+- Curious next move, points will cost triple
 
 // Penguin found
 - Penguin feeling heavy and can't move for 3 next moves (Penguin found)

@@ -1,3 +1,5 @@
+import { GameEffect } from "./GameEffect";
+
 const ITEM_RARITY = {
     COMMON: "common",
     UNCOMMON: "uncommon",
@@ -13,28 +15,11 @@ const RARITY_THRESHOLDS = {
     UNCOMMON_MAX: 50,
     COMMON_MAX: 100,
 };
-export class GameItem {
-    #id;
-    #name;
-    #description;
+export class GameItem extends GameEffect {
     #chance;
     constructor({ id, name, description, chance }) {
-        this.#id = id;
-        this.#name = name;
-        this.#description = description;
+        super({ id, name, description });
         this.#chance = chance;
-    }
-
-    get ID() {
-        return this.#id;
-    }
-
-    get Name() {
-        return this.#name;
-    }
-
-    get Description() {
-        return this.#description;
     }
 
     get Chance() {
