@@ -34,10 +34,13 @@ export const getItemEffectHandler = ({ roomEffectHandler, openPopup }) => {
         },
         [ITEM_ID.FREE_POINTS]: () => {
             const randomPoints = getRandomInt(0, 15);
+            const text = fox.HasDepression
+                ? "Ơ k có điểm nhưng bớt trầm kam3"
+                : `Nine sừ, cảm thấy hưng phấn dc tăng thêm ${randomPoints} điểm`;
             fox.addPoints(randomPoints);
             openPopup({
                 image: fox.Avatar,
-                text: `Nine sừ, cảm thấy hưng phấn dc tăng thêm ${randomPoints} điểm`,
+                text: text,
             });
         },
         [ITEM_ID.GET_RANDOM_ITEM]: () => {

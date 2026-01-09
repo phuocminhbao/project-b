@@ -1,9 +1,9 @@
 import "./Room.css";
 import Popup from "../Popup/Popup";
-import { useEffect, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import InfoBox from "../InfoBox/InfoBox";
 import { mapData } from "../../data/map";
-import { getRandomInt } from "../../utils/numberUtils";
+import { getRandomInt, inChanceOf } from "../../utils/numberUtils";
 import { getRandomElement, shuffle } from "../../utils/array";
 import { hitEndMessage } from "../../data/texts";
 import { fox } from "../../model/Fox";
@@ -11,11 +11,7 @@ import { penguin } from "../../model/Penguin";
 import { duck } from "../../model/Duck";
 import { Button } from "../Shared/Button/Button";
 import NPCAvatar from "./NPCAvatar";
-import {
-    getNextRoomPosition,
-    getKeyFromKeyCode,
-    DIRECTION,
-} from "../../utils/room";
+import { getNextRoomPosition, DIRECTION } from "../../utils/room";
 import DirectionArrows from "./DirectionArrows";
 import QuestionButton from "./QuestionButton";
 import { getItem } from "../../data/items";
@@ -23,6 +19,9 @@ import ShieldIcon from "../Shared/Icon/Shield";
 import { CharacterPositionSynchronizer } from "../../helper/CharacterPositionSynchronizer";
 import { createRoomEffectHandler } from "./EffectHandler/RoomEffectHandler";
 import { getItemEffectHandler } from "./EffectHandler/ItemEffectHandler";
+import EventPopup from "../Popup/EventPopup";
+import { EVENT_REGISTRY, getRandomEvent } from "../../data/events";
+import { getRoomEventHandler } from "./EffectHandler/RoomEventHandler";
 
 const Room = () => {
     const [popupData, setPopupData] = useState();
@@ -32,6 +31,7 @@ const Room = () => {
         isAnswered: false,
         itemQuestions: 0,
         isGoToLastRoom: false,
+        isEventProcessed: false,
     });
 
     const found = {
@@ -71,6 +71,14 @@ const Room = () => {
     const isEndGame = false;
     // (isExit && found.duck && found.penguin) || fox.Points <= 0;
 
+    const event = useMemo(() => {
+        // Todo: 30 chance
+        if (inChanceOf(100)) {
+            return getRandomEvent();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [fox.Row, fox.Col]);
+
     const openHitWallPopup = () => {
         openPopup({
             text: `Ngõ cụt: ${getRandomElement(hitEndMessage)}`,
@@ -88,6 +96,7 @@ const Room = () => {
         isAnswered,
         isGoToLastRoom,
         isQuestionsReturnItem,
+        isEventProcessed,
         goToLastRoomInDirection,
         tryToGoNextRoom,
         decreaseQuestionsReturnItem,
@@ -111,15 +120,6 @@ const Room = () => {
         };
         return { direction, position, cost, go };
     });
-
-    const handleKeyDown = (e) => {
-        const { keyCode } = e;
-        const direction = getKeyFromKeyCode(keyCode);
-        if (!direction || popupData) return;
-        return nextRoomsInfos
-            .find((info) => info.direction === direction)
-            ?.go();
-    };
 
     const handleAnswerQuestion = (answer) => {
         const isRewardAsItem = isQuestionsReturnItem();
@@ -148,10 +148,12 @@ const Room = () => {
     const handleSpecialQuestionAnswer = (answer) => {
         const openHiderPopup = (message) => {
             const { hider } = question;
-            openPopup({
-                image: hider.Avatar,
-                text: message,
-                closeText: "Bye!",
+            setTimeout(() => {
+                openPopup({
+                    image: hider.Avatar,
+                    text: message,
+                    closeText: "Bye!",
+                });
             });
         };
         if (answer.isCorrect) {
@@ -192,13 +194,10 @@ const Room = () => {
         openPopup,
     });
 
-    useEffect(() => {
-        document.addEventListener("keydown", handleKeyDown);
-        return () => {
-            document.removeEventListener("keydown", handleKeyDown);
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [fox.Row, fox.Col, popupData]);
+    const { handleRoomEvent } = getRoomEventHandler({
+        roomEffectHandler,
+        openPopup,
+    });
 
     return (
         <div className="room">
@@ -225,6 +224,14 @@ const Room = () => {
                 >
                     {popupData.children}
                 </Popup>
+            )}
+            {event && !isEventProcessed() && (
+                <EventPopup
+                    event={event}
+                    onClose={() => {
+                        handleRoomEvent(event);
+                    }}
+                />
             )}
             {isEndGame && (
                 <Popup text="The end">

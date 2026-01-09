@@ -1,10 +1,19 @@
+import { CharacterPositionSynchronizer } from "../helper/CharacterPositionSynchronizer";
 import { duck } from "../model/Duck";
 import { fox } from "../model/Fox";
 import { penguin } from "../model/Penguin";
 import { EVENT_TYPE, RoomEvent } from "../model/RoomEvent";
+import { getRandomElement } from "../utils/array";
 const foxName = fox.Name;
 const penguinName = penguin.Name;
 const duckName = duck.Name;
+
+const EVENT_SYMBOL = {
+    DUCK: "d",
+    PENGUIN: "p",
+    FOX: "f",
+    ALL: "dp",
+};
 
 export const EVENT_ID = {
     // COMMON
@@ -24,11 +33,11 @@ export const EVENT_ID = {
     F_LONELY: "f_lonely",
 
     // DUCK & PENGUIN
-    D_P_EARTHQUAKE: "d_p_earthquake",
-    D_P_FIGHTING: "d_p_fighting",
-    D_P_DIFFERENT_OPINIONS: "d_p_different_opinions",
-    D_P_CHILDISH: "d_p_childish",
-    D_P_CURIOUS: "d_p_curious",
+    D_P_EARTHQUAKE: "dp_earthquake",
+    D_P_FIGHTING: "dp_fighting",
+    D_P_DIFFERENT_OPINIONS: "dp_different_opinions",
+    D_P_CHILDISH: "dp_childish",
+    D_P_CURIOUS: "dp_curious",
 
     // PENGUIN
     P_HEAVY: "p_heavy",
@@ -45,6 +54,29 @@ export const EVENT_ID = {
     D_DUCKING: "d_ducking",
 };
 
+/**
+ * @param {string} eventID
+ * @returns {boolean}
+ */
+const isEventAvailable = (eventID) => {
+    const symbol = eventID.split("_");
+    const { IsDuckFound, IsPenguinFound, IsFoundAll } =
+        CharacterPositionSynchronizer;
+    if (symbol === EVENT_SYMBOL.ALL) {
+        return IsFoundAll;
+    }
+    if (symbol === EVENT_SYMBOL.FOX) {
+        return !IsDuckFound && !IsPenguinFound;
+    }
+    if (symbol === EVENT_SYMBOL.DUCK) {
+        return !IsFoundAll && IsDuckFound;
+    }
+    if (symbol == EVENT_SYMBOL.PENGUIN) {
+        return !IsFoundAll && IsPenguinFound;
+    }
+    return true;
+};
+
 export const EVENT_REGISTRY = [
     new RoomEvent({
         id: EVENT_ID.FOX_OVERTHINKING,
@@ -55,7 +87,7 @@ export const EVENT_REGISTRY = [
     new RoomEvent({
         id: EVENT_ID.FOX_DEPRESSION,
         name: `${foxName} Depression`,
-        description: `${foxName} is depressed, can't gain any points for next 2 moves`,
+        description: `${foxName} is depressed, can't gain any points for next 2 points reward`,
         type: EVENT_TYPE.BAD,
     }),
     new RoomEvent({
@@ -140,7 +172,7 @@ export const EVENT_REGISTRY = [
     new RoomEvent({
         id: EVENT_ID.D_P_CHILDISH,
         name: "Childish behavior",
-        description: `${duckName} and ${penguinName} are acting childish, lose 5 points to buy ice-cream for both of them`,
+        description: `${duckName} and ${penguinName} are acting childish, lose 10 points to buy ice-cream for both of them`,
         type: EVENT_TYPE.BAD,
     }),
     new RoomEvent({
@@ -210,3 +242,15 @@ export const EVENT_REGISTRY = [
         type: EVENT_TYPE.BAD,
     }),
 ];
+
+const getEventById = (eventId) => {
+    return EVENT_REGISTRY.find((event) => event.ID === eventId);
+};
+
+export const getRandomEvent = () => {
+    const availableEvents = EVENT_REGISTRY.filter((event) =>
+        isEventAvailable(event.ID)
+    );
+    // return getRandomElement(availableEvents);
+    return getEventById(EVENT_ID.D_MYSTERIOUS);
+};

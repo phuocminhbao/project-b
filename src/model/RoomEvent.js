@@ -11,6 +11,9 @@ export class RoomEvent extends GameEffect {
         super({ id, name, description });
         this.#type = type;
     }
+    get Type() {
+        return this.#type;
+    }
     get isGood() {
         return this.#type === EVENT_TYPE.GOOD;
     }

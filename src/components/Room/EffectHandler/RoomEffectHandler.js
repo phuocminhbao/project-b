@@ -8,15 +8,12 @@ export function createRoomEffectHandler({
     refreshScreen,
     openHitWallPopup,
 }) {
-    // "private" via closure
-    const _roomSpecialEffectRef = roomSpecialEffectRef;
-
     const isQuestionsReturnItem = () => {
-        return _roomSpecialEffectRef.current.itemQuestions > 0;
+        return roomSpecialEffectRef.current.itemQuestions > 0;
     };
 
     const increaseQuestionsReturnItem = (amount = 1) => {
-        _roomSpecialEffectRef.current.itemQuestions += amount;
+        roomSpecialEffectRef.current.itemQuestions += amount;
     };
 
     const decreaseQuestionsReturnItem = (amount = 1) => {
@@ -24,31 +21,39 @@ export function createRoomEffectHandler({
     };
 
     const isGoToLastRoom = () => {
-        return _roomSpecialEffectRef.current.isGoToLastRoom;
+        return roomSpecialEffectRef.current.isGoToLastRoom;
     };
-
     const setIsGoToLastRoom = (value) => {
-        _roomSpecialEffectRef.current.isGoToLastRoom = value;
+        roomSpecialEffectRef.current.isGoToLastRoom = value;
     };
 
     const isAnswered = () => {
-        return _roomSpecialEffectRef.current.isAnswered;
+        return roomSpecialEffectRef.current.isAnswered;
+    };
+    const setIsAnswered = (value) => {
+        roomSpecialEffectRef.current.isAnswered = value;
     };
 
-    const setIsAnswered = (value) => {
-        _roomSpecialEffectRef.current.isAnswered = value;
+    const isEventProcessed = () => {
+        return roomSpecialEffectRef.current.isEventProcessed;
+    };
+    const setIsEventProcessed = (value) => {
+        roomSpecialEffectRef.current.isEventProcessed = value;
+    };
+
+    const resetRoomStateBeforeMoving = () => {
+        assignRandomQuestion(fox.Row, fox.Col);
+        setIsAnswered(false);
+        setIsEventProcessed(false);
+        setIsGoToLastRoom(false);
     };
 
     const goToRoom = (row, col) => {
+        resetRoomStateBeforeMoving();
         const { IsDuckFound, IsPenguinFound } = CharacterPositionSynchronizer;
         fox.moveTo(row, col);
         CharacterPositionSynchronizer.syncPosition(IsDuckFound, IsPenguinFound);
         refreshScreen();
-    };
-
-    const resetCurrentRoom = () => {
-        assignRandomQuestion(fox.Row, fox.Col);
-        setIsAnswered(false);
     };
 
     const isHitWall = (row, col) => {
@@ -63,7 +68,6 @@ export function createRoomEffectHandler({
             return;
         }
 
-        resetCurrentRoom();
         goToRoom(row, col);
     };
 
@@ -72,9 +76,6 @@ export function createRoomEffectHandler({
             direction,
             fox.Position
         );
-
-        resetCurrentRoom();
-        setIsGoToLastRoom(false);
         goToRoom(row, col);
     };
 
@@ -90,11 +91,14 @@ export function createRoomEffectHandler({
         isAnswered,
         setIsAnswered,
 
+        isEventProcessed,
+        setIsEventProcessed,
+
         // actions
         goToRoom,
         tryToGoNextRoom,
         goToLastRoomInDirection,
-        resetCurrentRoom,
+        resetRoomStateBeforeMoving,
         isHitWall,
         refreshScreen,
     };

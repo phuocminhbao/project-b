@@ -118,4 +118,12 @@ const assignRandomQuestion = (row, col) => {
     mapData[row][col].question = getRandomElement(questions);
 };
 loadMap();
-export { mapData, MAX_LENGTH, reLoadMap, assignRandomQuestion };
+export {
+    mapData,
+    MAX_LENGTH,
+    reLoadMap,
+    assignRandomQuestion,
+    assignFox,
+    assignDuck,
+    assignPenguin,
+};

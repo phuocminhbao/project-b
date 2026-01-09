@@ -117,11 +117,12 @@ export const getItem = () => {
 };
 
 export const getItemById = (id) => ITEM_REGISTRY.find((item) => item.ID === id);
-
-window.getItem = getItem;
-window.getItemById = getItemById;
-window.triggerFoxCheat = () => {
+export const addAllItems = () => {
     ITEM_REGISTRY.forEach((item) => {
         fox.addItem(item);
     });
 };
+
+window.getItem = getItem;
+window.getItemById = getItemById;
+window.triggerFoxCheat = addAllItems;

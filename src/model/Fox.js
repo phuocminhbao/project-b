@@ -10,6 +10,7 @@ class Fox extends Character {
     #items = [];
     #itemQuantity = {};
     #shields = 0;
+    #depression = 0;
 
     constructor(possition) {
         super("Kayron", foxAvatar, possition);
@@ -18,6 +19,13 @@ class Fox extends Character {
 
     get Items() {
         return this.#items.filter((item) => fox.getItemQuantity(item) > 0);
+    }
+
+    get TotalItemsQuantity() {
+        return this.#items.reduce(
+            (sum, item) => sum + this.getItemQuantity(item),
+            0
+        );
     }
 
     getItemQuantity(item) {
@@ -49,14 +57,22 @@ class Fox extends Character {
 
     resetItems() {
         this.#items = [];
+        this.#itemQuantity = {};
     }
 
-    addShield() {
-        this.#shields++;
+    addShield(amount = 1) {
+        this.#shields = +amount;
     }
 
     get HasShield() {
         return this.#shields > 0;
+    }
+
+    gainDepression(amount = 1) {
+        this.#depression += amount;
+    }
+    get HasDepression() {
+        return this.#depression > 0;
     }
 
     get Points() {
@@ -68,6 +84,10 @@ class Fox extends Character {
     }
 
     addPoints(amount) {
+        if (this.HasDepression) {
+            this.#depression--;
+            return;
+        }
         this.#points += amount;
     }
 
