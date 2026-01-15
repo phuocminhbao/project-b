@@ -123,14 +123,14 @@ export const EVENT_REGISTRY = [
     }),
     new RoomEvent({
         id: EVENT_ID.DOUBLE_COST,
-        name: "Double Cost",
-        description: "Everything cost double",
+        name: "Double kill",
+        description: "Next time losing points, you will lose x2",
         type: EVENT_TYPE.BAD,
     }),
     new RoomEvent({
         id: EVENT_ID.FOX_COOL_GUY,
         name: "Cool Guy",
-        description: `${foxName} is feeling cool, wherever he see Ngân Kiên or PS4, those NPC will give truth hints`,
+        description: `${foxName} is feeling cool, wherever he see or meet again Ngân Kiên or PS4, those guys will give truth hints`,
         type: EVENT_TYPE.GOOD,
     }),
     new RoomEvent({
@@ -214,7 +214,7 @@ export const EVENT_REGISTRY = [
     new RoomEvent({
         id: EVENT_ID.D_SILENT_TREATMENT,
         name: "Silent treatment",
-        description: `${duckName} is silent treatment, he make presure on 2 next NPCs will sure not giving hints`,
+        description: `${duckName} is performing silent treatment, he make presure on 2 next NPCs will sure not giving hints`,
         type: EVENT_TYPE.BAD,
     }),
     new RoomEvent({
@@ -252,5 +252,5 @@ export const getRandomEvent = () => {
         isEventAvailable(event.ID)
     );
     // return getRandomElement(availableEvents);
-    return getEventById(EVENT_ID.D_MYSTERIOUS);
+    return getEventById(EVENT_ID.D_NO_COMMENT);
 };

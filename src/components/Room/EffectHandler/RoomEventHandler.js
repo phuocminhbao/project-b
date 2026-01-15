@@ -1,11 +1,18 @@
 import { EVENT_ID } from "../../../data/events";
 import { addAllItems } from "../../../data/items";
-import { assignDuck, assignFox, assignPenguin } from "../../../data/map";
+import {
+    assignDuck,
+    assignFox,
+    assignPenguin,
+    mapData,
+    MAX_LENGTH,
+} from "../../../data/map";
 import { duck } from "../../../model/Duck";
 import { fox } from "../../../model/Fox";
 import { penguin } from "../../../model/Penguin";
 import { getRandomElement } from "../../../utils/array";
 import { getRandomInt } from "../../../utils/numberUtils";
+import { DIRECTION } from "../../../utils/room";
 
 export const getRoomEventHandler = ({ roomEffectHandler, openPopup }) => {
     const closeEventPopup = () => {
@@ -40,10 +47,21 @@ export const getRoomEventHandler = ({ roomEffectHandler, openPopup }) => {
             // Todo
         },
         [EVENT_ID.DOUBLE_COST]: () => {
-            // Todo
+            fox.addMinusPointAdjustment(2);
         },
         [EVENT_ID.FOX_COOL_GUY]: () => {
-            // Todo
+            const ps4AndNgan = [];
+            for (let i = 0; i < MAX_LENGTH; i++) {
+                for (let j = 0; j < MAX_LENGTH; j++) {
+                    const roomData = mapData[i][j];
+                    if ([12, 13].includes(roomData.npc?.ID)) {
+                        ps4AndNgan.push(roomData.npc);
+                    }
+                }
+            }
+            ps4AndNgan.forEach((npc) => {
+                npc.forceToGiveHint(true);
+            });
         },
         [EVENT_ID.F_CREDIT_CARD]: () => {
             fox.addShield(3);
@@ -62,13 +80,20 @@ export const getRoomEventHandler = ({ roomEffectHandler, openPopup }) => {
             assignDuck();
         },
         [EVENT_ID.D_P_DIFFERENT_OPINIONS]: () => {
-            // Todo
+            const correctDirection = getRandomElement([
+                DIRECTION.UP,
+                DIRECTION.DOWN,
+            ]);
+            roomEffectHandler.setRewardDirection(
+                correctDirection,
+                correctDirection === DIRECTION.UP ? duck : penguin
+            );
         },
         [EVENT_ID.D_P_CHILDISH]: () => {
             fox.minusPoints(10);
         },
         [EVENT_ID.D_P_CURIOUS]: () => {
-            // Todo
+            fox.addMinusPointAdjustment(3);
         },
         [EVENT_ID.P_HEAVY]: () => {
             // Todo
@@ -99,7 +124,13 @@ export const getRoomEventHandler = ({ roomEffectHandler, openPopup }) => {
             // Todo
         },
         [EVENT_ID.D_NO_COMMENT]: () => {
-            // Todo
+            const randomDirection = getRandomElement([
+                DIRECTION.UP,
+                DIRECTION.DOWN,
+                DIRECTION.LEFT,
+                DIRECTION.RIGHT,
+            ]);
+            roomEffectHandler.setRewardDirection(randomDirection, duck);
         },
         [EVENT_ID.D_DUCKING]: () => {
             // Todo

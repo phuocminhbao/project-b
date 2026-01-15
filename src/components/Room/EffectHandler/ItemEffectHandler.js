@@ -28,7 +28,13 @@ export const getItemEffectHandler = ({ roomEffectHandler, openPopup }) => {
             const liesText = `Heheeee t bịp m á, tại bị súi bởi ${penguin.Name} - Vua bịp`;
             openPopup({
                 image: npc.Avatar,
-                text: `${npc.IsTellingTruth ? truthText : liesText}`,
+                text: `${
+                    npc.IsNganKien
+                        ? "Kiên à, Ngân ns thịt ớooooo, tin Ngân nhaaa"
+                        : npc.IsTellingTruth
+                        ? truthText
+                        : liesText
+                }`,
             });
             return;
         },

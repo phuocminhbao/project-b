@@ -10,8 +10,8 @@ export class NPC {
     #avatar;
     #texts;
     #currentText;
-    #isGivingHint = inChanceOf(50);
-    #isTrueHint = inChanceOf(50);
+    #isGivingHint = false;
+    #isTrueHint = false;
     #hintGenerator;
     constructor(id, name, avatar, texts) {
         this.#id = id;
@@ -20,6 +20,31 @@ export class NPC {
         this.#texts = this.#generateTexts(texts);
         this.#currentText = 0;
         this.#hintGenerator = new HintGenerator(this.#isTrueHint);
+    }
+
+    get ID() {
+        return this.#id;
+    }
+
+    get IsNganKien() {
+        return this.#id === 12;
+    }
+
+    forceToGiveHint(isTrueHint) {
+        this.#removeHintTexts();
+        this.#isGivingHint = true;
+        this.#isTrueHint = isTrueHint;
+        this.#texts = this.#generateTexts(this.#texts);
+        this.#hintGenerator = new HintGenerator(this.#isTrueHint);
+    }
+
+    #removeHintTexts() {
+        let lastText = this.#texts[this.#texts.length - 1];
+        while (Number.isInteger(lastText)) {
+            this.#texts.pop();
+            lastText = this.#texts[this.#texts.length - 1];
+        }
+        this.#texts.pop();
     }
 
     #generateTexts(intialTexts) {
@@ -45,7 +70,10 @@ export class NPC {
         if (isHint) {
             return `${this.#name}: ${this.#getHint(text)}`;
         }
-        return `${this.#name}: ${text ?? "Chim cook dei"}`;
+        return `${this.#name}: ${
+            text ??
+            (this.IsNganKien ? "Kiên nhớ đội mũ nhìu vào nha" : "Chim cook dei")
+        }`;
     }
 
     #getHint(hint) {

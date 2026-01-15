@@ -1,12 +1,18 @@
+import { EVENT_ID } from "../../../data/events";
+import { getItem } from "../../../data/items";
 import { assignRandomQuestion, MAX_LENGTH } from "../../../data/map";
 import { CharacterPositionSynchronizer } from "../../../helper/CharacterPositionSynchronizer";
+import { duck } from "../../../model/Duck";
 import { fox } from "../../../model/Fox";
+import { penguin } from "../../../model/Penguin";
+import { getRandomInt } from "../../../utils/numberUtils";
 import { getLastRoomInDirectionPosition } from "../../../utils/room";
 
 export function createRoomEffectHandler({
     roomSpecialEffectRef,
     refreshScreen,
     openHitWallPopup,
+    openPopup,
 }) {
     const isQuestionsReturnItem = () => {
         return roomSpecialEffectRef.current.itemQuestions > 0;
@@ -79,6 +85,50 @@ export function createRoomEffectHandler({
         goToRoom(row, col);
     };
 
+    const setRewardDirection = (direction, giver) => {
+        if (!direction || !giver) {
+            roomSpecialEffectRef.current.rewardDirection = undefined;
+            return;
+        }
+        roomSpecialEffectRef.current.rewardDirection = { direction, giver };
+    };
+
+    const goWrapper = (direction, go) => {
+        const { rewardDirection } = roomSpecialEffectRef.current;
+        if (!rewardDirection) {
+            return go;
+        }
+        if (direction === rewardDirection?.direction) {
+            return () => {
+                openPopup({
+                    image: rewardDirection.giver.Avatar,
+                    text: `${rewardDirection.giver.Name}: Đù chọn đúng nè, để thưởng cho tí items xài chơi`,
+                    closeText: "Bú!",
+                    closeAction: () => {
+                        fox.addItem(getItem());
+                        setRewardDirection();
+                        go();
+                    },
+                });
+            };
+        } else {
+            const punisher =
+                rewardDirection.giver.Name === duck.Name ? penguin : duck;
+            return () => {
+                openPopup({
+                    image: punisher.Avatar,
+                    text: `${punisher.Name}: Hãy chọn giá đúng, m chọn hướng sai thì t bú m ít điểm`,
+                    closeText: "Oh mannn, fak u!",
+                    closeAction: () => {
+                        fox.minusPoints(getRandomInt(1, fox.Points));
+                        setRewardDirection();
+                        go();
+                    },
+                });
+            };
+        }
+    };
+
     return {
         // state accessors
         isQuestionsReturnItem,
@@ -101,5 +151,7 @@ export function createRoomEffectHandler({
         resetRoomStateBeforeMoving,
         isHitWall,
         refreshScreen,
+        setRewardDirection,
+        goWrapper,
     };
 }

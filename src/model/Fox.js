@@ -11,10 +11,22 @@ class Fox extends Character {
     #itemQuantity = {};
     #shields = 0;
     #depression = 0;
+    #pointsAdjustment = {
+        add: [],
+        minus: [],
+    };
 
     constructor(possition) {
         super("Kayron", foxAvatar, possition);
         this.#points = 20;
+    }
+
+    addAddPointAdjustment(amount) {
+        this.#pointsAdjustment.add.push(amount);
+    }
+
+    addMinusPointAdjustment(amount) {
+        this.#pointsAdjustment.minus.push(amount);
     }
 
     get Items() {
@@ -88,7 +100,8 @@ class Fox extends Character {
             this.#depression--;
             return;
         }
-        this.#points += amount;
+        const adjustment = this.#pointsAdjustment.add.pop() ?? 1;
+        this.#points += amount * adjustment;
     }
 
     minusPoints(amount) {
@@ -96,7 +109,8 @@ class Fox extends Character {
             this.#shields--;
             return;
         }
-        this.addPoints(-amount);
+        const adjustment = this.#pointsAdjustment.minus.pop() ?? 1;
+        this.#points -= amount * adjustment;
     }
 }
 

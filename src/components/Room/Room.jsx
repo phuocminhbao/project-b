@@ -32,6 +32,7 @@ const Room = () => {
         itemQuestions: 0,
         isGoToLastRoom: false,
         isEventProcessed: false,
+        rewardDirection: undefined,
     });
 
     const found = {
@@ -47,10 +48,11 @@ const Room = () => {
         setPopupData(undefined);
     };
 
-    const ClosePopupButton = ({ text = "Alright!" }) => {
+    const ClosePopupButton = ({ text = "Alright!", closeAction }) => {
         return (
             <Button
                 onClick={() => {
+                    closeAction && closeAction();
                     closePopup();
                 }}
             >
@@ -59,11 +61,13 @@ const Room = () => {
         );
     };
 
-    const openPopup = ({ image, text, closeText }) => {
+    const openPopup = ({ image, text, closeText, closeAction }) => {
         setPopupData({
             image,
             text,
-            children: <ClosePopupButton text={closeText} />,
+            children: (
+                <ClosePopupButton text={closeText} closeAction={closeAction} />
+            ),
         });
     };
 
@@ -80,9 +84,11 @@ const Room = () => {
     }, [fox.Row, fox.Col]);
 
     const openHitWallPopup = () => {
-        openPopup({
-            text: `Ngõ cụt: ${getRandomElement(hitEndMessage)}`,
-            closeText: "cái djtconmeeeee cuocdoi",
+        setTimeout(() => {
+            openPopup({
+                text: `Ngõ cụt: ${getRandomElement(hitEndMessage)}`,
+                closeText: "cái djtconmeeeee cuocdoi",
+            });
         });
     };
 
@@ -90,6 +96,7 @@ const Room = () => {
         roomSpecialEffectRef,
         refreshScreen,
         openHitWallPopup,
+        openPopup,
     });
 
     const {
@@ -100,6 +107,7 @@ const Room = () => {
         goToLastRoomInDirection,
         tryToGoNextRoom,
         decreaseQuestionsReturnItem,
+        goWrapper,
     } = roomEffectHandler;
 
     const nextRoomsInfos = [
@@ -118,7 +126,7 @@ const Room = () => {
                 tryToGoNextRoom(position, cost);
             }
         };
-        return { direction, position, cost, go };
+        return { direction, position, cost, go: goWrapper(direction, go) };
     });
 
     const handleAnswerQuestion = (answer) => {
@@ -209,11 +217,7 @@ const Room = () => {
             {found.penguin && (
                 <img src={penguin.Avatar} alt="penguin" className="fox" />
             )}
-            <DirectionArrows
-                currentPosition={fox.Position}
-                goNextRoom={tryToGoNextRoom}
-                nextRoomsInfos={nextRoomsInfos}
-            />
+            <DirectionArrows nextRoomsInfos={nextRoomsInfos} />
             <InfoBox onItemSelect={handleItemSelect} />
             {popupData && (
                 <Popup
