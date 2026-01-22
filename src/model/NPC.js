@@ -2,7 +2,6 @@ import { getHints } from "../data/npcHints";
 import { givingHintMessage } from "../data/texts";
 import { HintGenerator } from "../helper/HintGenerator";
 import { getRandomElement } from "../utils/array";
-import { inChanceOf } from "../utils/numberUtils";
 
 export class NPC {
     #id;
@@ -38,7 +37,17 @@ export class NPC {
         this.#hintGenerator = new HintGenerator(this.#isTrueHint);
     }
 
+    forceToNotGiveHint() {
+        this.#removeHintTexts();
+        this.#isGivingHint = false;
+        this.#isTrueHint = false;
+        this.#texts.push("Hè đáng lẽ có hint á, mà bị /mute òi");
+    }
+
     #removeHintTexts() {
+        if (!this.#isGivingHint) {
+            return;
+        }
         let lastText = this.#texts[this.#texts.length - 1];
         while (Number.isInteger(lastText)) {
             this.#texts.pop();

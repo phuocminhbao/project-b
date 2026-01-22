@@ -15,6 +15,7 @@ class Fox extends Character {
         add: [],
         minus: [],
     };
+    #isAlone = false;
 
     constructor(possition) {
         super("Kayron", foxAvatar, possition);
@@ -27,6 +28,14 @@ class Fox extends Character {
 
     addMinusPointAdjustment(amount) {
         this.#pointsAdjustment.minus.push(amount);
+    }
+
+    get IsAlone() {
+        return this.#isAlone;
+    }
+
+    set IsAlone(value) {
+        this.#isAlone = value;
     }
 
     get Items() {

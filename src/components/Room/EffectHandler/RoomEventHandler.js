@@ -1,4 +1,4 @@
-import { EVENT_ID } from "../../../data/events";
+import { EVENT_ID } from "../../../constant/event";
 import { addAllItems } from "../../../data/items";
 import {
     assignDuck,
@@ -70,7 +70,7 @@ export const getRoomEventHandler = ({ roomEffectHandler, openPopup }) => {
             fox.minusPoints(999999);
         },
         [EVENT_ID.F_LONELY]: () => {
-            // Todo
+            fox.IsAlone = true;
         },
         [EVENT_ID.D_P_EARTHQUAKE]: () => {
             assignDuck();
@@ -80,13 +80,15 @@ export const getRoomEventHandler = ({ roomEffectHandler, openPopup }) => {
             assignDuck();
         },
         [EVENT_ID.D_P_DIFFERENT_OPINIONS]: () => {
+            roomEffectHandler.disableDirection(DIRECTION.LEFT);
+            roomEffectHandler.disableDirection(DIRECTION.RIGHT);
             const correctDirection = getRandomElement([
                 DIRECTION.UP,
                 DIRECTION.DOWN,
             ]);
             roomEffectHandler.setRewardDirection(
                 correctDirection,
-                correctDirection === DIRECTION.UP ? duck : penguin
+                correctDirection === DIRECTION.UP ? duck : penguin,
             );
         },
         [EVENT_ID.D_P_CHILDISH]: () => {
@@ -96,22 +98,24 @@ export const getRoomEventHandler = ({ roomEffectHandler, openPopup }) => {
             fox.addMinusPointAdjustment(3);
         },
         [EVENT_ID.P_HEAVY]: () => {
-            // Todo
+            penguin.increaseBlockingMoves(2);
         },
         [EVENT_ID.P_HURT_WORDS]: () => {
             fox.minusPoints(5);
         },
         [EVENT_ID.P_LOST_WEAPON]: () => {
-            // Todo
+            penguin.needSpikedMace();
         },
         [EVENT_ID.P_JOIN_DUCK]: () => {
             penguin.moveTo(duck.Row, duck.Col);
         },
         [EVENT_ID.P_BIG_BOSS]: () => {
-            // Todo
+            roomEffectHandler.disableDirection(DIRECTION.UP);
+            roomEffectHandler.disableDirection(DIRECTION.LEFT);
+            roomEffectHandler.disableDirection(DIRECTION.RIGHT);
         },
         [EVENT_ID.D_SILENT_TREATMENT]: () => {
-            // Todo
+            roomEffectHandler.increaseNPCNoHint(2);
         },
         [EVENT_ID.D_MYSTERIOUS]: () => {
             const randomHideTimes = getRandomInt(0, fox.TotalItemsQuantity);
@@ -121,7 +125,8 @@ export const getRoomEventHandler = ({ roomEffectHandler, openPopup }) => {
             }
         },
         [EVENT_ID.D_GENEROUS]: () => {
-            // Todo
+            // Todo rolls
+            fox.addPoints(10);
         },
         [EVENT_ID.D_NO_COMMENT]: () => {
             const randomDirection = getRandomElement([
@@ -133,7 +138,7 @@ export const getRoomEventHandler = ({ roomEffectHandler, openPopup }) => {
             roomEffectHandler.setRewardDirection(randomDirection, duck);
         },
         [EVENT_ID.D_DUCKING]: () => {
-            // Todo
+            duck.goDifferentWay();
         },
     };
 

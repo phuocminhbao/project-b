@@ -1,12 +1,11 @@
-import { EVENT_ID } from "../../../data/events";
 import { getItem } from "../../../data/items";
-import { assignRandomQuestion, MAX_LENGTH } from "../../../data/map";
+import { assignRandomQuestion, mapData, MAX_LENGTH } from "../../../data/map";
 import { CharacterPositionSynchronizer } from "../../../helper/CharacterPositionSynchronizer";
 import { duck } from "../../../model/Duck";
 import { fox } from "../../../model/Fox";
 import { penguin } from "../../../model/Penguin";
 import { getRandomInt } from "../../../utils/numberUtils";
-import { getLastRoomInDirectionPosition } from "../../../utils/room";
+import { DIRECTION, getLastRoomInDirectionPosition } from "../../../utils/room";
 
 export function createRoomEffectHandler({
     roomSpecialEffectRef,
@@ -59,6 +58,7 @@ export function createRoomEffectHandler({
         const { IsDuckFound, IsPenguinFound } = CharacterPositionSynchronizer;
         fox.moveTo(row, col);
         CharacterPositionSynchronizer.syncPosition(IsDuckFound, IsPenguinFound);
+        makeNextNpcNoHint([row, col]);
         refreshScreen();
     };
 
@@ -80,7 +80,7 @@ export function createRoomEffectHandler({
     const goToLastRoomInDirection = (direction) => {
         const [row, col] = getLastRoomInDirectionPosition(
             direction,
-            fox.Position
+            fox.Position,
         );
         goToRoom(row, col);
     };
@@ -129,6 +129,29 @@ export function createRoomEffectHandler({
         }
     };
 
+    const disableDirection = (direction) => {
+        roomSpecialEffectRef.current.disableDirection[direction] = true;
+    };
+
+    const resetDisableDirection = () => {
+        roomSpecialEffectRef.current.disableDirection[DIRECTION.UP] = false;
+        roomSpecialEffectRef.current.disableDirection[DIRECTION.DOWN] = false;
+        roomSpecialEffectRef.current.disableDirection[DIRECTION.LEFT] = false;
+        roomSpecialEffectRef.current.disableDirection[DIRECTION.RIGHT] = false;
+    };
+
+    const increaseNPCNoHint = (amount = 1) => {
+        roomSpecialEffectRef.current.forceNPCNoHintRemaining += amount;
+    };
+
+    const makeNextNpcNoHint = ([row, col]) => {
+        const npc = mapData[row][col].npc;
+        if (roomSpecialEffectRef.current.forceNPCNoHintRemaining > 0) {
+            roomSpecialEffectRef.current.forceNPCNoHintRemaining -= 1;
+            !!npc && npc.forceToNotGiveHint();
+        }
+    };
+
     return {
         // state accessors
         isQuestionsReturnItem,
@@ -153,5 +176,9 @@ export function createRoomEffectHandler({
         refreshScreen,
         setRewardDirection,
         goWrapper,
+        disableDirection,
+        resetDisableDirection,
+        increaseNPCNoHint,
+        makeNextNpcNoHint,
     };
 }

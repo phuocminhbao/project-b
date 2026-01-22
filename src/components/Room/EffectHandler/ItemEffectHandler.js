@@ -1,4 +1,6 @@
-import { getItem, ITEM_ID } from "../../../data/items";
+import { config } from "../../../config/gameConfig";
+import { ITEM_ID } from "../../../constant/item";
+import { getItem } from "../../../data/items";
 import { CORNERS, mapData } from "../../../data/map";
 import { CharacterPositionSynchronizer } from "../../../helper/CharacterPositionSynchronizer";
 import { duck } from "../../../model/Duck";
@@ -6,6 +8,8 @@ import { fox } from "../../../model/Fox";
 import { penguin } from "../../../model/Penguin";
 import { getRandomElement } from "../../../utils/array";
 import { getRandomInt, inChanceOf } from "../../../utils/numberUtils";
+
+const itemProbability = config.item.probability;
 
 export const getItemEffectHandler = ({ roomEffectHandler, openPopup }) => {
     const { npc } = mapData[fox.Row][fox.Col];
@@ -32,8 +36,8 @@ export const getItemEffectHandler = ({ roomEffectHandler, openPopup }) => {
                     npc.IsNganKien
                         ? "Kiên à, Ngân ns thịt ớooooo, tin Ngân nhaaa"
                         : npc.IsTellingTruth
-                        ? truthText
-                        : liesText
+                          ? truthText
+                          : liesText
                 }`,
             });
             return;
@@ -67,7 +71,9 @@ export const getItemEffectHandler = ({ roomEffectHandler, openPopup }) => {
             roomEffectHandler.refreshScreen();
         },
         [ITEM_ID.GACHA_TELEPORT_OR_DEAD]: () => {
-            const isWin = inChanceOf(15);
+            const isWin = inChanceOf(
+                itemProbability[ITEM_ID.GACHA_TELEPORT_OR_DEAD],
+            );
             if (!isWin) {
                 fox.minusPoints(9999);
             } else if (CharacterPositionSynchronizer.IsFoundAll) {
@@ -84,15 +90,15 @@ export const getItemEffectHandler = ({ roomEffectHandler, openPopup }) => {
             roomEffectHandler.refreshScreen();
         },
         [ITEM_ID.TELEPORT_HIDER]: () => {
-            if (
-                CharacterPositionSynchronizer.IsDuckFound &&
-                CharacterPositionSynchronizer.IsPenguinFound
-            ) {
+            if (CharacterPositionSynchronizer.IsFoundAll) {
                 openPopup({
                     image: penguin.Avatar,
                     text: "Ei bọn t ở ây sẵn mà, m hơi giàu òi ấy!",
                 });
-            } else if (!CharacterPositionSynchronizer.IsFoundAll) {
+            } else if (
+                !CharacterPositionSynchronizer.IsDuckFound &&
+                !CharacterPositionSynchronizer.IsPenguinFound
+            ) {
                 getRandomElement([duck, penguin]).jumpToFoxRoom();
             } else {
                 !CharacterPositionSynchronizer.IsDuckFound &&
@@ -104,9 +110,9 @@ export const getItemEffectHandler = ({ roomEffectHandler, openPopup }) => {
         },
         [ITEM_ID.TELEPORT_HIDER_TO_EXIT]: () => {
             const [exitRow, exitCol] = CORNERS.find(
-                (corner) => mapData[corner[0]][corner[1]].isExit
+                (corner) => mapData[corner[0]][corner[1]].isExit,
             );
-            if (inChanceOf(5)) {
+            if (inChanceOf(itemProbability[ITEM_ID.TELEPORT_HIDER_TO_EXIT])) {
                 duck.moveTo(exitRow, exitCol);
                 penguin.moveTo(exitRow, exitCol);
             } else {

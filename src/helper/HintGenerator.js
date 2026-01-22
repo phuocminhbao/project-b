@@ -1,4 +1,3 @@
-import { HINT } from "../data/npcHints";
 import { noHintNeededMessage } from "../data/texts";
 import { duck } from "../model/Duck";
 import { penguin } from "../model/Penguin";
@@ -7,6 +6,7 @@ import { Hider } from "../model/Hider";
 import { getRandomInt, inChanceOf } from "../utils/numberUtils";
 import { MAX_LENGTH } from "../data/map";
 import { fox } from "../model/Fox";
+import { HINT } from "../constant/hint";
 export class HintGenerator {
     #isTruth;
 
@@ -73,7 +73,7 @@ export class HintGenerator {
             return getText(trueDirection);
         }
         const fakeDirection = ["trên", "dưới", "trái", "phải"].filter(
-            (direction) => direction !== trueDirection
+            (direction) => direction !== trueDirection,
         );
         return getText(getRandomElement(fakeDirection));
     }
@@ -140,7 +140,7 @@ export class HintGenerator {
             return text;
         }
         const fakeAlignments = [sameColumn, sameRow, noAlignment].filter(
-            (t) => t !== text
+            (t) => t !== text,
         );
         return getRandomElement(fakeAlignments);
     }
@@ -163,7 +163,7 @@ export class HintGenerator {
             return text;
         }
         const fakeAlignments = [sameColumn, sameRow, noAlignment].filter(
-            (t) => t !== text
+            (t) => t !== text,
         );
         return getRandomElement(fakeAlignments);
     }
@@ -171,7 +171,7 @@ export class HintGenerator {
     #getRowColumnDiff() {
         const getText = (
             [vertical, verticalDistance],
-            [horizontal, horizontalDistance]
+            [horizontal, horizontalDistance],
         ) => {
             return `${
                 this.#hider.Name
@@ -197,7 +197,7 @@ export class HintGenerator {
                 getRandomElement(["above", "bellow"]),
                 getRandomInt(0, MAX_LENGTH),
             ],
-            [getRandomElement(["left", "right"]), getRandomInt(0, MAX_LENGTH)]
+            [getRandomElement(["left", "right"]), getRandomInt(0, MAX_LENGTH)],
         );
     }
 
@@ -235,7 +235,7 @@ export class HintGenerator {
                 "top right",
                 "down left",
                 "down right",
-            ])
+            ]),
         );
     }
 

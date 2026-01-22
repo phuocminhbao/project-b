@@ -1,4 +1,4 @@
-import { EVENT_ID } from "../../../data/events";
+import { EVENT_ID } from "../../../constant/event";
 import { RoomEvent } from "../../../model/RoomEvent";
 
 /**

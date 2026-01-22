@@ -1,3 +1,4 @@
+import { EVENT_ID, EVENT_SYMBOL } from "../constant/event";
 import { CharacterPositionSynchronizer } from "../helper/CharacterPositionSynchronizer";
 import { duck } from "../model/Duck";
 import { fox } from "../model/Fox";
@@ -7,52 +8,6 @@ import { getRandomElement } from "../utils/array";
 const foxName = fox.Name;
 const penguinName = penguin.Name;
 const duckName = duck.Name;
-
-const EVENT_SYMBOL = {
-    DUCK: "d",
-    PENGUIN: "p",
-    FOX: "f",
-    ALL: "dp",
-};
-
-export const EVENT_ID = {
-    // COMMON
-    FOX_OVERTHINKING: "fox_overthinking",
-    FOX_DEPRESSION: "fox_depression",
-    HAPPY_BIRTHDAY: "happy_birthday",
-    FOX_GOING_HOME: "fox_going_home",
-    FOX_LOSE_ALL_ITEMS: "fox_lose_all_items",
-    THANOS_SNAP: "thanos_snap",
-    MORE_ROLLS: "more_rolls",
-    DOUBLE_COST: "double_cost",
-    FOX_COOL_GUY: "fox_cool_guy",
-
-    // ONLY FOX
-    F_CREDIT_CARD: "f_credit_card",
-    F_LAZY: "f_lazy",
-    F_LONELY: "f_lonely",
-
-    // DUCK & PENGUIN
-    D_P_EARTHQUAKE: "dp_earthquake",
-    D_P_FIGHTING: "dp_fighting",
-    D_P_DIFFERENT_OPINIONS: "dp_different_opinions",
-    D_P_CHILDISH: "dp_childish",
-    D_P_CURIOUS: "dp_curious",
-
-    // PENGUIN
-    P_HEAVY: "p_heavy",
-    P_HURT_WORDS: "p_hurt_words",
-    P_LOST_WEAPON: "p_lost_weapon",
-    P_JOIN_DUCK: "p_join_duck",
-    P_BIG_BOSS: "p_big_boss",
-
-    // DUCK
-    D_SILENT_TREATMENT: "d_silent_treatment",
-    D_MYSTERIOUS: "d_mysterious",
-    D_GENEROUS: "d_generous",
-    D_NO_COMMENT: "d_no_comment",
-    D_DUCKING: "d_ducking",
-};
 
 /**
  * @param {string} eventID
@@ -183,7 +138,7 @@ export const EVENT_REGISTRY = [
     }),
     new RoomEvent({
         id: EVENT_ID.P_HEAVY,
-        name: `${penguinName}'s weigth`,
+        name: `${penguinName}'s weigth gain`,
         description: `${penguinName} is too heavy, can't move for next 2 moves`,
         type: EVENT_TYPE.BAD,
     }),
@@ -226,7 +181,7 @@ export const EVENT_REGISTRY = [
     new RoomEvent({
         id: EVENT_ID.D_GENEROUS,
         name: "Genious Duck",
-        description: `${duckName} is generous, he give ${foxName} 3 rolls in this room`,
+        description: `${duckName} is generous, he give ${foxName} 3 rolls in this room and 10 points`,
         type: EVENT_TYPE.GOOD,
     }),
     new RoomEvent({
@@ -249,8 +204,8 @@ const getEventById = (eventId) => {
 
 export const getRandomEvent = () => {
     const availableEvents = EVENT_REGISTRY.filter((event) =>
-        isEventAvailable(event.ID)
+        isEventAvailable(event.ID),
     );
     // return getRandomElement(availableEvents);
-    return getEventById(EVENT_ID.D_NO_COMMENT);
+    return getEventById(EVENT_ID.P_LOST_WEAPON);
 };

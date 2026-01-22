@@ -1,26 +1,30 @@
-export const HINT = {
-    EXTRACT_POSITION: 1,
-    RANGE_OF_ROOMS: 2,
-    RELATIVE_DIRECTION: 3,
-    RELATIVE_DIRECTION_DIAGONAL: 4,
-    DISTANCE: 5,
-    ROW_COLUMN_ALIGNMENT_FOX: 6,
-    ROW_COLUMN_ALIGNMENT_HIDERS: 7,
-    ROW_COLUMN_DIFF: 8,
-    HIDING_AT_CONNER: 9,
-    NOTTHNG: 10,
-};
+import { config } from "../config/gameConfig";
+import { HINT } from "../constant/hint";
+
+const rarelity = config.hint.rarelity;
 
 const hints = [
-    { name: HINT.EXTRACT_POSITION, chance: 1.69 },
-    { name: HINT.RANGE_OF_ROOMS, chance: 40 },
-    { name: HINT.RELATIVE_DIRECTION, chance: 35 },
-    { name: HINT.RELATIVE_DIRECTION_DIAGONAL, chance: 25 },
-    { name: HINT.DISTANCE, chance: 30 },
-    { name: HINT.ROW_COLUMN_ALIGNMENT_FOX, chance: 30 },
-    { name: HINT.ROW_COLUMN_ALIGNMENT_HIDERS, chance: 50 },
-    { name: HINT.ROW_COLUMN_DIFF, chance: 10 },
-    { name: HINT.HIDING_AT_CONNER, chance: 60 },
+    { name: HINT.EXTRACT_POSITION, chance: rarelity[HINT.EXTRACT_POSITION] },
+    { name: HINT.RANGE_OF_ROOMS, chance: rarelity[HINT.RANGE_OF_ROOMS] },
+    {
+        name: HINT.RELATIVE_DIRECTION,
+        chance: rarelity[HINT.RELATIVE_DIRECTION],
+    },
+    {
+        name: HINT.RELATIVE_DIRECTION_DIAGONAL,
+        chance: rarelity[HINT.RELATIVE_DIRECTION_DIAGONAL],
+    },
+    { name: HINT.DISTANCE, chance: rarelity[HINT.DISTANCE] },
+    {
+        name: HINT.ROW_COLUMN_ALIGNMENT_FOX,
+        chance: rarelity[HINT.ROW_COLUMN_ALIGNMENT_FOX],
+    },
+    {
+        name: HINT.ROW_COLUMN_ALIGNMENT_HIDERS,
+        chance: rarelity[HINT.ROW_COLUMN_ALIGNMENT_HIDERS],
+    },
+    { name: HINT.ROW_COLUMN_DIFF, chance: rarelity[HINT.ROW_COLUMN_DIFF] },
+    { name: HINT.HIDING_AT_CONNER, chance: rarelity[HINT.HIDING_AT_CONNER] },
 ];
 
 const totalChances = hints.reduce((total, hint) => total + hint.chance, 0);

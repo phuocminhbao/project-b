@@ -29,16 +29,31 @@
 }
 
 /* Specific hover transforms need to handle the centering translation + scale */
-.arrow-up:hover { transform: translateX(-50%) scale(1.1); }
-.arrow-down:hover { transform: translateX(-50%) scale(1.1); }
-.arrow-left:hover { transform: translateY(-50%) scale(1.1); }
-.arrow-right:hover { transform: translateY(-50%) scale(1.1); }
+.arrow-up:hover {
+    transform: translateX(-50%) scale(1.1);
+}
+.arrow-down:hover {
+    transform: translateX(-50%) scale(1.1);
+}
+.arrow-left:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+.arrow-right:hover {
+    transform: translateY(-50%) scale(1.1);
+}
 
-.arrow-up:active { transform: translateX(-50%) scale(0.95); }
-.arrow-down:active { transform: translateX(-50%) scale(0.95); }
-.arrow-left:active { transform: translateY(-50%) scale(0.95); }
-.arrow-right:active { transform: translateY(-50%) scale(0.95); }
-
+.arrow-up:active {
+    transform: translateX(-50%) scale(0.95);
+}
+.arrow-down:active {
+    transform: translateX(-50%) scale(0.95);
+}
+.arrow-left:active {
+    transform: translateY(-50%) scale(0.95);
+}
+.arrow-right:active {
+    transform: translateY(-50%) scale(0.95);
+}
 
 /* Cost badge */
 .cost-badge {
@@ -49,7 +64,7 @@
     font-weight: bold;
     padding: 2px 6px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     pointer-events: none;
     white-space: nowrap;
 }
@@ -60,25 +75,25 @@
     margin-top: 8px;
     left: 50%;
     transform: translateX(-50%);
-} 
+}
 .badge-down {
     bottom: 100%;
     margin-bottom: 8px;
     left: 50%;
     transform: translateX(-50%);
-} 
+}
 .badge-left {
     left: 100%;
     margin-left: 8px;
     top: 50%;
     transform: translateY(-50%);
-} 
+}
 .badge-right {
     right: 100%;
     margin-right: 8px;
     top: 50%;
     transform: translateY(-50%);
-} 
+}
 
 /* Vị trí arrow */
 .arrow-up {
@@ -100,4 +115,21 @@
     right: 5%;
     top: 50%;
     transform: translateY(-50%);
+}
+/* Disabled state */
+.arrow--disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    background: rgba(30, 30, 30, 0.6);
+    box-shadow: none;
+    pointer-events: none; /* hard stop all interactions */
+}
+
+/* Kill hover effects when disabled */
+.arrow--disabled:hover,
+.arrow--disabled:active {
+    transform: none;
+    background: rgba(30, 30, 30, 0.6);
+    box-shadow: none;
+    border-color: rgba(255, 255, 255, 0.15);
 }

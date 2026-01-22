@@ -22,6 +22,8 @@ import { getItemEffectHandler } from "./EffectHandler/ItemEffectHandler";
 import EventPopup from "../Popup/EventPopup";
 import { EVENT_REGISTRY, getRandomEvent } from "../../data/events";
 import { getRoomEventHandler } from "./EffectHandler/RoomEventHandler";
+import { config } from "../../config/gameConfig";
+import SpikedMace from "../Shared/Icon/SpikedMace";
 
 const Room = () => {
     const [popupData, setPopupData] = useState();
@@ -33,6 +35,13 @@ const Room = () => {
         isGoToLastRoom: false,
         isEventProcessed: false,
         rewardDirection: undefined,
+        disableDirection: {
+            [DIRECTION.UP]: false,
+            [DIRECTION.DOWN]: false,
+            [DIRECTION.LEFT]: false,
+            [DIRECTION.RIGHT]: false,
+        },
+        forceNPCNoHintRemaining: 0,
     });
 
     const found = {
@@ -73,11 +82,10 @@ const Room = () => {
 
     const { npc, question, isExit } = mapData[fox.Row][fox.Col];
     const isEndGame = false;
-    // (isExit && found.duck && found.penguin) || fox.Points <= 0;
+    // (isExit && found.duck && found.penguin && !fox.IsAlone) || fox.Points <= 0;
 
     const event = useMemo(() => {
-        // Todo: 30 chance
-        if (inChanceOf(100)) {
+        if (inChanceOf(config.map.probability.generateEvent)) {
             return getRandomEvent();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -108,6 +116,7 @@ const Room = () => {
         tryToGoNextRoom,
         decreaseQuestionsReturnItem,
         goWrapper,
+        resetDisableDirection,
     } = roomEffectHandler;
 
     const nextRoomsInfos = [
@@ -120,13 +129,20 @@ const Room = () => {
         const cost =
             mapData[position.row]?.[position.col]?.cost ?? getRandomInt(1, 5);
         const go = () => {
+            resetDisableDirection();
             if (isGoToLastRoom()) {
                 goToLastRoomInDirection(direction);
             } else {
                 tryToGoNextRoom(position, cost);
             }
         };
-        return { direction, position, cost, go: goWrapper(direction, go) };
+        return {
+            direction,
+            position,
+            cost,
+            go: goWrapper(direction, go),
+            isDisable: roomSpecialEffectRef.current.disableDirection[direction],
+        };
     });
 
     const handleAnswerQuestion = (answer) => {
@@ -167,12 +183,12 @@ const Room = () => {
         if (answer.isCorrect) {
             fox.addItem(getItem());
             openHiderPopup(
-                `${question.hider.Name}: Check kho đồ dei, ms cho m con hàng á`
+                `${question.hider.Name}: Check kho đồ dei, ms cho m con hàng á`,
             );
             return;
         }
         openHiderPopup(
-            `${question.hider.Name}: Bn bè coin card j deos bít j về nhau à?`
+            `${question.hider.Name}: Bn bè coin card j deos bít j về nhau à?`,
         );
     };
 
@@ -215,7 +231,12 @@ const Room = () => {
                 {fox.HasShield && <ShieldIcon className="fox-shield" />}
             </div>
             {found.penguin && (
-                <img src={penguin.Avatar} alt="penguin" className="fox" />
+                <div className="fox-wrapper">
+                    <img src={penguin.Avatar} alt="penguin" className="fox" />
+                    {penguin.IsNeedSpikedMace && penguin.IsFoundSpikedMace && (
+                        <SpikedMace className="fox-shield" />
+                    )}
+                </div>
             )}
             <DirectionArrows nextRoomsInfos={nextRoomsInfos} />
             <InfoBox onItemSelect={handleItemSelect} />

@@ -4,8 +4,17 @@ import { fox } from "./Fox";
 
 export class Hider extends Character {
     #isFound = false;
+    #blockingMoves = 0;
     constructor(name, avatar, possition) {
         super(name, avatar, possition);
+    }
+
+    get IsMoveAble() {
+        return this.#blockingMoves <= 0;
+    }
+
+    increaseBlockingMoves(amount) {
+        this.#blockingMoves += amount;
     }
 
     get IsFound() {
@@ -19,7 +28,7 @@ export class Hider extends Character {
 
     jumpToExit() {
         const exit = CORNERS.find(
-            (corner) => mapData[corner[0]][corner[1]].isExit
+            (corner) => mapData[corner[0]][corner[1]].isExit,
         );
         this.moveTo(exit[0], exit[1]);
     }
@@ -29,5 +38,12 @@ export class Hider extends Character {
     }
     lost() {
         this.#isFound = false;
+    }
+    moveTo(row, col) {
+        if (this.IsMoveAble) {
+            super.moveTo(row, col);
+            return;
+        }
+        this.#blockingMoves--;
     }
 }

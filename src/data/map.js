@@ -5,8 +5,10 @@ import { questions, specialQuestions } from "./questions";
 import { fox } from "../model/Fox";
 import { duck } from "../model/Duck";
 import { penguin } from "../model/Penguin";
+import { config } from "../config/gameConfig";
 
-const MAX_LENGTH = 5;
+const MAX_LENGTH = config.map.size;
+const mapProbability = config.map.probability;
 
 const mapData = [
     [
@@ -60,10 +62,11 @@ const assignPenguin = () => {
         [row, col] = getRandomPosition();
     }
     penguin.moveTo(row, col);
+    penguin.SpikedMacePosition = [row, col];
 };
 
 const getNPC = (NPCs) => {
-    if (inChanceOf(60)) {
+    if (inChanceOf(mapProbability.notGetNPC)) {
         return undefined;
     }
 
@@ -71,7 +74,10 @@ const getNPC = (NPCs) => {
 };
 
 const getQuestion = (questionIndexs, specialQuestionsIndexs) => {
-    if (inChanceOf(20) && specialQuestionsIndexs.length > 0) {
+    if (
+        inChanceOf(mapProbability.getSpecialQuestion) &&
+        specialQuestionsIndexs.length > 0
+    ) {
         return specialQuestions[specialQuestionsIndexs.pop()];
     }
     return questions[questionIndexs.pop()];
@@ -81,17 +87,17 @@ const loadMap = () => {
     const randomNPCs = generateUniqueRandomArray(
         npcCharacters.length,
         MAX_LENGTH * MAX_LENGTH,
-        true
+        true,
     );
     const randomQuestions = generateUniqueRandomArray(
         questions.length,
         MAX_LENGTH * MAX_LENGTH,
-        true
+        true,
     );
     const randomSpecialQuestions = generateUniqueRandomArray(
         specialQuestions.length,
         MAX_LENGTH * MAX_LENGTH,
-        true
+        true,
     );
     for (let row = 0; row < MAX_LENGTH; row++) {
         mapData[row] = [];
