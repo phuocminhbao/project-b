@@ -1,0 +1,119 @@
+.encounter-frame {
+    width: 260px;
+    height: 380px;
+
+    background: rgba(30, 30, 30, 0.85);
+    border-radius: 20px;
+
+    padding: 24px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    cursor: pointer;
+    position: relative;
+
+    transition: transform 0.18s ease;
+}
+
+.encounter-frame:hover {
+    transform: translateY(-6px);
+}
+.encounter-icon-wrapper {
+    height: 140px; /* FIXED visual dominance */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.encounter-icon-wrapper img {
+    width: 72px;
+    height: 72px;
+}
+.encounter-title {
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+}
+.encounter-description {
+    margin-top: 12px;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #fff;
+    text-align: center;
+    opacity: 0.9;
+}
+.shop-reroll {
+    margin-top: 20px;
+    padding: 10px 16px;
+    background: #2a2a2a;
+    border: 1px solid #555;
+    border-radius: 10px;
+    color: #ccc;
+    font-weight: 600;
+}
+
+.shop-reroll:disabled {
+    opacity: 0.4;
+}
+
+.reroll-btn {
+    position: relative;
+    margin-top: auto;
+    width: 40%;
+    max-width: 60%;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    transition: background 0.15s ease, border-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.reroll-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.reroll-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+.reroll-btn svg {
+    transition: transform 0.2s ease;
+}
+
+.reroll-btn:hover:not(:disabled) svg {
+    transform: rotate(-30deg);
+}
+.reroll-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: #fff;
+    color: #000;
+    font-size: 11px;
+    font-weight: 700;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

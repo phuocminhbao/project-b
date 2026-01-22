@@ -8,7 +8,7 @@ const config = {
             notGetNPC: 40,
             getSpecialQuestion: 20,
             // Todo: 30 chance
-            generateEvent: 30,
+            generateEvent: 0,
         },
     },
     item: {

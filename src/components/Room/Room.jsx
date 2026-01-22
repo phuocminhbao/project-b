@@ -24,6 +24,7 @@ import { EVENT_REGISTRY, getRandomEvent } from "../../data/events";
 import { getRoomEventHandler } from "./EffectHandler/RoomEventHandler";
 import { config } from "../../config/gameConfig";
 import SpikedMace from "../Shared/Icon/SpikedMace";
+import Shop from "./Shop/Shop";
 
 const Room = () => {
     const [popupData, setPopupData] = useState();
@@ -168,7 +169,6 @@ const Room = () => {
         fox.addPoints(question.point);
     };
 
-    // Todo: Open popup instead of alert
     const handleSpecialQuestionAnswer = (answer) => {
         const openHiderPopup = (message) => {
             const { hider } = question;
@@ -183,12 +183,12 @@ const Room = () => {
         if (answer.isCorrect) {
             fox.addItem(getItem());
             openHiderPopup(
-                `${question.hider.Name}: Check kho đồ dei, ms cho m con hàng á`,
+                `${question.hider.Name}: Check kho đồ dei, ms cho m con hàng á`
             );
             return;
         }
         openHiderPopup(
-            `${question.hider.Name}: Bn bè coin card j deos bít j về nhau à?`,
+            `${question.hider.Name}: Bn bè coin card j deos bít j về nhau à?`
         );
     };
 
@@ -277,6 +277,7 @@ const Room = () => {
                 setPopupData={setPopupData}
                 closePopup={closePopup}
             />
+            <Shop />
         </div>
     );
 };
