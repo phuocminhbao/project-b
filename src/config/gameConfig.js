@@ -10,6 +10,12 @@ const config = {
             // Todo: 30 chance
             generateEvent: 0,
         },
+        rolls: 1,
+    },
+    fox: {
+        points: 20,
+        shield: 0,
+        depression: 0,
     },
     item: {
         rarelity: {

@@ -23,7 +23,10 @@
     align-items: center;
     justify-content: center;
 
-    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+    transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        transform 0.15s ease;
     z-index: 99;
 }
 
@@ -55,6 +58,11 @@
     border-radius: 20px;
     padding: 32px;
     animation: popup-in 0.25s ease;
+}
+
+.shop-popup-colliding {
+    position: fixed;
+    bottom: 21%;
 }
 
 @keyframes popup-in {

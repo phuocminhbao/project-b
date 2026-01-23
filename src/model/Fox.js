@@ -1,4 +1,5 @@
 import foxAvatar from "../assets/fox.gif";
+import { config } from "../config/gameConfig";
 import { Character } from "./Character";
 import { GameItem } from "./GameItem";
 class Fox extends Character {
@@ -9,8 +10,8 @@ class Fox extends Character {
      */
     #items = [];
     #itemQuantity = {};
-    #shields = 0;
-    #depression = 0;
+    #shields = config.fox.shield;
+    #depression = config.fox.depression;
     #pointsAdjustment = {
         add: [],
         minus: [],
@@ -19,7 +20,7 @@ class Fox extends Character {
 
     constructor(possition) {
         super("Kayron", foxAvatar, possition);
-        this.#points = 20;
+        this.#points = config.fox.points;
     }
 
     addAddPointAdjustment(amount) {
@@ -45,7 +46,7 @@ class Fox extends Character {
     get TotalItemsQuantity() {
         return this.#items.reduce(
             (sum, item) => sum + this.getItemQuantity(item),
-            0
+            0,
         );
     }
 

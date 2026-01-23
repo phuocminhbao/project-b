@@ -1,54 +1,61 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import EncounterCard from "./EncounterCard.jsx";
 import "./Shop.css";
-import { Button } from "../../Shared/Button/Button.js";
 import ThreeCards from "../../Shared/Icon/ThreeCards.jsx";
 import { fox } from "../../../model/Fox.js";
 import { duck } from "../../../model/Duck.js";
 import { penguin } from "../../../model/Penguin.js";
+import { useCollision } from "../../../hooks/useCollision.js";
 
-const mock = [
-    {
-        icon: duck.Avatar,
-        name: "Pickme boi",
-        description: "Pickme boi",
-        rollRemaining: 1,
-    },
-    {
-        icon: fox.Avatar,
-        name: "Pickme boi",
-        description: "Pickme boi",
-        rollRemaining: 1,
-    },
-    {
-        icon: penguin.Avatar,
-        name: "Pickme boi",
-        description: "Pickme boi",
-        rollRemaining: 1,
-    },
-];
-
-const Shop = () => {
+const Shop = ({ disableShop, maxRolls }) => {
+    const mock = [
+        {
+            icon: duck.Avatar,
+            name: "Pickme boi",
+            description: "Pickme boi 1 ",
+            rollRemaining: maxRolls,
+        },
+        {
+            icon: fox.Avatar,
+            name: "Pickme boi",
+            description: "Pickme boi 2 ",
+            rollRemaining: maxRolls,
+        },
+        {
+            icon: penguin.Avatar,
+            name: "Pickme boi",
+            description: "Pickme boi 3 ",
+            rollRemaining: maxRolls,
+        },
+    ];
     const [open, setOpen] = useState(false);
     const [encounters, setEncounters] = useState(mock);
+    const buttonRef = useRef();
+    const shopRef = useRef();
 
-    const handleOpen = () => {
+    const isColliding = useCollision(buttonRef, shopRef, open);
+
+    const handleClick = () => {
         setOpen(!open);
     };
 
     const handleSelect = (encounter) => {
         console.log(encounter.name);
         setOpen(false);
+        disableShop();
     };
 
     return (
         <>
-            <button className="shop-fab" onClick={handleOpen}>
+            <button className="shop-fab" onClick={handleClick} ref={buttonRef}>
                 <ThreeCards size={32} />
             </button>
             {open && (
                 <div className="shop-overlay">
-                    <div className="shop-popup">
+                    <div
+                        className={`shop-popup ${isColliding ? "shop-popup-colliding" : ""}`}
+                        ref={shopRef}
+                    >
                         <div className="shop-cards">
                             {encounters.map((e, i) => (
                                 <EncounterCard

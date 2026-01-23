@@ -44,7 +44,7 @@ export const getRoomEventHandler = ({ roomEffectHandler, openPopup }) => {
             // Todo remove hints in note
         },
         [EVENT_ID.MORE_ROLLS]: () => {
-            // Todo
+            roomEffectHandler.increaseRolls();
         },
         [EVENT_ID.DOUBLE_COST]: () => {
             fox.addMinusPointAdjustment(2);
@@ -125,7 +125,7 @@ export const getRoomEventHandler = ({ roomEffectHandler, openPopup }) => {
             }
         },
         [EVENT_ID.D_GENEROUS]: () => {
-            // Todo rolls
+            roomEffectHandler.increaseRolls(2);
             fox.addPoints(10);
         },
         [EVENT_ID.D_NO_COMMENT]: () => {

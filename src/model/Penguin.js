@@ -4,7 +4,7 @@ class Penguin extends Hider {
     #spikedMacePosition = [0, 0];
     #isNeedSpikedMace = false;
     constructor(possition) {
-        super("Trinh Me", penguinAvatar, possition);
+        super("Chinh Me", penguinAvatar, possition);
     }
 
     get IsNeedSpikedMace() {

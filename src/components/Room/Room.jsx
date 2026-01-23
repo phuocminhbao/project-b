@@ -29,6 +29,7 @@ import Shop from "./Shop/Shop";
 const Room = () => {
     const [popupData, setPopupData] = useState();
     const [, updateScreen] = useState({});
+    const [isShopAvailable, setIsShopAvailable] = useState(true);
 
     const roomSpecialEffectRef = useRef({
         isAnswered: false,
@@ -43,6 +44,7 @@ const Room = () => {
             [DIRECTION.RIGHT]: false,
         },
         forceNPCNoHintRemaining: 0,
+        maxRolls: config.map.rolls,
     });
 
     const found = {
@@ -101,11 +103,21 @@ const Room = () => {
         });
     };
 
+    const disableShop = () => {
+        setIsShopAvailable(false);
+    };
+
+    const openShop = () => {
+        setIsShopAvailable(true);
+    };
+
     const roomEffectHandler = createRoomEffectHandler({
         roomSpecialEffectRef,
         refreshScreen,
         openHitWallPopup,
         openPopup,
+        disableShop,
+        openShop,
     });
 
     const {
@@ -183,12 +195,12 @@ const Room = () => {
         if (answer.isCorrect) {
             fox.addItem(getItem());
             openHiderPopup(
-                `${question.hider.Name}: Check kho đồ dei, ms cho m con hàng á`
+                `${question.hider.Name}: Check kho đồ dei, ms cho m con hàng á`,
             );
             return;
         }
         openHiderPopup(
-            `${question.hider.Name}: Bn bè coin card j deos bít j về nhau à?`
+            `${question.hider.Name}: Bn bè coin card j deos bít j về nhau à?`,
         );
     };
 
@@ -277,7 +289,13 @@ const Room = () => {
                 setPopupData={setPopupData}
                 closePopup={closePopup}
             />
-            <Shop />
+            {isShopAvailable && (
+                <Shop
+                    key={`${fox.Row}-${fox.Col}`}
+                    disableShop={disableShop}
+                    maxRolls={roomSpecialEffectRef.current.maxRolls}
+                />
+            )}
         </div>
     );
 };

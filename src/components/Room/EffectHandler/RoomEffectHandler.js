@@ -12,6 +12,8 @@ export function createRoomEffectHandler({
     refreshScreen,
     openHitWallPopup,
     openPopup,
+    disableShop,
+    openShop,
 }) {
     const isQuestionsReturnItem = () => {
         return roomSpecialEffectRef.current.itemQuestions > 0;
@@ -59,6 +61,8 @@ export function createRoomEffectHandler({
         fox.moveTo(row, col);
         CharacterPositionSynchronizer.syncPosition(IsDuckFound, IsPenguinFound);
         makeNextNpcNoHint([row, col]);
+        openShop();
+        resetRolls();
         refreshScreen();
     };
 
@@ -152,6 +156,18 @@ export function createRoomEffectHandler({
         }
     };
 
+    const increaseRolls = (amount = 1) => {
+        roomSpecialEffectRef.current.maxRolls += amount;
+    };
+
+    const decreaseRolls = (amount = 1) => {
+        roomSpecialEffectRef.current.maxRolls -= amount;
+    };
+
+    const resetRolls = () => {
+        roomSpecialEffectRef.current.maxRolls = 1;
+    };
+
     return {
         // state accessors
         isQuestionsReturnItem,
@@ -180,5 +196,8 @@ export function createRoomEffectHandler({
         resetDisableDirection,
         increaseNPCNoHint,
         makeNextNpcNoHint,
+        increaseRolls,
+        decreaseRolls,
+        resetRolls,
     };
 }
