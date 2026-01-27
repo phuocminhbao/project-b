@@ -1,16 +1,30 @@
 import { HINT } from "../constant/hint";
 import { ITEM_ID } from "../constant/item";
 
-const config = {
+export const configLable = {
+    notGetNPC: "Percent of NPC not appear when enter a room",
+    getSpecialQuestion:
+        "Percent of a special question is replace the normal question when enter a room",
+    generateEvent: "Percent of an event appear when enter a room",
+
+    points: "Starting points",
+    shield: "Starting shield",
+    depression: "Starting depression",
+
+    givingHint: "Percent of an NPC is giving hint when enter a room",
+    trueHint: "Percent of appeared hint will be true",
+};
+
+const defaultConfig = {
     map: {
         size: 5,
         probability: {
             notGetNPC: 40,
             getSpecialQuestion: 20,
-            // Todo: 30 chance
-            generateEvent: 0,
+            generateEvent: 30,
         },
         rolls: 1,
+        maxRoomCost: 15,
     },
     fox: {
         points: 20,
@@ -33,7 +47,7 @@ const config = {
         },
         probability: {
             [ITEM_ID.GACHA_TELEPORT_OR_DEAD]: 15,
-            [ITEM_ID.TELEPORT_HIDER_TO_EXIT]: 5,
+            [ITEM_ID.TELEPORT_HIDER_TO_EXIT]: 15,
         },
     },
     hint: {
@@ -49,6 +63,52 @@ const config = {
             [HINT.HIDING_AT_CONNER]: 60,
         },
     },
+    npc: {
+        givingHint: 50,
+        trueHint: 50,
+    },
 };
 
-export { config };
+const createDeepProxy = (obj, onChange) => {
+    return new Proxy(obj, {
+        get(target, key) {
+            const value = target[key];
+
+            if (typeof value === "object" && value !== null) {
+                return createDeepProxy(value, onChange);
+            }
+
+            return value;
+        },
+        set(target, key, value) {
+            target[key] = value;
+            onChange();
+            return true;
+        },
+    });
+};
+
+let saveScheduled = false;
+
+const save = () => {
+    if (saveScheduled) return;
+    saveScheduled = true;
+
+    queueMicrotask(() => {
+        localStorage.setItem("config", JSON.stringify(config));
+        console.log("config saved");
+        saveScheduled = false;
+    });
+};
+
+const config = (() => {
+    const localStorageConfig = localStorage.getItem("config");
+    if (!localStorageConfig) {
+        return structuredClone(defaultConfig);
+    }
+    return JSON.parse(localStorageConfig);
+})();
+
+const confixProxy = createDeepProxy(config, save);
+
+export { confixProxy as config };

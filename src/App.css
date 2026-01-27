@@ -1,0 +1,18 @@
+.screen-root {
+    width: 100vw;
+    transition:
+        opacity 300ms ease,
+        transform 300ms ease;
+}
+
+/* entering */
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* exiting */
+.fade-out {
+    opacity: 0;
+    transform: translateY(10px);
+}

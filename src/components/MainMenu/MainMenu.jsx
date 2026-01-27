@@ -1,0 +1,59 @@
+import { SCREEN } from "../../constant/screen";
+import { increaseTimePlayed, timePlayed } from "../../helper/GameStrorage";
+import "./MainMenu.css";
+import MenuButton from "./MenuButton";
+
+const MainMenu = ({ onNavigate }) => {
+    return (
+        <div className="main-menu">
+            <div className="menu-left">
+                <MenuButton
+                    onClick={() => {
+                        increaseTimePlayed();
+                        onNavigate(SCREEN.GAME);
+                    }}
+                >
+                    {/* Start */}1
+                </MenuButton>
+                <MenuButton onClick={() => onNavigate(SCREEN.HOW_TO)}>
+                    {/* How to play */}2
+                </MenuButton>
+                <MenuButton onClick={() => onNavigate(SCREEN.ACHIEVEMENT)}>
+                    {/* Achievement */}3
+                </MenuButton>
+                <MenuButton
+                    onClick={() => onNavigate(SCREEN.SETTING)}
+                    disabled={timePlayed() <= 15}
+                >
+                    {/* Setting */}4
+                </MenuButton>
+            </div>
+
+            <div className="menu-right">
+                <div className="menu-title">
+                    <span className="menu-title-eyebrow">A GOTC GAME</span>
+
+                    <h1 className="menu-title-main">
+                        {/* Todo: New game title */}
+                        {/* F*CK
+                        <br />
+                        D*CK
+                        <br />
+                        PEN*S */}
+                        FOX
+                        <br />
+                        ROOMS
+                    </h1>
+
+                    <div className="menu-title-divider" />
+
+                    <p className="menu-title-sub">
+                        Will you eat cứt to save me?
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default MainMenu;

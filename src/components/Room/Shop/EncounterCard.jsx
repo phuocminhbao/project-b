@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./EncounterCard.css";
-import reactSvg from "../../../assets/react.svg";
 import RerollIcon from "../../Shared/Icon/reroll";
 
 const EncounterCard = ({ data, onSelect }) => {

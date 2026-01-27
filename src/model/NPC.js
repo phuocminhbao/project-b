@@ -1,7 +1,9 @@
+import { config } from "../config/gameConfig";
 import { getHints } from "../data/npcHints";
 import { givingHintMessage } from "../data/texts";
 import { HintGenerator } from "../helper/HintGenerator";
 import { getRandomElement } from "../utils/array";
+import { inChanceOf } from "../utils/numberUtils";
 
 export class NPC {
     #id;
@@ -16,6 +18,8 @@ export class NPC {
         this.#id = id;
         this.#name = name;
         this.#avatar = avatar;
+        this.#isGivingHint = inChanceOf(config.npc.givingHint);
+        this.#isTrueHint = inChanceOf(config.npc.trueHint);
         this.#texts = this.#generateTexts(texts);
         this.#currentText = 0;
         this.#hintGenerator = new HintGenerator(this.#isTrueHint);

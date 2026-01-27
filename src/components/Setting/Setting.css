@@ -1,0 +1,36 @@
+.admin-config {
+    padding: 24px;
+    margin: 0 auto;
+    font-family: system-ui, sans-serif;
+    overflow-y: auto;
+
+    height: 100vh; /* take full viewport */
+    overflow-y: auto; /* enable scrolling */
+    padding: 24px;
+
+    /* optional polish */
+    box-sizing: border-box;
+}
+
+.section {
+    margin-bottom: 24px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.section h2 {
+    margin-bottom: 12px;
+}
+
+.field {
+    display: grid;
+    grid-template-columns: 1fr 120px;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.field input {
+    padding: 4px 6px;
+}

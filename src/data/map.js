@@ -103,7 +103,7 @@ const loadMap = () => {
         mapData[row] = [];
         for (let col = 0; col < MAX_LENGTH; col++) {
             mapData[row][col] = {
-                cost: getRandomInt(0, 9),
+                cost: getRandomInt(0, config.map.maxRoomCost),
                 npc: getNPC(randomNPCs),
                 question: getQuestion(randomQuestions, randomSpecialQuestions),
                 event: undefined,

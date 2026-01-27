@@ -140,7 +140,8 @@ const Room = () => {
     ].map((direction) => {
         const position = getNextRoomPosition(direction, fox.Position);
         const cost =
-            mapData[position.row]?.[position.col]?.cost ?? getRandomInt(1, 5);
+            mapData[position[0]]?.[position[1]]?.cost ??
+            getRandomInt(1, config.map.maxRoomCost);
         const go = () => {
             resetDisableDirection();
             if (isGoToLastRoom()) {

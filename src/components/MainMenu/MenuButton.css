@@ -1,0 +1,76 @@
+.menu-button {
+    position: relative;
+    height: 10%;
+    width: 220px;
+    padding: 14px 20px;
+    background: transparent;
+    border: 0px solid rgba(255, 255, 255, 0.2);
+    color: #f5f5f5;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    transition:
+        border-color 200ms ease,
+        transform 120ms ease,
+        background-color 200ms ease;
+    z-index: 1;
+}
+
+.menu-button-text {
+    transition:
+        transform 200ms ease,
+        opacity 200ms ease;
+}
+
+/* left accent line */
+.menu-button-indicator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: #ffffff;
+    opacity: 0;
+    transition: opacity 200ms ease;
+}
+
+/* hover / focus */
+.menu-button:hover,
+.menu-button:focus-visible {
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(4px);
+}
+
+.menu-button:hover .menu-button-text,
+.menu-button:focus-visible .menu-button-text {
+    transform: translateX(6px);
+}
+
+.menu-button:hover .menu-button-indicator,
+.menu-button:focus-visible .menu-button-indicator {
+    opacity: 1;
+}
+
+/* active (click) */
+.menu-button:active {
+    transform: translateX(2px);
+}
+
+/* disabled */
+.menu-button.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.menu-button.disabled:hover {
+    transform: none;
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.2);
+}

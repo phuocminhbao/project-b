@@ -26,7 +26,7 @@ export const ITEM_REGISTRY = [
     new GameItem({
         id: ITEM_ID.TELEPORT_HIDER_TO_EXIT,
         name: "Room: Shambles",
-        description: `Teleport ${duck.Name} or ${penguin.Name} to the exit, there is 5% both of them will go together`,
+        description: `Teleport ${duck.Name} or ${penguin.Name} to the exit, there is ${config.item.probability[ITEM_ID.TELEPORT_HIDER_TO_EXIT]} both of them will go together`,
         chance: itemRarelity[ITEM_ID.TELEPORT_HIDER_TO_EXIT],
     }),
 
@@ -46,8 +46,8 @@ export const ITEM_REGISTRY = [
 
     new GameItem({
         id: ITEM_ID.GACHA_TELEPORT_OR_DEAD,
-        name: "It's GACHA time",
-        description: `High risk high reward: 15% that both ${duck.Name} and ${penguin.Name} summon to current room, else you lose 9999 points`,
+        name: "It's Gamble time",
+        description: `High risk high reward: ${config.item.probability[ITEM_ID.GACHA_TELEPORT_OR_DEAD]}% that both ${duck.Name} and ${penguin.Name} summon to current room, else you lose 9999 points`,
         chance: itemRarelity[ITEM_ID.GACHA_TELEPORT_OR_DEAD],
     }),
 

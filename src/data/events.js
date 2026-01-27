@@ -14,7 +14,7 @@ const duckName = duck.Name;
  * @returns {boolean}
  */
 const isEventAvailable = (eventID) => {
-    const symbol = eventID.split("_");
+    const symbol = eventID.split("_")[0];
     const { IsDuckFound, IsPenguinFound, IsFoundAll } =
         CharacterPositionSynchronizer;
     if (symbol === EVENT_SYMBOL.ALL) {
@@ -206,6 +206,6 @@ export const getRandomEvent = () => {
     const availableEvents = EVENT_REGISTRY.filter((event) =>
         isEventAvailable(event.ID),
     );
-    // return getRandomElement(availableEvents);
-    return getEventById(EVENT_ID.P_LOST_WEAPON);
+    return getRandomElement(availableEvents);
+    // return getEventById(EVENT_ID.P_LOST_WEAPON);
 };
