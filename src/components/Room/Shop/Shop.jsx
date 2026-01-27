@@ -6,30 +6,18 @@ import { fox } from "../../../model/Fox.js";
 import { duck } from "../../../model/Duck.js";
 import { penguin } from "../../../model/Penguin.js";
 import { useCollision } from "../../../hooks/useCollision.js";
+import ItemIcon from "../../Shared/Icon/Item.jsx";
+import EventIcon from "../../Shared/Icon/Event.jsx";
+import ShopIcon from "../../Shared/Icon/Shop.jsx";
+import { getShopItem } from "../../../helper/ShopGenerator.js";
 
 const Shop = ({ disableShop, maxRolls }) => {
-    const mock = [
-        {
-            icon: duck.Avatar,
-            name: "Pickme boi",
-            description: "Pickme boi 1 ",
-            rollRemaining: maxRolls,
-        },
-        {
-            icon: fox.Avatar,
-            name: "Pickme boi",
-            description: "Pickme boi 2 ",
-            rollRemaining: maxRolls,
-        },
-        {
-            icon: penguin.Avatar,
-            name: "Pickme boi",
-            description: "Pickme boi 3 ",
-            rollRemaining: maxRolls,
-        },
-    ];
     const [open, setOpen] = useState(false);
-    const [encounters, setEncounters] = useState(mock);
+    const [encounters, setEncounters] = useState([
+        getShopItem(maxRolls),
+        getShopItem(maxRolls),
+        getShopItem(maxRolls),
+    ]);
     const buttonRef = useRef();
     const shopRef = useRef();
 
@@ -43,6 +31,16 @@ const Shop = ({ disableShop, maxRolls }) => {
         console.log(encounter.name);
         setOpen(false);
         disableShop();
+    };
+
+    const handleReroll = (encounter) => {
+        encounter.rollRemaining -= 1;
+        setEncounters((preEncounters) => {
+            preEncounters[encounter.index] = getShopItem(
+                encounter.rollRemaining,
+            );
+            return [...preEncounters];
+        });
     };
 
     return (
@@ -59,9 +57,10 @@ const Shop = ({ disableShop, maxRolls }) => {
                         <div className="shop-cards">
                             {encounters.map((e, i) => (
                                 <EncounterCard
-                                    key={i}
-                                    data={e}
+                                    key={i + e.name}
+                                    data={{ ...e, index: i }}
                                     onSelect={handleSelect}
+                                    onReroll={handleReroll}
                                 />
                             ))}
                         </div>

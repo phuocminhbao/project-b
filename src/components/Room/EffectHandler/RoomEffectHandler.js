@@ -53,6 +53,8 @@ export function createRoomEffectHandler({
         setIsAnswered(false);
         setIsEventProcessed(false);
         setIsGoToLastRoom(false);
+        openShop();
+        resetRolls();
     };
 
     const goToRoom = (row, col) => {
@@ -61,8 +63,6 @@ export function createRoomEffectHandler({
         fox.moveTo(row, col);
         CharacterPositionSynchronizer.syncPosition(IsDuckFound, IsPenguinFound);
         makeNextNpcNoHint([row, col]);
-        openShop();
-        resetRolls();
         refreshScreen();
     };
 

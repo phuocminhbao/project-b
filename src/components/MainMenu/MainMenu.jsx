@@ -13,19 +13,23 @@ const MainMenu = ({ onNavigate }) => {
                         onNavigate(SCREEN.GAME);
                     }}
                 >
-                    {/* Start */}1
+                    Start
+                    {/* 1 */}
                 </MenuButton>
                 <MenuButton onClick={() => onNavigate(SCREEN.HOW_TO)}>
-                    {/* How to play */}2
+                    How to play
+                    {/* 2 */}
                 </MenuButton>
                 <MenuButton onClick={() => onNavigate(SCREEN.ACHIEVEMENT)}>
-                    {/* Achievement */}3
+                    Achievement
+                    {/* 3 */}
                 </MenuButton>
                 <MenuButton
                     onClick={() => onNavigate(SCREEN.SETTING)}
                     disabled={timePlayed() <= 15}
                 >
-                    {/* Setting */}4
+                    Setting
+                    {/* 4 */}
                 </MenuButton>
             </div>
 
@@ -35,14 +39,14 @@ const MainMenu = ({ onNavigate }) => {
 
                     <h1 className="menu-title-main">
                         {/* Todo: New game title */}
-                        {/* F*CK
+                        F*CK
                         <br />
                         D*CK
                         <br />
-                        PEN*S */}
-                        FOX
+                        PEN*S
+                        {/* FOX
                         <br />
-                        ROOMS
+                        ROOMS */}
                     </h1>
 
                     <div className="menu-title-divider" />

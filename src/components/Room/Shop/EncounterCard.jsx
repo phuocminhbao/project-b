@@ -2,20 +2,19 @@ import { useState } from "react";
 import "./EncounterCard.css";
 import RerollIcon from "../../Shared/Icon/reroll";
 
-const EncounterCard = ({ data, onSelect }) => {
+const EncounterCard = ({ data, onSelect, onReroll }) => {
     const [rerollLeft, setRerollLeft] = useState(data.rollRemaining);
 
     const handleReroll = (e) => {
         e.stopPropagation();
         if (rerollLeft <= 0) return;
-        // eslint-disable-next-line react-hooks/immutability
-        data.rollRemaining = rerollLeft - 1;
+        onReroll(data);
         setRerollLeft(data.rollRemaining);
     };
     return (
         <div className="encounter-frame" onClick={() => onSelect(data)}>
             <div className="encounter-icon-wrapper">
-                <img src={data.icon} alt="" />
+                <data.icon />
             </div>
 
             <div className="encounter-title">{data.name}</div>
