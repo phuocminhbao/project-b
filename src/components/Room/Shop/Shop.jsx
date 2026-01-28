@@ -2,16 +2,16 @@ import { useRef, useState } from "react";
 import EncounterCard from "./EncounterCard.jsx";
 import "./Shop.css";
 import ThreeCards from "../../Shared/Icon/ThreeCards.jsx";
-import { fox } from "../../../model/Fox.js";
-import { duck } from "../../../model/Duck.js";
-import { penguin } from "../../../model/Penguin.js";
 import { useCollision } from "../../../hooks/useCollision.js";
-import ItemIcon from "../../Shared/Icon/Item.jsx";
-import EventIcon from "../../Shared/Icon/Event.jsx";
-import ShopIcon from "../../Shared/Icon/Shop.jsx";
 import { getShopItem } from "../../../helper/ShopGenerator.js";
+import { fox } from "../../../model/Fox.js";
 
-const Shop = ({ disableShop, maxRolls }) => {
+const Shop = ({
+    disableShop,
+    maxRolls,
+    onGameItemSelect,
+    onRoomEventSelect,
+}) => {
     const [open, setOpen] = useState(false);
     const [encounters, setEncounters] = useState([
         getShopItem(maxRolls),
@@ -29,6 +29,13 @@ const Shop = ({ disableShop, maxRolls }) => {
 
     const handleSelect = (encounter) => {
         console.log(encounter.name);
+        fox.minusPoints(encounter.cost);
+        if (encounter.type === "item") {
+            onGameItemSelect(encounter.item);
+        }
+        if (encounter.type === "event") {
+            onRoomEventSelect(encounter.event);
+        }
         setOpen(false);
         disableShop();
     };

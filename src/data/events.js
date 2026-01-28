@@ -209,3 +209,10 @@ export const getRandomEvent = () => {
     return getRandomElement(availableEvents);
     // return getEventById(EVENT_ID.P_LOST_WEAPON);
 };
+
+export const getGoodRandomEvent = () => {
+    const availableEvents = EVENT_REGISTRY.filter(
+        (event) => isEventAvailable(event.ID) && event.isGood,
+    );
+    return getRandomElement(availableEvents);
+};

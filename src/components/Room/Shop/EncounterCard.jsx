@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./EncounterCard.css";
 import RerollIcon from "../../Shared/Icon/reroll";
+import EnergyIcon from "../../Shared/Icon/EnergyIcon";
 
 const EncounterCard = ({ data, onSelect, onReroll }) => {
     const [rerollLeft, setRerollLeft] = useState(data.rollRemaining);
@@ -20,6 +21,11 @@ const EncounterCard = ({ data, onSelect, onReroll }) => {
             <div className="encounter-title">{data.name}</div>
 
             <div className="encounter-description">{data.description}</div>
+
+            <div className="encounter-cost">
+                <EnergyIcon />
+                <span className="cost-value">{data.cost}</span>
+            </div>
 
             <button
                 className="reroll-btn"

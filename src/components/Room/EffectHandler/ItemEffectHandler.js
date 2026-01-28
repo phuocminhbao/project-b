@@ -134,5 +134,10 @@ export const getItemEffectHandler = ({ roomEffectHandler, openPopup }) => {
         fox.removeItem(item);
         itemHandlerMap[item.ID]();
     };
-    return { handleItemSelect };
+
+    const handleItemSelectWihoutRemove = (item) => {
+        console.log(item.ID);
+        itemHandlerMap[item.ID]();
+    };
+    return { handleItemSelect, handleItemSelectWihoutRemove };
 };

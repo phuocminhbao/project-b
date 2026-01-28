@@ -228,10 +228,11 @@ const Room = () => {
             })),
         });
     };
-    const { handleItemSelect } = getItemEffectHandler({
-        roomEffectHandler,
-        openPopup,
-    });
+    const { handleItemSelect, handleItemSelectWihoutRemove } =
+        getItemEffectHandler({
+            roomEffectHandler,
+            openPopup,
+        });
 
     const { handleRoomEvent } = getRoomEventHandler({
         roomEffectHandler,
@@ -297,6 +298,8 @@ const Room = () => {
                     key={`${fox.Row}-${fox.Col}`}
                     disableShop={disableShop}
                     maxRolls={roomSpecialEffectRef.current.maxRolls}
+                    onGameItemSelect={handleItemSelectWihoutRemove}
+                    onRoomEventSelect={handleRoomEvent}
                 />
             )}
         </div>

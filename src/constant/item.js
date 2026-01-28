@@ -11,3 +11,19 @@ export const ITEM_ID = {
     GET_RANDOM_ITEM: "get_random_item",
     SAITAMA: "saitama",
 };
+
+export const ITEM_RARITY = {
+    COMMON: "common",
+    UNCOMMON: "uncommon",
+    RARE: "rare",
+    EPIC: "epic",
+    LEGENDARY: "legendary",
+};
+
+export const RARITY_THRESHOLDS = {
+    LEGENDARY_MAX: 5,
+    EPIC_MAX: 10,
+    RARE_MAX: 20,
+    UNCOMMON_MAX: 50,
+    COMMON_MAX: 100,
+};

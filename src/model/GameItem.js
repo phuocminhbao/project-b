@@ -1,20 +1,5 @@
+import { ITEM_RARITY, RARITY_THRESHOLDS } from "../constant/item";
 import { GameEffect } from "./GameEffect";
-
-const ITEM_RARITY = {
-    COMMON: "common",
-    UNCOMMON: "uncommon",
-    RARE: "rare",
-    EPIC: "epic",
-    LEGENDARY: "legendary",
-};
-
-const RARITY_THRESHOLDS = {
-    LEGENDARY_MAX: 5,
-    EPIC_MAX: 10,
-    RARE_MAX: 20,
-    UNCOMMON_MAX: 50,
-    COMMON_MAX: 100,
-};
 export class GameItem extends GameEffect {
     #chance;
     constructor({ id, name, description, chance }) {
