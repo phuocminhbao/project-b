@@ -1,0 +1,35 @@
+.how-to-play-troll {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 24px;
+}
+
+.troll-text {
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-size: 48px;
+    font-weight: bold;
+    line-height: 1.3;
+    color: #111;
+    text-shadow:
+        3px 3px 0 #ffd700,
+        6px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.troll-text .duck {
+    color: #ff9800;
+    font-size: 56px;
+    text-transform: uppercase;
+}
+
+.sub-text {
+    margin-top: 24px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-size: 20px;
+    opacity: 0.8;
+    font-style: italic;
+}
