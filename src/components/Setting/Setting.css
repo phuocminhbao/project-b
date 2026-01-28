@@ -2,7 +2,6 @@
     padding: 24px;
     margin: 0 auto;
     font-family: system-ui, sans-serif;
-    overflow-y: auto;
 
     height: 100vh; /* take full viewport */
     overflow-y: auto; /* enable scrolling */

@@ -1,6 +1,6 @@
 .main-menu {
     width: 100vw;
-    height: 105vh;
+    height: 100vh;
     display: flex;
     background: radial-gradient(
         circle at -10% -10%,

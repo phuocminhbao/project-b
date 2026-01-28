@@ -25,6 +25,7 @@ import { getRoomEventHandler } from "./EffectHandler/RoomEventHandler";
 import { config } from "../../config/gameConfig";
 import SpikedMace from "../Shared/Icon/SpikedMace";
 import Shop from "./Shop/Shop";
+import { saveAnsweredSpecialQuestions } from "../../helper/GameStrorage";
 
 const Room = () => {
     const [popupData, setPopupData] = useState();
@@ -193,6 +194,7 @@ const Room = () => {
                 });
             });
         };
+        saveAnsweredSpecialQuestions(question.id, !!answer.isCorrect);
         if (answer.isCorrect) {
             fox.addItem(getItem());
             openHiderPopup(

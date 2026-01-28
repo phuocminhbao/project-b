@@ -29,8 +29,16 @@ import andrew from "../assets/andrew.jpg";
 import theGirls from "../assets/the-girls.png";
 import ironFist from "../assets/iron-fist.png";
 import omen from "../assets/omen.jpg";
-
+import dracoMalfoy from "../assets/dracoMalfoy.jpg";
 import { NPC } from "../model/NPC";
+import stitch from "../assets/stitch.jpg";
+import donalTrump from "../assets/donalTrump.jpg";
+import gumball from "../assets/gumball.jpg";
+import dacKy from "../assets/dacKy.jpg";
+import leon from "../assets/leon.png";
+import doom from "../assets/doom.jpg";
+import tifa from "../assets/tifa.jpg";
+import l from "../assets/l.jpg";
 
 export const npcCharacters = [
     new NPC(1, "top hat duck", topHatDuck, [
@@ -178,9 +186,41 @@ export const npcCharacters = [
         "People play me in games",
         "But when it come to bro Ph, that mean Omen playing Serious Duck#2305 and not vice versa",
     ]),
-    // Omen
-    // Donal Trump
-    // Elon Musk
-    // Gumbal
-    // Wukong
+    new NPC(32, "Draco Malfoy", dracoMalfoy, [
+        "you filthy little Mudblood!",
+        "you don't deserve Slytherin",
+    ]),
+    new NPC(33, "Stitch", stitch, [
+        "OHANA means ... family",
+        "'Family' means no one gets left behind",
+    ]),
+    new NPC(34, "Donal Trump", donalTrump, [
+        "I'm gonna make America great again",
+        "But first let take Greenland",
+    ]),
+    //
+    new NPC(35, "Gumball", gumball, [
+        "What the what?!",
+        "79% of stair accidents happen on the stairs",
+    ]),
+    new NPC(36, "Tô Đắc Kỷ", dacKy, [
+        "Chào chàng",
+        "Mún bít sao Trụ Vương ngày xưa mất nước k?",
+        "Chơi vs ta 1 cữ là hiểu",
+    ]),
+    new NPC(37, "Leon Scott Kennedy", leon, [
+        "Dudeee",
+        "I can't hold it anymore",
+        "Helpppp meeeee",
+    ]),
+    new NPC(38, "Doomguy", doom, [
+        "I don't negotiate.",
+        "I reload.",
+        "Then I rip and tear.",
+    ]),
+    new NPC(39, "Tifa", tifa, [
+        "Toi biết bạn đang nhìn cơ bụng 11 múi này",
+        "đây là thứ con Chinh Me mãi mãi k có",
+    ]),
+    new NPC(40, "L", l, ["Everyone, the Shinigam-", "...", "..", "."]),
 ];

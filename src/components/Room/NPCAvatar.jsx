@@ -1,3 +1,4 @@
+import { saveNPCAsFound } from "../../helper/GameStrorage";
 import { Button } from "../Shared/Button/Button";
 const NPCAvatar = ({ npc, setPopupData, closePopup }) => {
     if (!npc) return <></>;
@@ -10,6 +11,7 @@ const NPCAvatar = ({ npc, setPopupData, closePopup }) => {
             alt="npc"
             className="npc"
             onClick={() => {
+                saveNPCAsFound(npc.ID);
                 setPopupData({
                     image: npc.Avatar,
                     text: npc.CurrentText,

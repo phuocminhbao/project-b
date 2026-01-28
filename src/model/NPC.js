@@ -10,6 +10,7 @@ export class NPC {
     #name;
     #avatar;
     #texts;
+    #originalTexts;
     #currentText;
     #isGivingHint = false;
     #isTrueHint = false;
@@ -18,11 +19,16 @@ export class NPC {
         this.#id = id;
         this.#name = name;
         this.#avatar = avatar;
+        this.#originalTexts = texts;
         this.#isGivingHint = inChanceOf(config.npc.givingHint);
         this.#isTrueHint = inChanceOf(config.npc.trueHint);
         this.#texts = this.#generateTexts(texts);
         this.#currentText = 0;
         this.#hintGenerator = new HintGenerator(this.#isTrueHint);
+    }
+
+    get Texts() {
+        return this.#originalTexts;
     }
 
     get ID() {
