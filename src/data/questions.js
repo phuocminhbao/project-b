@@ -356,6 +356,36 @@ export const specialQuestions = [
             { title: "60.2kg" },
         ],
     },
+    {
+        id: 1029,
+        isSpecial: true,
+        hider: penguin,
+        title: `${penguin.Name} có bao nhiêu bạn thân?:)))`,
+        answers: [
+            { title: "1" },
+            { title: "2" },
+            { title: "3" },
+            { title: "4" },
+            { title: "5", isCorrect: true },
+            { title: "6" },
+            { title: "7" },
+            { title: "8" },
+        ],
+    },
+    {
+        id: 1030,
+        isSpecial: true,
+        hider: penguin,
+        title: `Cung hoàng đạo mà ${penguin.Name} thích nhất?`,
+        answers: [
+            { title: "Song tử" },
+            { title: "Bảo bình", isCorrect: true },
+            { title: "Nhân mã" },
+            { title: "Ma kết" },
+            { title: "Thiên bình" },
+            { title: "Bọ cạp" },
+        ],
+    },
 ];
 
 export const questions = [
