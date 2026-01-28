@@ -1,4 +1,5 @@
 import { SCREEN } from "../../constant/screen";
+import { reLoadMap } from "../../data/map";
 import { increaseTimePlayed, timePlayed } from "../../helper/GameStrorage";
 import "./MainMenu.css";
 import MenuButton from "./MenuButton";
@@ -10,6 +11,7 @@ const MainMenu = ({ onNavigate }) => {
                 <MenuButton
                     onClick={() => {
                         increaseTimePlayed();
+                        reLoadMap();
                         onNavigate(SCREEN.GAME);
                     }}
                 >
