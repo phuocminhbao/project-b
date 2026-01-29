@@ -10,6 +10,7 @@ export const ITEM_ID = {
     QUESTION_RETURN_ITEM: "question_return_item",
     GET_RANDOM_ITEM: "get_random_item",
     SAITAMA: "saitama",
+    NPC_SUMMON: "npc_summon",
 };
 
 export const ITEM_RARITY = {

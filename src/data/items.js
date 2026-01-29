@@ -88,6 +88,12 @@ export const ITEM_REGISTRY = [
             "One punch break through all ahead walls, the next move will take you to the last room in the same direction without any cost",
         chance: itemRarelity[ITEM_ID.SAITAMA],
     }),
+    new GameItem({
+        id: ITEM_ID.NPC_SUMMON,
+        name: "Get over here!",
+        description: "Summon an reliable NPC to the current room",
+        chance: itemRarelity[ITEM_ID.NPC_SUMMON],
+    }),
 ];
 
 const TOTAL_CHANCE = ITEM_REGISTRY.reduce((sum, item) => sum + item.Chance, 0);

@@ -40,15 +40,11 @@ const MainMenu = ({ onNavigate }) => {
                     <span className="menu-title-eyebrow">A GOTC GAME</span>
 
                     <h1 className="menu-title-main">
-                        {/* Todo: New game title */}
                         F*CK
                         <br />
                         D*CK
                         <br />
                         PEN*S
-                        {/* FOX
-                        <br />
-                        ROOMS */}
                     </h1>
 
                     <div className="menu-title-divider" />

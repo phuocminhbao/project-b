@@ -2,6 +2,7 @@ import { config } from "../../../config/gameConfig";
 import { ITEM_ID } from "../../../constant/item";
 import { getItem } from "../../../data/items";
 import { CORNERS, mapData } from "../../../data/map";
+import { npcCharacters } from "../../../data/npcCharacters";
 import { CharacterPositionSynchronizer } from "../../../helper/CharacterPositionSynchronizer";
 import { duck } from "../../../model/Duck";
 import { fox } from "../../../model/Fox";
@@ -127,6 +128,12 @@ export const getItemEffectHandler = ({ roomEffectHandler, openPopup }) => {
         },
         [ITEM_ID.SAITAMA]: () => {
             roomEffectHandler.setIsGoToLastRoom(true);
+        },
+        [ITEM_ID.NPC_SUMMON]: () => {
+            const newNpc = getRandomElement(npcCharacters);
+            newNpc.forceToGiveHint(true);
+            mapData[fox.Row][fox.Col].npc = newNpc;
+            roomEffectHandler.refreshScreen();
         },
     };
     const handleItemSelect = (item) => {

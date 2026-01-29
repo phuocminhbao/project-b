@@ -44,6 +44,7 @@ const defaultConfig = {
             [ITEM_ID.QUESTION_RETURN_ITEM]: 20,
             [ITEM_ID.GET_RANDOM_ITEM]: 15,
             [ITEM_ID.SAITAMA]: 10,
+            [ITEM_ID.NPC_SUMMON]: 35,
         },
         probability: {
             [ITEM_ID.GACHA_TELEPORT_OR_DEAD]: 15,
