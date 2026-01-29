@@ -28,6 +28,9 @@ class Duck extends Hider {
     }
 }
 
-const duck = new Duck([1, 1]);
-window.duck = duck;
-export { duck };
+let duck = new Duck([1, 1]);
+window.duck = () => duck;
+const isekaiDuck = () => {
+    duck = new Duck([1, 1]);
+};
+export { duck, isekaiDuck };

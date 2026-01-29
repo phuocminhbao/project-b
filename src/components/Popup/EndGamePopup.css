@@ -1,0 +1,108 @@
+.endgame-popup {
+    height: 70%;
+}
+
+.endgame-image img {
+    max-width: 90%;
+    max-height: 60vh;
+    object-fit: contain;
+    border: 2px solid black;
+    border-radius: 10px;
+    background: white;
+}
+
+.endgame-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    opacity: 1; /* IMPORTANT */
+}
+
+.endgame-image.fade-in {
+    animation: imageFadeIn 0.8s ease-out forwards;
+}
+
+.endgame-image.visible {
+    opacity: 1;
+}
+
+.endgame-image.fade-out {
+    animation: imageFadeOut 0.8s ease-in forwards;
+}
+
+@keyframes imageFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes imageFadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+/* credits */
+.credits-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.credits-scroll {
+    width: 100%;
+}
+
+/* animation ONLY starts when class exists */
+.start {
+    animation: scrollCredits 25s linear forwards;
+}
+
+@keyframes scrollCredits {
+    from {
+        transform: translateY(25%);
+    }
+    to {
+        transform: translateY(-105%);
+    }
+}
+
+.credit-row {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.credit-line {
+    font-size: 20px;
+    margin: 8px 0;
+}
+
+.serious-duck {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 16px 0;
+}
+
+.credit-name {
+    text-align: left;
+    font-size: 17px;
+    white-space: nowrap;
+    font-style: italic;
+}
+
+.credit-role {
+    text-align: right;
+    font-size: 18px;
+}

@@ -207,7 +207,7 @@ export const getRandomEvent = () => {
         isEventAvailable(event.ID),
     );
     return getRandomElement(availableEvents);
-    // return getEventById(EVENT_ID.P_LOST_WEAPON);
+    // return getEventById(EVENT_ID.FOX_OVERTHINKING);
 };
 
 export const getGoodRandomEvent = () => {

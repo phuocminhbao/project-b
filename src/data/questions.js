@@ -13,7 +13,8 @@ export const specialQuestions = [
             { title: "Beefsteak" },
             { title: "Pizaa" },
             { title: "Cơm ếch xào xả ớt" },
-            { title: "Cơm cá kgo tộ" },
+            { title: "Cơm cá kho tộ" },
+            { title: "1 Người chị 98 xinh đẹp nào đó" },
         ],
     },
     {
@@ -26,6 +27,7 @@ export const specialQuestions = [
             { title: "Moba" },
             { title: "FPS" },
             { title: "Soulslike" },
+            { title: "hentai sv bienthai" },
         ],
     },
     {
@@ -146,6 +148,7 @@ export const specialQuestions = [
             { title: "Đú tại thấy nhìu ng chơi", isCorrect: true },
             { title: "Cinemetic game lúc đầu nhìn ngầu" },
             { title: "Chán Đột Kích" },
+            { title: "Có Sona vuto" },
         ],
     },
     {
@@ -196,6 +199,7 @@ export const specialQuestions = [
             { title: "Kem" },
             { title: "Bánh mì" },
             { title: "Không biếc nữa" },
+            { title: "T.O" },
         ],
     },
     {
@@ -210,6 +214,7 @@ export const specialQuestions = [
             { title: "Vì có nhiều yếu tố mới lạ" },
             { title: "Vì được là chính mình", isCorrect: true },
             { title: "Không biếc nữa" },
+            { title: "Vì để thoả mãn cái toi cao ngút trời" },
         ],
     },
     {
@@ -226,6 +231,7 @@ export const specialQuestions = [
             { title: "Competitive" },
             { title: "Board Game" },
             { title: "Gacha" },
+            { title: "Trapping other bois' heart" },
         ],
     },
     {
@@ -252,6 +258,7 @@ export const specialQuestions = [
             { title: "Bạo lực" },
             { title: "Tranh cãi" },
             { title: "Im lặng", isCorrect: true },
+            { title: "Đi làm ly cafe nhìu sữa òi ị" },
         ],
     },
     {
@@ -265,6 +272,7 @@ export const specialQuestions = [
             { title: "Phá án" },
             { title: "Strategic" },
             { title: "Tâm lí học", isCorrect: true },
+            { title: "Nuôi dạy trẻ" },
         ],
     },
     {
@@ -279,6 +287,9 @@ export const specialQuestions = [
             { title: "Người nhẹ nhàng, tinh tế", isCorrect: true },
             { title: "Người thông minh" },
             { title: "Người hoạt bát" },
+            {
+                title: "Người khôn, người đến chốn lao xao, ta dại, ta tìm nơi vắng vẻ",
+            },
         ],
     },
     {
@@ -303,6 +314,7 @@ export const specialQuestions = [
             { title: "Do không thích đi" },
             { title: "Do lười đi" },
             { title: "Do đang có sự hứng thú khác" },
+            { title: "Do mắc ị" },
         ],
     },
     {
@@ -331,6 +343,7 @@ export const specialQuestions = [
             { title: "Phân vân" },
             { title: "Trì hoãn" },
             { title: "Thiếu kiên nhẫn" },
+            { title: "Mập địt" },
         ],
     },
     {
@@ -366,10 +379,10 @@ export const specialQuestions = [
             { title: "2" },
             { title: "3" },
             { title: "4" },
-            { title: "5", isCorrect: true },
+            { title: "5" },
             { title: "6" },
             { title: "7" },
-            { title: "8" },
+            { title: "8", isCorrect: true },
         ],
     },
     {

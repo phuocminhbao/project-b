@@ -6,8 +6,8 @@ import MainMenu from "./components/MainMenu/MainMenu";
 import Achievement from "./components/Achievement/Achievement";
 import Setting from "./components/Setting/Setting";
 import HowToPlay from "./components/HowToPlay/HowToPlay";
-import { initBackgroundMusic } from "./helper/BackGroundAudio";
 import audio from "./audio/LemonDays.mp3";
+import { playAudio, stopAudio } from "./helper/AudioManager";
 
 function App() {
     const [screen, setScreen] = useState(SCREEN.MENU);
@@ -28,7 +28,17 @@ function App() {
     };
 
     useEffect(() => {
-        initBackgroundMusic(audio);
+        document.addEventListener(
+            "click",
+            () => {
+                playAudio(audio, {
+                    loop: true,
+                    volume: 0.6,
+                });
+            },
+            { once: true },
+        );
+        return () => stopAudio();
     }, []);
 
     useEffect(() => {

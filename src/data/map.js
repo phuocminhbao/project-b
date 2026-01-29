@@ -2,9 +2,9 @@ import { getRandomElement, generateUniqueRandomArray } from "../utils/array";
 import { getRandomInt, inChanceOf } from "../utils/numberUtils";
 import { npcCharacters } from "./npcCharacters";
 import { questions, specialQuestions } from "./questions";
-import { fox } from "../model/Fox";
-import { duck } from "../model/Duck";
-import { penguin } from "../model/Penguin";
+import { fox, isekaiFox } from "../model/Fox";
+import { duck, isekaiDuck } from "../model/Duck";
+import { isekaiPenguin, penguin } from "../model/Penguin";
 import { config } from "../config/gameConfig";
 
 const MAX_LENGTH = config.map.size;
@@ -118,6 +118,10 @@ const loadMap = () => {
 };
 
 const reLoadMap = () => {
+    // fox.isekai();
+    isekaiFox();
+    isekaiDuck();
+    isekaiPenguin();
     loadMap();
 };
 const assignRandomQuestion = (row, col) => {

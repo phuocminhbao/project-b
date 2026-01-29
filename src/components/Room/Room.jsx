@@ -1,6 +1,6 @@
 import "./Room.css";
 import Popup from "../Popup/Popup";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import InfoBox from "../InfoBox/InfoBox";
 import { mapData } from "../../data/map";
 import { getRandomInt, inChanceOf } from "../../utils/numberUtils";
@@ -26,6 +26,15 @@ import { config } from "../../config/gameConfig";
 import SpikedMace from "../Shared/Icon/SpikedMace";
 import Shop from "./Shop/Shop";
 import { saveAnsweredSpecialQuestions } from "../../helper/GameStrorage";
+import foxDeath from "../../assets/foxDeath.png";
+import EndGamePopup from "../Popup/EndGamePopup";
+import fdp1 from "../../assets/fox-duck-penguin-1.png";
+import fdp2 from "../../assets/fox-duck-penguin-2.png";
+import fdp3 from "../../assets/fox-duck-penguin-3.png";
+import fs from "../../assets/fox-sad.jpg";
+import fs1 from "../../assets/fox-sad-1.jpg";
+import fs2 from "../../assets/fox-sad-2.jpg";
+import fs3 from "../../assets/fox-sad-3.jpg";
 
 const Room = () => {
     const [popupData, setPopupData] = useState();
@@ -47,11 +56,6 @@ const Room = () => {
         forceNPCNoHintRemaining: 0,
         maxRolls: config.map.rolls,
     });
-
-    const found = {
-        duck: CharacterPositionSynchronizer.IsDuckFound,
-        penguin: CharacterPositionSynchronizer.IsPenguinFound,
-    };
 
     const refreshScreen = () => {
         updateScreen({});
@@ -85,8 +89,16 @@ const Room = () => {
     };
 
     const { npc, question, isExit } = mapData[fox.Row][fox.Col];
-    const isEndGame = false;
-    // (isExit && found.duck && found.penguin && !fox.IsAlone) || fox.Points <= 0;
+    const isFoxDead = fox.Points <= 0;
+    const isWinWithFriends =
+        isExit && CharacterPositionSynchronizer.IsFoundAll && !fox.IsAlone;
+    const isWinAlone =
+        isExit &&
+        !CharacterPositionSynchronizer.IsDuckFound &&
+        !CharacterPositionSynchronizer.IsPenguinFound &&
+        fox.IsAlone;
+    const isFoxWin = isWinWithFriends || isWinAlone;
+    const isEndGame = isFoxDead || isFoxWin;
 
     const event = useMemo(() => {
         if (inChanceOf(config.map.probability.generateEvent)) {
@@ -96,6 +108,9 @@ const Room = () => {
     }, [fox.Row, fox.Col]);
 
     const openHitWallPopup = () => {
+        if (isEndGame) {
+            return;
+        }
         setTimeout(() => {
             openPopup({
                 text: `Ngõ cụt: ${getRandomElement(hitEndMessage)}`,
@@ -241,12 +256,14 @@ const Room = () => {
 
     return (
         <div className="room">
-            {found.duck && <img src={duck.Avatar} alt="duck" className="fox" />}
+            {CharacterPositionSynchronizer.IsDuckFound && (
+                <img src={duck.Avatar} alt="duck" className="fox" />
+            )}
             <div className="fox-wrapper">
                 <img src={fox.Avatar} alt="fox" className="fox" />
                 {fox.HasShield && <ShieldIcon className="fox-shield" />}
             </div>
-            {found.penguin && (
+            {CharacterPositionSynchronizer.IsPenguinFound && (
                 <div className="fox-wrapper">
                     <img src={penguin.Avatar} alt="penguin" className="fox" />
                     {penguin.IsNeedSpikedMace && penguin.IsFoundSpikedMace && (
@@ -256,7 +273,7 @@ const Room = () => {
             )}
             <DirectionArrows nextRoomsInfos={nextRoomsInfos} />
             <InfoBox onItemSelect={handleItemSelect} />
-            {popupData && (
+            {popupData && !isEndGame && (
                 <Popup
                     key={popupData.image}
                     image={popupData.image}
@@ -266,7 +283,7 @@ const Room = () => {
                     {popupData.children}
                 </Popup>
             )}
-            {event && !isEventProcessed() && (
+            {event && !isEventProcessed() && !isEndGame && (
                 <EventPopup
                     event={event}
                     onClose={() => {
@@ -274,9 +291,19 @@ const Room = () => {
                     }}
                 />
             )}
-            {isEndGame && (
-                <Popup text="The end">
-                    <p>Mún chơi lại thì f5 chớ t lừi làm feature reload</p>
+            {isEndGame && !isFoxDead && (
+                <EndGamePopup
+                    images={
+                        fox.IsAlone ? [fs, fs1, fs2, fs3] : [fdp1, fdp2, fdp3]
+                    }
+                />
+            )}
+            {isFoxDead && (
+                <Popup text={`${fox.Name} đã hết ham muốn`} image={foxDeath}>
+                    <p>
+                        Mún chơi lại thì f5 or ấn ESC chớ t lừi làm feature
+                        reload
+                    </p>
                 </Popup>
             )}
             {question && (
@@ -295,7 +322,7 @@ const Room = () => {
             />
             {isShopAvailable && (
                 <Shop
-                    key={`${fox.Row}-${fox.Col}`}
+                    key={`${fox.Row}-${fox.Col}-${roomSpecialEffectRef.current.maxRolls}`}
                     disableShop={disableShop}
                     maxRolls={roomSpecialEffectRef.current.maxRolls}
                     onGameItemSelect={handleItemSelectWihoutRemove}

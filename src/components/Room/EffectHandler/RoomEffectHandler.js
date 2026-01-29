@@ -1,3 +1,4 @@
+import { config } from "../../../config/gameConfig";
 import { getItem } from "../../../data/items";
 import { assignRandomQuestion, mapData, MAX_LENGTH } from "../../../data/map";
 import { CharacterPositionSynchronizer } from "../../../helper/CharacterPositionSynchronizer";
@@ -165,7 +166,7 @@ export function createRoomEffectHandler({
     };
 
     const resetRolls = () => {
-        roomSpecialEffectRef.current.maxRolls = 1;
+        roomSpecialEffectRef.current.maxRolls = config.map.rolls;
     };
 
     return {

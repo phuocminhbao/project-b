@@ -23,6 +23,19 @@ class Fox extends Character {
         this.#points = config.fox.points;
     }
 
+    // isekai() {
+    //     this.#points = config.fox.points;
+    //     this.#items = [];
+    //     this.#itemQuantity = {};
+    //     this.#shields = config.fox.shield;
+    //     this.#depression = config.fox.depression;
+    //     this.#pointsAdjustment = {
+    //         add: [],
+    //         minus: [],
+    //     };
+    //     this.#isAlone = false;
+    // }
+
     addAddPointAdjustment(amount) {
         this.#pointsAdjustment.add.push(amount);
     }
@@ -124,7 +137,9 @@ class Fox extends Character {
     }
 }
 
-const fox = new Fox([0, 0]);
-window.fox = fox;
-
-export { fox, Fox };
+let fox = new Fox([0, 0]);
+window.fox = () => fox;
+const isekaiFox = () => {
+    fox = new Fox([0, 0]);
+};
+export { fox, Fox, isekaiFox };

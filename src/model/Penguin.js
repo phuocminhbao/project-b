@@ -34,6 +34,9 @@ class Penguin extends Hider {
     }
 }
 
-const penguin = new Penguin([2, 2]);
-window.penguin = penguin;
-export { penguin };
+let penguin = new Penguin([2, 2]);
+const isekaiPenguin = () => {
+    penguin = new Penguin([2, 2]);
+};
+window.penguin = () => penguin;
+export { penguin, isekaiPenguin };
