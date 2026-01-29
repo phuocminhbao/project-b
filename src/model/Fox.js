@@ -23,19 +23,6 @@ class Fox extends Character {
         this.#points = config.fox.points;
     }
 
-    // isekai() {
-    //     this.#points = config.fox.points;
-    //     this.#items = [];
-    //     this.#itemQuantity = {};
-    //     this.#shields = config.fox.shield;
-    //     this.#depression = config.fox.depression;
-    //     this.#pointsAdjustment = {
-    //         add: [],
-    //         minus: [],
-    //     };
-    //     this.#isAlone = false;
-    // }
-
     addAddPointAdjustment(amount) {
         this.#pointsAdjustment.add.push(amount);
     }

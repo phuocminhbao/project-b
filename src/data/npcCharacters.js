@@ -198,7 +198,6 @@ export const npcCharacters = [
         "I'm gonna make America great again",
         "But first let take Greenland",
     ]),
-    //
     new NPC(35, "Gumball", gumball, [
         "What the what?!",
         "79% of stair accidents happen on the stairs",

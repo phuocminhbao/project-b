@@ -87,7 +87,6 @@ export class HintGenerator {
                 return x2 < x1 ? "trên" : "dưới";
             }
 
-            // Same row → horizontal only
             if (x1 === x2) {
                 return y2 < y1 ? "trái" : "phải";
             }

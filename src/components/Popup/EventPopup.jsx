@@ -32,26 +32,18 @@ const EventPopup = ({ event, onClose }) => {
     return (
         <div className="event-overlay">
             <div className={`event-popup event-${Type}`}>
-                {/* Watermark */}
-                {/* <div className="event-watermark">
-                    <img src={meta.waterMark}></img>
-                </div> */}
                 <img
                     src={meta.waterMark}
                     alt=""
                     className="event-watermark-img"
                 />
-                {/* Icon */}
                 <div className="event-icon">{meta.icon}</div>
 
-                {/* Moment line */}
                 <div className="event-moment">{meta.moment}</div>
 
-                {/* Content */}
                 <h2 className="event-title">{Name}</h2>
                 <p className="event-description">{Description}</p>
 
-                {/* Action */}
                 <button className="event-confirm-btn" onClick={onClose}>
                     {meta.closeText}
                 </button>

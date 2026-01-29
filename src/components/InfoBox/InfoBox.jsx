@@ -52,7 +52,7 @@ const InfoBox = ({ onItemSelect }) => {
             <div className="info-box">
                 <div className="info-box__points-wrapper">
                     <div ref={pointsRef} className="info-box__points">
-                        Points: {fox.Points}
+                        Điểm ham muốn: {fox.Points}
                     </div>
 
                     {floatingText && (

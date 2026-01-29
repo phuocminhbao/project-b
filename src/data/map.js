@@ -118,7 +118,6 @@ const loadMap = () => {
 };
 
 const reLoadMap = () => {
-    // fox.isekai();
     isekaiFox();
     isekaiDuck();
     isekaiPenguin();

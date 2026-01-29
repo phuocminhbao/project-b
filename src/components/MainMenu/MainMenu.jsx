@@ -16,22 +16,18 @@ const MainMenu = ({ onNavigate }) => {
                     }}
                 >
                     Start
-                    {/* 1 */}
                 </MenuButton>
                 <MenuButton onClick={() => onNavigate(SCREEN.HOW_TO)}>
                     How to play
-                    {/* 2 */}
                 </MenuButton>
                 <MenuButton onClick={() => onNavigate(SCREEN.ACHIEVEMENT)}>
                     Achievement
-                    {/* 3 */}
                 </MenuButton>
                 <MenuButton
                     onClick={() => onNavigate(SCREEN.SETTING)}
                     disabled={timePlayed() <= 15}
                 >
-                    Setting
-                    {/* 4 */}
+                    Cheat mode
                 </MenuButton>
             </div>
 
